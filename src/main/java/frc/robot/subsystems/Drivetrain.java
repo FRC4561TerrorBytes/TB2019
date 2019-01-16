@@ -22,6 +22,7 @@ public class Drivetrain extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
+	double kP = 0.1;
 	DifferentialDrive differentialDrive;
 
 	public Drivetrain() {
@@ -51,6 +52,13 @@ public class Drivetrain extends Subsystem {
 	public void controllerDrive() {
 		// If you need to use this code, replace curvatureDrive() with controllerDrive() in CurvatureDriveCommand.java
 		differentialDrive.curvatureDrive(RobotMap.GAME_PAD.getY(Hand.kLeft), -RobotMap.GAME_PAD.getX(Hand.kRight), true);
+	}
+
+	//Gyro Driving Straight
+	public void gyroDriveStraight() {
+		double error = -RobotMap.navx.getAngle();
+		double turn_power = kP * error;
+		differentialDrive.arcadeDrive(RobotMap.LEFT_STICK.getY(), turn_power, false);
 	}
 
 	// Creates stop method to stop all motors on drivetrain
