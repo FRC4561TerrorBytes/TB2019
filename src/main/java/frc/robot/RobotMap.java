@@ -8,10 +8,12 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.XboxController;
 
@@ -36,13 +38,13 @@ public class RobotMap {
 	public static final int DRIVE_MODE = 1; // 1 is curve drive, 0 is tank drive
 
   // Joystick Ports
-public static final int RIGHT_JOYSTICK_PORT = 0;  // TODO: Assign values to the engine, Scotty.
-public static final int LEFT_JOYSTICK_PORT = 1;
+  public static final int RIGHT_JOYSTICK_PORT = 0;  // TODO: Assign values to the engine, Scotty.
+  public static final int LEFT_JOYSTICK_PORT = 1;
 
   //Right motor ports
-public static final int FRONT_RIGHT_MOTOR_PORT = 8;
-public static final int MID_RIGHT_MOTOR_PORT = 9;
-public static final int BOT_RIGHT_MOTOR_PORT = 10;
+  public static final int FRONT_RIGHT_MOTOR_PORT = 8;
+  public static final int MID_RIGHT_MOTOR_PORT = 9;
+  public static final int BOT_RIGHT_MOTOR_PORT = 10;
 
 // Left motor ports		
 public static final int FRONT_LEFT_MOTOR_PORT = 7;
@@ -55,16 +57,16 @@ private static final int INTAKE_VERT_FORWARD_PORT = 4561;//TODO: change the numb
 private static final int INTAKE_VERT_BACK_PORT = 4561;//TODO: change the numbers 
 private static final int INTAKE_OUT_PORT = 4561; //TODO: change the numbers
 
-// XBox Controller Port
-public static final int XBOX_CONTROLLER_PORT = 2;
+  // XBox Controller Port
+  public static final int XBOX_CONTROLLER_PORT = 2;
 
-// Declraing all TalonSRX
-public static final WPI_TalonSRX FRONT_LEFT_MOTOR = new WPI_TalonSRX(FRONT_LEFT_MOTOR_PORT);
-public static final WPI_TalonSRX FRONT_RIGHT_MOTOR = new WPI_TalonSRX(FRONT_RIGHT_MOTOR_PORT);
-public static final WPI_TalonSRX MID_RIGHT_MOTOR = new WPI_TalonSRX(MID_RIGHT_MOTOR_PORT); 
-public static final WPI_TalonSRX BACK_LEFT_MOTOR = new WPI_TalonSRX(BOT_LEFT_MOTOR_PORT);
-public static final WPI_TalonSRX MID_LEFT_MOTOR = new WPI_TalonSRX(MID_LEFT_MOTOR_PORT);
-public static final WPI_TalonSRX BACK_RIGHT_MOTOR = new WPI_TalonSRX(BOT_RIGHT_MOTOR_PORT);
+  // Declraing all TalonSRX
+  public static final WPI_TalonSRX FRONT_LEFT_MOTOR = new WPI_TalonSRX(FRONT_LEFT_MOTOR_PORT);
+  public static final WPI_TalonSRX FRONT_RIGHT_MOTOR = new WPI_TalonSRX(FRONT_RIGHT_MOTOR_PORT);
+  public static final WPI_TalonSRX MID_RIGHT_MOTOR = new WPI_TalonSRX(MID_RIGHT_MOTOR_PORT); 
+  public static final WPI_TalonSRX BACK_LEFT_MOTOR = new WPI_TalonSRX(BOT_LEFT_MOTOR_PORT);
+  public static final WPI_TalonSRX MID_LEFT_MOTOR = new WPI_TalonSRX(MID_LEFT_MOTOR_PORT);
+  public static final WPI_TalonSRX BACK_RIGHT_MOTOR = new WPI_TalonSRX(BOT_RIGHT_MOTOR_PORT);
 
 //Hatch intake variables
 public static final DoubleSolenoid INTAKE_VERT_SOLENOID = new DoubleSolenoid(INTAKE_VERT_FORWARD_PORT, INTAKE_VERT_BACK_PORT);
@@ -76,10 +78,13 @@ public static final Solenoid INTAKE_OUT_SOLENOID = new Solenoid(INTAKE_OUT_PORT)
 public static final SpeedControllerGroup LEFT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_LEFT_MOTOR, MID_LEFT_MOTOR, BACK_LEFT_MOTOR);
 public static final SpeedControllerGroup RIGHT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_RIGHT_MOTOR, MID_RIGHT_MOTOR, BACK_RIGHT_MOTOR);
 
-//Creates Joystick objects for each joystick
-public static final Joystick LEFT_STICK = new Joystick (LEFT_JOYSTICK_PORT);
-public static final Joystick RIGHT_STICK = new Joystick (RIGHT_JOYSTICK_PORT);
+  //Declaring NavX MXP
+  public static final AHRS navx = new AHRS(SPI.Port.kMXP);
 
-//Creates Xbox Controller object with the controller
-public static final XboxController GAME_PAD = new XboxController(XBOX_CONTROLLER_PORT);
+  //Creates Joystick objects for each joystick
+  public static final Joystick LEFT_STICK = new Joystick (LEFT_JOYSTICK_PORT);
+  public static final Joystick RIGHT_STICK = new Joystick (RIGHT_JOYSTICK_PORT);
+
+  //Creates Xbox Controller object with the controller
+  public static final XboxController GAME_PAD = new XboxController(XBOX_CONTROLLER_PORT);
 }
