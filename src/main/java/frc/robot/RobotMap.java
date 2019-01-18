@@ -9,7 +9,9 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.XboxController;
 
@@ -45,7 +47,13 @@ public static final int BOT_RIGHT_MOTOR_PORT = 10;
 // Left motor ports		
 public static final int FRONT_LEFT_MOTOR_PORT = 7;
 public static final int MID_LEFT_MOTOR_PORT = 11;
-  public static final int BOT_LEFT_MOTOR_PORT = 12;
+public static final int BOT_LEFT_MOTOR_PORT = 12;
+
+// Intake motor ports
+private static final int INTAKE_HORIZ_PORT = 4561; //TODO: change the numbers
+private static final int INTAKE_VERT_FORWARD_PORT = 4561;//TODO: change the numbers 
+private static final int INTAKE_VERT_BACK_PORT = 4561;//TODO: change the numbers 
+private static final int INTAKE_OUT_PORT = 4561; //TODO: change the numbers
 
 // XBox Controller Port
 public static final int XBOX_CONTROLLER_PORT = 2;
@@ -57,6 +65,12 @@ public static final WPI_TalonSRX MID_RIGHT_MOTOR = new WPI_TalonSRX(MID_RIGHT_MO
 public static final WPI_TalonSRX BACK_LEFT_MOTOR = new WPI_TalonSRX(BOT_LEFT_MOTOR_PORT);
 public static final WPI_TalonSRX MID_LEFT_MOTOR = new WPI_TalonSRX(MID_LEFT_MOTOR_PORT);
 public static final WPI_TalonSRX BACK_RIGHT_MOTOR = new WPI_TalonSRX(BOT_RIGHT_MOTOR_PORT);
+
+//Hatch intake variables
+public static final DoubleSolenoid INTAKE_VERT_SOLENOID = new DoubleSolenoid(INTAKE_VERT_FORWARD_PORT, INTAKE_VERT_BACK_PORT);
+public static final Solenoid INTAKE_HORIZ_SOLENOID = new Solenoid(INTAKE_HORIZ_PORT);
+public static final Solenoid INTAKE_OUT_SOLENOID = new Solenoid(INTAKE_OUT_PORT);
+
 
 //Creates SpeedController object to combine left and right side motors
 public static final SpeedControllerGroup LEFT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_LEFT_MOTOR, MID_LEFT_MOTOR, BACK_LEFT_MOTOR);
