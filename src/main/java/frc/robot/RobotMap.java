@@ -52,10 +52,10 @@ public static final int MID_LEFT_MOTOR_PORT = 11;
 public static final int BOT_LEFT_MOTOR_PORT = 12;
 
 // Intake motor ports
-private static final int INTAKE_HORIZ_PORT = 4561; //TODO: change the numbers
-private static final int INTAKE_VERT_FORWARD_PORT = 4561;//TODO: change the numbers 
-private static final int INTAKE_VERT_BACK_PORT = 4561;//TODO: change the numbers 
-private static final int INTAKE_OUT_PORT = 4561; //TODO: change the numbers
+private static final int INTAKE_HORIZ_PORT = 0; //TODO: change the numbers
+private static final int INTAKE_VERT_FORWARD_PORT = 1;//TODO: change the numbers 
+private static final int INTAKE_VERT_BACK_PORT = 2;//TODO: change the numbers 
+private static final int INTAKE_OUT_PORT = 3; //TODO: change the numbers
 
   // XBox Controller Port
   public static final int XBOX_CONTROLLER_PORT = 2;

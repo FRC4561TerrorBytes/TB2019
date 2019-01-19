@@ -22,7 +22,7 @@ public class Drivetrain extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	double kP = 0.01, kI = 0.0, kD = 0.0;
+	double kP = 2, kI = 0, kD = 0;
 	double integral = 0, previous_error = 0;
 	DifferentialDrive differentialDrive;
 
@@ -67,7 +67,7 @@ public class Drivetrain extends Subsystem {
 	// Gyro Driving Straight
 	public void gyroDriveStraight() {
 		// drive toward 0 degrees
-		double error = -this.getAngle();
+		double error = this.getAngle();
 		// accumulate error between calls, method is called approx. every 16.67 ms
 		this.integral += error * 0.01666666667;
 		// see how the error is changing over time, method is called approx every 16.67 ms
