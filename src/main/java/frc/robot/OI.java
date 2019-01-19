@@ -10,6 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.DriveStraightCommand;
+import frc.robot.commands.HatchIntakeCommand;
+import frc.robot.commands.HatchOuttakeCommand;
+import frc.robot.commands.HatchPositionCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -45,7 +48,19 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   public OI() {
-    Button button2 = new JoystickButton(RobotMap.LEFT_STICK, 2);
+    Button button1 = new JoystickButton(RobotMap.LEFT_STICK, 1); // Placeholder for hatchOuttake.
+    Button button2 = new JoystickButton(RobotMap.LEFT_STICK, 2); // Placeholder for driveForward.
+    Button button3 = new JoystickButton(RobotMap.LEFT_STICK, 3); // Placeholder for hatchIntake.
+    Button button4 = new JoystickButton(RobotMap.LEFT_STICK, 4); // Placeholder for hatchPosition down.
+    Button button5 = new JoystickButton(RobotMap.LEFT_STICK, 5); // Placeholder for hatchPosition up.
+    
+    button1.whileHeld(new HatchOuttakeCommand(true)); // (placeholder) When held HatchOuttake pushes out.
+    button1.whenReleased(new HatchOuttakeCommand(false)); // (placeholder) When released HatchOuttake pulls in.
     button2.whileHeld(new DriveStraightCommand());
+    button3.whileHeld(new HatchIntakeCommand(true)); // (placeholder) When held Hatchintake pushes out.
+    button3.whenReleased(new HatchIntakeCommand(false)); // (placeholder) When released Hatchintake pulls in.
+    button4.whenPressed(new HatchPositionCommand(true)); // (placeholder) When pressed Hatchintake goes down.
+    button5.whenPressed(new HatchPositionCommand(false)); // (placeholder) When pressed Hatchintake goes up.
+    
   }
 }

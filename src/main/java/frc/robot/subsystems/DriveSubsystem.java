@@ -18,7 +18,7 @@ import frc.robot.commands.TankDriveCommand;
  * @author Snehil
  */
 
-public class Drivetrain extends Subsystem {
+public class DriveSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
@@ -26,7 +26,7 @@ public class Drivetrain extends Subsystem {
 	double integral = 0, previous_error = 0;
 	DifferentialDrive differentialDrive;
 
-	public Drivetrain() {
+	public DriveSubsystem() {
 		// Seting differentialDrive object to control the motor groups
 		differentialDrive = new DifferentialDrive(RobotMap.LEFT_SIDE_MOTOR_GROUP, RobotMap.RIGHT_SIDE_MOTOR_GROUP);
 	}

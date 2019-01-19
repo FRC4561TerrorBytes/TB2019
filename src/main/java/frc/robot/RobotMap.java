@@ -57,7 +57,7 @@ private static final int INTAKE_VERT_FORWARD_PORT = 1;//TODO: change the numbers
 private static final int INTAKE_VERT_BACK_PORT = 2;//TODO: change the numbers 
 private static final int INTAKE_OUT_PORT = 3; //TODO: change the numbers
 
-  // XBox Controller Port
+  // Xbox Controller Port
   public static final int XBOX_CONTROLLER_PORT = 2;
 
   // Declraing all TalonSRX
@@ -69,9 +69,9 @@ private static final int INTAKE_OUT_PORT = 3; //TODO: change the numbers
   public static final WPI_TalonSRX BACK_RIGHT_MOTOR = new WPI_TalonSRX(BOT_RIGHT_MOTOR_PORT);
 
 //Hatch intake variables
-public static final DoubleSolenoid INTAKE_VERT_SOLENOID = new DoubleSolenoid(INTAKE_VERT_FORWARD_PORT, INTAKE_VERT_BACK_PORT);
-public static final Solenoid INTAKE_HORIZ_SOLENOID = new Solenoid(INTAKE_HORIZ_PORT);
-public static final Solenoid INTAKE_OUT_SOLENOID = new Solenoid(INTAKE_OUT_PORT);
+public static final DoubleSolenoid HATCH_POSITION_SOLENOID = new DoubleSolenoid(INTAKE_VERT_FORWARD_PORT, INTAKE_VERT_BACK_PORT);
+public static final Solenoid HATCH_INTAKE_SOLENOID = new Solenoid(INTAKE_HORIZ_PORT);
+public static final Solenoid HATCH_OUTTAKE_SOLENOID = new Solenoid(INTAKE_OUT_PORT);
 
 
 //Creates SpeedController object to combine left and right side motors
