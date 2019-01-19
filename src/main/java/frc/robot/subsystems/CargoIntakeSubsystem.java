@@ -21,7 +21,7 @@ public class CargoIntakeSubsystem extends Subsystem {
   private WPI_TalonSRX cargoIntakeLeftMotor;
 	private WPI_TalonSRX cargoIntakeRightMotor; 
 
-  public CargoIntake(){
+  public CargoIntakeSubsystem(){
     this.cargoIntakeLeftMotor = new WPI_TalonSRX((Integer) null); //TODO: find real values
     this.cargoIntakeRightMotor = new WPI_TalonSRX((Integer) null);
   }

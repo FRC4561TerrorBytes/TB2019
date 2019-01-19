@@ -24,7 +24,7 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   public static DriveSubsystem drivetrain = new DriveSubsystem();
   public static HatchIntakeSubsystem hatchIntake = new HatchIntakeSubsystem();
-  public static CargoIntake cargoIntake = new CargoIntake();
+  public static CargoIntakeSubsystem cargoIntake = new CargoIntakeSubsystem();
   public static OI oi;
 
   Command m_autonomousCommand;
