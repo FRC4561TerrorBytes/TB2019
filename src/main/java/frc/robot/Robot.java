@@ -25,6 +25,7 @@ public class Robot extends TimedRobot {
   public static DriveSubsystem drivetrain = new DriveSubsystem();
   public static HatchIntakeSubsystem hatchIntake = new HatchIntakeSubsystem();
   public static CargoIntakeSubsystem cargoIntake = new CargoIntakeSubsystem();
+  public static ClimberSubsystem climber = new ClimberSubsystem();
   public static OI oi;
 
   Command m_autonomousCommand;
