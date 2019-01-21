@@ -46,19 +46,26 @@ public class RobotMap {
   public static final int MID_RIGHT_MOTOR_PORT = 9;
   public static final int BOT_RIGHT_MOTOR_PORT = 10;
 
-// Left motor ports		
-public static final int FRONT_LEFT_MOTOR_PORT = 7;
-public static final int MID_LEFT_MOTOR_PORT = 11;
-public static final int BOT_LEFT_MOTOR_PORT = 12;
+  // Left motor ports		
+  public static final int FRONT_LEFT_MOTOR_PORT = 7;
+  public static final int MID_LEFT_MOTOR_PORT = 11;
+  public static final int BOT_LEFT_MOTOR_PORT = 12;
 
-// Intake motor ports
-private static final int INTAKE_HORIZ_PORT = 0; //TODO: change the numbers
-private static final int INTAKE_VERT_FORWARD_PORT = 1;//TODO: change the numbers 
-private static final int INTAKE_VERT_BACK_PORT = 2;//TODO: change the numbers 
-private static final int INTAKE_OUT_PORT = 3; //TODO: change the numbers
+  // Intake motor ports
+  private static final int INTAKE_HORIZ_PORT = 0; //TODO: change the numbers
+  private static final int INTAKE_VERT_FORWARD_PORT = 1;//TODO: change the numbers 
+  private static final int INTAKE_VERT_BACK_PORT = 2;//TODO: change the numbers 
+  private static final int INTAKE_OUT_PORT = 3; //TODO: change the numbers
 
   // Xbox Controller Port
   public static final int XBOX_CONTROLLER_PORT = 2;
+
+  // Cargo Intake motor ports
+  private static final int CARGO_MOTOR_PORT = 0;
+
+  //Climber motor ports
+  private static final int CLIMBER_LEFT_PORT = 0;
+  private static final int CLIMBER_RIGHT_PORT = 1;
 
   // Declraing all TalonSRX
   public static final WPI_TalonSRX FRONT_LEFT_MOTOR = new WPI_TalonSRX(FRONT_LEFT_MOTOR_PORT);
@@ -68,15 +75,22 @@ private static final int INTAKE_OUT_PORT = 3; //TODO: change the numbers
   public static final WPI_TalonSRX MID_LEFT_MOTOR = new WPI_TalonSRX(MID_LEFT_MOTOR_PORT);
   public static final WPI_TalonSRX BACK_RIGHT_MOTOR = new WPI_TalonSRX(BOT_RIGHT_MOTOR_PORT);
 
-//Hatch intake variables
-public static final DoubleSolenoid HATCH_POSITION_SOLENOID = new DoubleSolenoid(INTAKE_VERT_FORWARD_PORT, INTAKE_VERT_BACK_PORT);
-public static final Solenoid HATCH_INTAKE_SOLENOID = new Solenoid(INTAKE_HORIZ_PORT);
-public static final Solenoid HATCH_OUTTAKE_SOLENOID = new Solenoid(INTAKE_OUT_PORT);
+  //Cargo intake variables
+  public static final WPI_TalonSRX CARGO_INTAKE_MOTOR = new WPI_TalonSRX(CARGO_MOTOR_PORT);
+
+  //Hatch intake variables
+  public static final DoubleSolenoid HATCH_POSITION_SOLENOID = new DoubleSolenoid(INTAKE_VERT_FORWARD_PORT, INTAKE_VERT_BACK_PORT);
+  public static final Solenoid HATCH_INTAKE_SOLENOID = new Solenoid(INTAKE_HORIZ_PORT);
+  public static final Solenoid HATCH_OUTTAKE_SOLENOID = new Solenoid(INTAKE_OUT_PORT);
+
+  //Climber subsystem variables
+  public static final WPI_TalonSRX LEFT_CLIMBER_MOTOR = new WPI_TalonSRX(CLIMBER_LEFT_PORT);
+  public static final WPI_TalonSRX RIGHT_CLIMBER_MOTOR = new WPI_TalonSRX(CLIMBER_RIGHT_PORT);
 
 
-//Creates SpeedController object to combine left and right side motors
-public static final SpeedControllerGroup LEFT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_LEFT_MOTOR, MID_LEFT_MOTOR, BACK_LEFT_MOTOR);
-public static final SpeedControllerGroup RIGHT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_RIGHT_MOTOR, MID_RIGHT_MOTOR, BACK_RIGHT_MOTOR);
+  //Creates SpeedController object to combine left and right side motors
+  public static final SpeedControllerGroup LEFT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_LEFT_MOTOR, MID_LEFT_MOTOR, BACK_LEFT_MOTOR);
+  public static final SpeedControllerGroup RIGHT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_RIGHT_MOTOR, MID_RIGHT_MOTOR, BACK_RIGHT_MOTOR);
 
   //Declaring NavX MXP
   public static final AHRS navx = new AHRS(SPI.Port.kMXP);

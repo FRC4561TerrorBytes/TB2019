@@ -22,7 +22,12 @@ public class DriveSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	double kP = 2, kI = 0, kD = 0;
+	// PID Values set for Delta:
+    // double kP = 0.21, kI = 0.6, kD = 0.01375;
+    // Ku: Maximum kP value that gives ocillation
+    // Tu: Time for full ocillation on the robot
+    // PID Values: kP = 0.6Ku  kI = 1.2Ku/Tu  kD = 3KuTu/40
+    double kP = 0.21, kI = 0.6, kD = 0.01375;
 	double integral = 0, previous_error = 0;
 	DifferentialDrive differentialDrive;
 

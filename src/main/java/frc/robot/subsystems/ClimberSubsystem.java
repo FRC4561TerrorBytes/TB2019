@@ -13,29 +13,35 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * @author Karthik
  */
-public class CargoIntakeSubsystem extends Subsystem {
+
+public class ClimberSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  
-  public CargoIntakeSubsystem(){
-  }
 
   @Override
   public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void intakeCargo(){
-    RobotMap.CARGO_INTAKE_MOTOR.set(1);
+  //This method makes the motors on both sides make the robot ascend
+  public void ascend () {
+    RobotMap.LEFT_CLIMBER_MOTOR.set(1);
+    RobotMap.RIGHT_CLIMBER_MOTOR.set(1);
   }
 
-  public void outtakeCargo(){
-    RobotMap.CARGO_INTAKE_MOTOR.set(-1);
+  //This method makes the motors on both sides make the robot descend
+  public void descend () {
+    RobotMap.LEFT_CLIMBER_MOTOR.set(-1);
+     RobotMap.RIGHT_CLIMBER_MOTOR.set(-1);
   }
 
-  public void stop(){
-    RobotMap.CARGO_INTAKE_MOTOR.set(0);
+  //This method makes the motors on both sides stop.
+  public void stop () {
+    RobotMap.LEFT_CLIMBER_MOTOR.set(0);
+     RobotMap.RIGHT_CLIMBER_MOTOR.set(0);
   }
 }
