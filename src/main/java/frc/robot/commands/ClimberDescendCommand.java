@@ -10,6 +10,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * @author Karthik
+ */
+
 public class ClimberDescendCommand extends Command {
   public ClimberDescendCommand() {
     requires(Robot.climber);

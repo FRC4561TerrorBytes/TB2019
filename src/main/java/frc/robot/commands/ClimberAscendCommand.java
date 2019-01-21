@@ -11,6 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
+/**
+ * @author Karthik
+ */
+
 public class ClimberAscendCommand extends Command {
   public ClimberAscendCommand() {
     requires(Robot.climber);
