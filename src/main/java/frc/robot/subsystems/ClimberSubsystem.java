@@ -34,12 +34,12 @@ public class ClimberSubsystem extends Subsystem {
   //This method makes the motors on both sides make the robot descend
   public void descend () {
     RobotMap.LEFT_CLIMBER_MOTOR.set(-1);
-     RobotMap.RIGHT_CLIMBER_MOTOR.set(-1);
+    RobotMap.RIGHT_CLIMBER_MOTOR.set(-1);
   }
 
   //This method makes the motors on both sides stop.
   public void stop () {
     RobotMap.LEFT_CLIMBER_MOTOR.set(0);
-     RobotMap.RIGHT_CLIMBER_MOTOR.set(0);
+    RobotMap.RIGHT_CLIMBER_MOTOR.set(0);
   }
 }
