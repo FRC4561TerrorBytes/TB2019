@@ -28,14 +28,14 @@ public class CargoIntakeSubsystem extends Subsystem {
   }
 
   public void intakeCargo(){
-    RobotMap.CARGO_INTAKE_MOTOR.set(1);
+    RobotMap.CARGO_ROLLERS_MOTOR_GROUP.set(1);
   }
 
   public void outtakeCargo(){
-    RobotMap.CARGO_INTAKE_MOTOR.set(-1);
+    RobotMap.CARGO_ROLLERS_MOTOR_GROUP.set(-1);
   }
 
   public void stop(){
-    RobotMap.CARGO_INTAKE_MOTOR.set(0);
+    RobotMap.CARGO_ROLLERS_MOTOR_GROUP.set(0);
   }
 }

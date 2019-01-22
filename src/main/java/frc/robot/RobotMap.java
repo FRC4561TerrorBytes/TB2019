@@ -61,7 +61,9 @@ public class RobotMap {
   public static final int XBOX_CONTROLLER_PORT = 2;
 
   // Cargo Intake motor ports
-  private static final int CARGO_MOTOR_PORT = 0;
+  private static final int CARGO_ARM_MOTOR_PORT = 0;
+  private static final int CARGO_TOP_ROLLER_PORT = 0;
+  private static final int CARGO_BOT_ROLLER_PORT = 0;
 
   //Climber motor ports
   private static final int CLIMBER_LEFT_PORT = 0;
@@ -76,7 +78,9 @@ public class RobotMap {
   public static final WPI_TalonSRX BACK_RIGHT_MOTOR = new WPI_TalonSRX(BOT_RIGHT_MOTOR_PORT);
 
   //Cargo intake variables
-  public static final WPI_TalonSRX CARGO_INTAKE_MOTOR = new WPI_TalonSRX(CARGO_MOTOR_PORT);
+  public static final WPI_TalonSRX CARGO_ARM_MOTOR = new WPI_TalonSRX(CARGO_ARM_MOTOR_PORT);
+  public static final WPI_TalonSRX CARGO_TOP_ROLLER_MOTOR = new WPI_TalonSRX(CARGO_TOP_ROLLER_PORT);
+  public static final WPI_TalonSRX CARGO_BOTTOM_ROLLER_MOTOR = new WPI_TalonSRX(CARGO_BOT_ROLLER_PORT);
 
   //Hatch intake variables
   public static final DoubleSolenoid HATCH_POSITION_SOLENOID = new DoubleSolenoid(INTAKE_VERT_FORWARD_PORT, INTAKE_VERT_BACK_PORT);
@@ -91,7 +95,7 @@ public class RobotMap {
   //Creates SpeedController object to combine left and right side motors
   public static final SpeedControllerGroup LEFT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_LEFT_MOTOR, MID_LEFT_MOTOR, BACK_LEFT_MOTOR);
   public static final SpeedControllerGroup RIGHT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_RIGHT_MOTOR, MID_RIGHT_MOTOR, BACK_RIGHT_MOTOR);
-
+  public static final SpeedControllerGroup CARGO_ROLLERS_MOTOR_GROUP = new SpeedControllerGroup(CARGO_TOP_ROLLER_MOTOR, CARGO_BOTTOM_ROLLER_MOTOR);
   //Declaring NavX MXP
   public static final AHRS navx = new AHRS(SPI.Port.kMXP);
 
