@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.DriveStraightCommand;
@@ -59,8 +60,8 @@ public class OI {
     button2.whileHeld(new DriveStraightCommand());
     button3.whileHeld(new HatchIntakeCommand(true)); // (placeholder) When held Hatchintake pushes out.
     button3.whenReleased(new HatchIntakeCommand(false)); // (placeholder) When released Hatchintake pulls in.
-    button4.whenPressed(new HatchPositionCommand(true)); // (placeholder) When pressed Hatchintake goes down.
-    button5.whenPressed(new HatchPositionCommand(false)); // (placeholder) When pressed Hatchintake goes up.
+    button4.whenPressed(new HatchPositionCommand(DoubleSolenoid.Value.kForward)); // (placeholder) When pressed Hatchintake goes down.
+    button5.whenPressed(new HatchPositionCommand(DoubleSolenoid.Value.kReverse)); // (placeholder) When pressed Hatchintake goes up.
     
   }
 }

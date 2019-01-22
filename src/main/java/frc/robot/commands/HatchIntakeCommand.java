@@ -30,8 +30,7 @@ public class HatchIntakeCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (this.set) Robot.hatchIntake.hatchIntakePistonsForward();
-    else Robot.hatchIntake.hatchIntakePistonsReverse();
+    Robot.hatchIntake.hatchIntakePistons(this.set);
   }
 
   // Make this return true when this Command no longer needs to run execute()

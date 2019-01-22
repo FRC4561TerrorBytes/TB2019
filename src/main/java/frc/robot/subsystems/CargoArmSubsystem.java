@@ -23,8 +23,8 @@ public class CargoArmSubsystem extends PIDSubsystem {
   // here. Call these from Commands.
 
   public CargoArmSubsystem(){
-    // values: P,I,D,F TODO: tune
-    super(0, 0, 0, 0);
+    // values: P,I,D,F,Period TODO: tune
+    super(0, 0, 0, 0, 0.01666666667);
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
     RobotMap.CARGO_ARM_MOTOR.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 		RobotMap.CARGO_ARM_MOTOR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
