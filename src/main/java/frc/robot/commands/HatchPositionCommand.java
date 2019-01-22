@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -14,9 +15,9 @@ import frc.robot.Robot;
  * @author Max
  */
 public class HatchPositionCommand extends Command {
-  boolean set = false;
+  DoubleSolenoid.Value set = DoubleSolenoid.Value.kReverse;
 
-  public HatchPositionCommand(boolean set) {
+  public HatchPositionCommand(DoubleSolenoid.Value set) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.hatchIntake);
     this.set = set;
@@ -30,8 +31,7 @@ public class HatchPositionCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (this.set) Robot.hatchIntake.hatchVertical();
-    else Robot.hatchIntake.hatchHorizontal();
+    Robot.hatchIntake.hatchPosition(this.set);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -25,31 +25,16 @@ public class HatchIntakeSubsystem extends Subsystem {
   }
 
   // Moving velcro pistons forward
-  public void hatchIntakePistonsForward() {
-    RobotMap.HATCH_INTAKE_SOLENOID.set(true);
-  }
-
-  // Moving velcro pistons backwards
-  public void hatchIntakePistonsReverse() {
-    RobotMap.HATCH_INTAKE_SOLENOID.set(false);
+  public void hatchIntakePistons(boolean value) {
+    RobotMap.HATCH_INTAKE_SOLENOID.set(value);
   }
 
   // Moving non-velcro pistons forward
-  public void hatchOuttakePistonsForward() {
-    RobotMap.HATCH_OUTTAKE_SOLENOID.set(true);
+  public void hatchOuttakePistons(boolean value) {
+    RobotMap.HATCH_OUTTAKE_SOLENOID.set(value);
   }
 
-  // Moving non-velcro pistons backwards
-  public void hatchOuttakePistonsReverse() {
-    RobotMap.HATCH_OUTTAKE_SOLENOID.set(false);
+  public void hatchPosition(DoubleSolenoid.Value value) {
+    RobotMap.HATCH_POSITION_SOLENOID.set(value);
   }
-
-  public void hatchVertical() {
-    RobotMap.HATCH_POSITION_SOLENOID.set(DoubleSolenoid.Value.kReverse);
-  }
-
-  public void hatchHorizontal() {
-    RobotMap.HATCH_POSITION_SOLENOID.set(DoubleSolenoid.Value.kForward);
-  }
-
 }

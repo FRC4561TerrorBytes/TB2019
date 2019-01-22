@@ -11,23 +11,26 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class SetCargoArmPosCommand extends Command {
-  int goal = 0;
-  public SetCargoArmPosCommand(int gol) {
+  int setpoint = 0;
+  public SetCargoArmPosCommand(int setpoint) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.cargoArmSubsystem);
-    this.goal = gol;
+    this.setpoint = setpoint;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    // Get within 0.1% of the setpoint
+    Robot.cargoArmSubsystem.setPercentTolerance(0.1);
+    // Start PID loop
+    Robot.cargoArmSubsystem.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoArmSubsystem.usePIDOutput(goal);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -45,5 +48,7 @@ public class SetCargoArmPosCommand extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    // Stop PID loop
+    Robot.cargoArmSubsystem.disable();
   }
 }
