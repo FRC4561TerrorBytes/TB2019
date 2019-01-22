@@ -46,6 +46,17 @@ public class CargoArmSubsystem extends PIDSubsystem {
     RobotMap.CARGO_ARM_MOTOR.set(ControlMode.Position, goal);
   }
 
+  public void armUp(){
+    RobotMap.CARGO_ARM_MOTOR.set(ControlMode.PercentOutput, 1);
+  }
+
+  public void armDown(){
+    RobotMap.CARGO_ARM_MOTOR.set(ControlMode.PercentOutput, -1);
+  }
+
+  public void stop(){
+    RobotMap.CARGO_ARM_MOTOR.set(ControlMode.PercentOutput, 0);
+  }
   public boolean getFwdSwitch(){
 		return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
 	}
