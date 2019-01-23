@@ -24,10 +24,13 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
   public CargoArmSubsystem(){
     // values: P,I,D,F,Period TODO: tune
-    super(0, 0, 0, 0, 0.01666666667);
+    super(.01, 0, 0, 3.41, 0.01666666667);
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
     RobotMap.CARGO_ARM_MOTOR.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-		RobotMap.CARGO_ARM_MOTOR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+    RobotMap.CARGO_ARM_MOTOR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+    getPIDController().setContinuous(false);
+    setInputRange(0, 1860);
+    setOutputRange(-1, 1);
   }
 
   @Override
@@ -44,6 +47,9 @@ public class CargoArmSubsystem extends PIDSubsystem {
   @Override
   public void usePIDOutput(double goal) {
     RobotMap.CARGO_ARM_MOTOR.set(ControlMode.Position, goal);
+    /*if(getFwdSwitch()||getRevSwitch()){
+      stop();
+    }*/
   }
 
   public void armUp(){

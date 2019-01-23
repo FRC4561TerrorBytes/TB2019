@@ -9,9 +9,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class SetCargoArmPosCommand extends Command {
-  int setpoint = 0;
+  int setpoint;
   public SetCargoArmPosCommand(int setpoint) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -23,7 +24,9 @@ public class SetCargoArmPosCommand extends Command {
   @Override
   protected void initialize() {
     // Get within 0.1% of the setpoint
-    Robot.cargoArmSubsystem.setPercentTolerance(0.1);
+    Robot.cargoArmSubsystem.setPercentTolerance(1);
+    // set setpoint
+    Robot.cargoArmSubsystem.setSetpoint(this.setpoint);
     // Start PID loop
     Robot.cargoArmSubsystem.enable();
   }
@@ -31,6 +34,7 @@ public class SetCargoArmPosCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    System.out.println(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
   }
 
   // Make this return true when this Command no longer needs to run execute()

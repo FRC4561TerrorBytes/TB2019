@@ -61,7 +61,7 @@ public class RobotMap {
   public static final int XBOX_CONTROLLER_PORT = 2;
 
   // Cargo Intake motor ports
-  private static final int CARGO_ARM_MOTOR_PORT = 0;
+  private static final int CARGO_ARM_MOTOR_PORT = 6;
   private static final int CARGO_TOP_ROLLER_PORT = 0;
   private static final int CARGO_BOT_ROLLER_PORT = 0;
 
