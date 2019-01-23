@@ -13,6 +13,7 @@ import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
+ * @author Max, Krishna
  */
 public class HatchIntakeSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
@@ -25,16 +26,32 @@ public class HatchIntakeSubsystem extends Subsystem {
   }
 
   // Moving velcro pistons forward
-  public void hatchIntakePistons(boolean value) {
-    RobotMap.HATCH_INTAKE_SOLENOID.set(value);
+  public void hatchIntakePistonsForward() {
+    RobotMap.HATCH_INTAKE_SOLENOID.set(true);
+  }
+
+  // Moving velcro pistons backwards
+  public void hatchIntakePistonsReverse() {
+    RobotMap.HATCH_INTAKE_SOLENOID.set(false);
   }
 
   // Moving non-velcro pistons forward
-  public void hatchOuttakePistons(boolean value) {
-    RobotMap.HATCH_OUTTAKE_SOLENOID.set(value);
+  public void hatchOuttakePistonsForward() {
+    RobotMap.HATCH_OUTTAKE_SOLENOID.set(true);
   }
 
-  public void hatchPosition(DoubleSolenoid.Value value) {
-    RobotMap.HATCH_POSITION_SOLENOID.set(value);
+  // Moving non-velcro pistons backwards
+  public void hatchOuttakePistonsReverse() {
+    RobotMap.HATCH_OUTTAKE_SOLENOID.set(false);
   }
+
+  // Allows the intake to move vertically.
+  public void hatchVertical() {
+    RobotMap.HATCH_POSITION_SOLENOID.set(DoubleSolenoid.Value.kReverse);
+  }
+// Allows the intake to move horizontally.
+  public void hatchHorizontal() {
+    RobotMap.HATCH_POSITION_SOLENOID.set(DoubleSolenoid.Value.kForward);
+  }
+
 }
