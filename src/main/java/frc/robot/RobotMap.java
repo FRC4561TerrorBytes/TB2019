@@ -69,7 +69,13 @@ public class RobotMap {
   private static final int CLIMBER_LEFT_PORT = 0;
   private static final int CLIMBER_RIGHT_PORT = 1;
 
-  // Declraing all TalonSRX
+  //Ski solenoid ports
+  private static final int LEFT_FORWARD_SKI_PORT = 0; //TODO: change the numbers
+  private static final int LEFT_REVERSE_SKI_PORT = 0; //TODO: change the numbers
+  private static final int RIGHT_FORWARD_SKI_PORT = 0; //TODO: change the numbers
+  private static final int RIGHT_REVERSE_SKI_PORT = 0; //TODO: change the numbers
+
+  // Declraing all Drivetrian TalonSRX
   private static final WPI_TalonSRX FRONT_LEFT_MOTOR = new WPI_TalonSRX(FRONT_LEFT_MOTOR_PORT);
   private static final WPI_TalonSRX FRONT_RIGHT_MOTOR = new WPI_TalonSRX(FRONT_RIGHT_MOTOR_PORT);
   private static final WPI_TalonSRX MID_RIGHT_MOTOR = new WPI_TalonSRX(MID_RIGHT_MOTOR_PORT); 
@@ -91,6 +97,9 @@ public class RobotMap {
   private static final WPI_TalonSRX LEFT_CLIMBER_MOTOR = new WPI_TalonSRX(CLIMBER_LEFT_PORT);
   private static final WPI_TalonSRX RIGHT_CLIMBER_MOTOR = new WPI_TalonSRX(CLIMBER_RIGHT_PORT);
 
+  //Ski solenoids objects
+  public static final DoubleSolenoid RIGHT_DOUBLE_SKI = new DoubleSolenoid(RIGHT_FORWARD_SKI_PORT, RIGHT_REVERSE_SKI_PORT);
+  public static final DoubleSolenoid LEFT_DOUBLE_SKI = new DoubleSolenoid(LEFT_FORWARD_SKI_PORT, LEFT_REVERSE_SKI_PORT);
 
   //Creates SpeedController object to combine left and right side motors
   public static final SpeedControllerGroup LEFT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_LEFT_MOTOR, MID_LEFT_MOTOR, BACK_LEFT_MOTOR);

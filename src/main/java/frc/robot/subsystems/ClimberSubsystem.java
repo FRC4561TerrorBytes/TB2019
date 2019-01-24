@@ -7,11 +7,12 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * @author Karthik
+ * @author Karthik, Snehil
  */
 
 public class ClimberSubsystem extends Subsystem {
@@ -25,17 +26,23 @@ public class ClimberSubsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  //This method makes the motors on both sides make the robot ascend
+  // This method makes the motors on both sides make the robot ascend
   public void ascend () {
     RobotMap.CLIMBER_MOTOR_GROUP.set(1);
   }
 
-  //This method makes the motors on both sides make the robot descend
+  // This method makes the motors on both sides make the robot descend
   public void descend () {
     RobotMap.CLIMBER_MOTOR_GROUP.set(-1);
   }
 
-  //This method makes the motors on both sides stop.
+  // Moving the skis onto the hab or back
+  public void skiOutPosition(DoubleSolenoid.Value value) {
+    RobotMap.RIGHT_DOUBLE_SKI.set(value);
+    RobotMap.LEFT_DOUBLE_SKI.set(value);
+  }
+
+  // This method makes the motors on both sides stop.
   public void stop () {
     RobotMap.CLIMBER_MOTOR_GROUP.set(0);
   }

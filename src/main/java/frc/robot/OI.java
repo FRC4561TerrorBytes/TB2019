@@ -8,12 +8,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.DriveStraightCommand;
 import frc.robot.commands.HatchIntakeCommand;
 import frc.robot.commands.HatchOuttakeCommand;
 import frc.robot.commands.HatchPositionCommand;
+import frc.robot.commands.SkiOutCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -54,6 +56,7 @@ public class OI {
     Button button3 = new JoystickButton(RobotMap.LEFT_STICK, 3); // Placeholder for hatchIntake.
     Button button4 = new JoystickButton(RobotMap.LEFT_STICK, 4); // Placeholder for hatchPosition down.
     Button button5 = new JoystickButton(RobotMap.LEFT_STICK, 5); // Placeholder for hatchPosition up.
+    Button button6 = new JoystickButton(RobotMap.LEFT_STICK, 6); // Placeholder for skiOutPosition.
     
     button1.whileHeld(new HatchOuttakeCommand(true)); // (placeholder) When held HatchOuttake pushes out.
     button1.whenReleased(new HatchOuttakeCommand(false)); // (placeholder) When released HatchOuttake pulls in.
@@ -62,6 +65,8 @@ public class OI {
     button3.whenReleased(new HatchIntakeCommand(false)); // (placeholder) When released Hatchintake pulls in.
     button4.whenPressed(new HatchPositionCommand(DoubleSolenoid.Value.kForward)); // (placeholder) When pressed Hatchintake goes down.
     button5.whenPressed(new HatchPositionCommand(DoubleSolenoid.Value.kReverse)); // (placeholder) When pressed Hatchintake goes up.
+    button6.whileHeld(new SkiOutCommand(DoubleSolenoid.Value.kForward)); // (placeholder) When pressed Ski comes out.
+    button6.whenReleased(new SkiOutCommand(DoubleSolenoid.Value.kReverse)); // (placeholder) When released Ski comes in.
     
   }
 }
