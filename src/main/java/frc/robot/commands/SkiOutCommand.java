@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * @author Max
+ * @author Snehil
  */
 public class SkiOutCommand extends Command {
   DoubleSolenoid.Value set = DoubleSolenoid.Value.kReverse;
