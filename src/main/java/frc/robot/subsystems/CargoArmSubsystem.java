@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.CargoArmManualCommand;
 
 /**
  * Add your docs here.
@@ -23,20 +24,30 @@ public class CargoArmSubsystem extends PIDSubsystem {
   // here. Call these from Commands.
 
   public CargoArmSubsystem(){
-    // values: P,I,D,F,Period TODO: tune
-    super(0, 0, 0, 0, 0.01666666667);
+    /* values: P,I,D,F,Period (stays constant); Robot_006 Values: TODO: find values for comp robot */ 
+    /* Delta Values: 4, 0.0055, 1023, 3.41*/
+    super(4, 0.0055, 1023, 3.41, 0.01666666667);
+    //Setup sensors
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
     RobotMap.CARGO_ARM_MOTOR.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
     RobotMap.CARGO_ARM_MOTOR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+    //Make it so that the PID will recognize that it has upper and lower limits
     getPIDController().setContinuous(false);
-    setInputRange(0, 1860);
-    setOutputRange(-1, 1);
+    setInputRange(RobotMap.ARM_BOT_LIMIT_SWITCH_LOC, RobotMap.ARM_TOP_LIMIT_SWITCH_LOC);
+    //Set the encoder value to it's maximum value when it hits the top limit switch and vice versa
+    if(getFwdSwitch()){ 
+      RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LIMIT_SWITCH_LOC);
+    }
+    if(getRevSwitch()){
+      RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_BOT_LIMIT_SWITCH_LOC);
+    }
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new CargoArmManualCommand());
   }
 
   @Override
@@ -45,21 +56,16 @@ public class CargoArmSubsystem extends PIDSubsystem {
   }
 
   @Override
-  public void usePIDOutput(double goal) {
-    RobotMap.CARGO_ARM_MOTOR.set(ControlMode.Position, goal);
-    /*if(getFwdSwitch()||getRevSwitch()){
-      stop();
-    }*/
+  protected void usePIDOutput(double output) {
+    System.out.println(output);
+    RobotMap.CARGO_ARM_MOTOR.set(ControlMode.PercentOutput, output);
   }
 
-  public void armUp(){
-    RobotMap.CARGO_ARM_MOTOR.set(ControlMode.PercentOutput, 1);
+  /** For manual movement of the arm using the controller */
+  public void armManual(double power){
+    RobotMap.CARGO_ARM_MOTOR.set(ControlMode.PercentOutput, power);
   }
-
-  public void armDown(){
-    RobotMap.CARGO_ARM_MOTOR.set(ControlMode.PercentOutput, -1);
-  }
-
+  /** Method to stop the motor from moving*/
   public void stop(){
     RobotMap.CARGO_ARM_MOTOR.set(ControlMode.PercentOutput, 0);
   }
@@ -68,5 +74,5 @@ public class CargoArmSubsystem extends PIDSubsystem {
 	}
 	public boolean getRevSwitch(){
 		return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
-	}
+  }
 }

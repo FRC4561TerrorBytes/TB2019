@@ -69,6 +69,10 @@ public class RobotMap {
   private static final int CLIMBER_LEFT_PORT = 0;
   private static final int CLIMBER_RIGHT_PORT = 1;
 
+  //Max/Min arm encoder positions/limit switch locations TODO: find real values
+  public static final int ARM_BOT_LIMIT_SWITCH_LOC = 0;
+  public static final int ARM_TOP_LIMIT_SWITCH_LOC = 0;
+
   //Ski solenoid ports
   private static final int LEFT_FORWARD_SKI_PORT = 0; //TODO: change the numbers
   private static final int LEFT_REVERSE_SKI_PORT = 0; //TODO: change the numbers
@@ -120,4 +124,5 @@ public class RobotMap {
 
   //Creates Xbox Controller object with the controller
   public static final XboxController GAME_PAD = new XboxController(XBOX_CONTROLLER_PORT);
+
 }

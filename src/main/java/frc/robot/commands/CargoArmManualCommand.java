@@ -7,11 +7,13 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class CargoArmUpCommand extends Command {
-  public CargoArmUpCommand() {
+public class CargoArmManualCommand extends Command {
+  public CargoArmManualCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.cargoArmSubsystem);
@@ -20,12 +22,20 @@ public class CargoArmUpCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    //set how accurate the PID needs to be in percent accuracy
+    Robot.cargoArmSubsystem.setPercentTolerance(1);
+    //start PID Loop
+    Robot.cargoArmSubsystem.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoArmSubsystem.armUp();
+    Robot.cargoArmSubsystem.armManual(RobotMap.GAME_PAD.getY(Hand.kRight));
+    //If we aren't moving the arm, keep it where it is
+    if(RobotMap.GAME_PAD.getY(Hand.kRight)==0){
+      Robot.cargoArmSubsystem.setSetpoint(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
