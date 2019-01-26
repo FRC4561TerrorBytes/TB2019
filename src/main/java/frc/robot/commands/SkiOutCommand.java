@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * @author Snehil
+ * @author Snehil, Lucas
  */
 public class SkiOutCommand extends Command {
-  DoubleSolenoid.Value set = DoubleSolenoid.Value.kReverse;
+  Boolean set;
 
-  public SkiOutCommand(DoubleSolenoid.Value set) {
+  public SkiOutCommand(Boolean set) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.climber);
     this.set = set;

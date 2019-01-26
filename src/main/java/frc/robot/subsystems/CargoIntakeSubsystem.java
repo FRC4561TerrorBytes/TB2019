@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * @author Lucas
  */
 public class CargoIntakeSubsystem extends Subsystem {
   // Put methods for controlling this subsystem

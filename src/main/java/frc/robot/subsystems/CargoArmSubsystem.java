@@ -17,8 +17,9 @@ import frc.robot.RobotMap;
 import frc.robot.commands.CargoArmManualCommand;
 
 /**
- * Add your docs here.
+ * @author Lucas
  */
+
 public class CargoArmSubsystem extends PIDSubsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
