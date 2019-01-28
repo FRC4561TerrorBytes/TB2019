@@ -58,7 +58,6 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    System.out.println(output);
     RobotMap.CARGO_ARM_MOTOR.set(ControlMode.PercentOutput, output);
   }
 

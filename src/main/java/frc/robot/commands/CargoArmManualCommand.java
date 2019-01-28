@@ -23,9 +23,7 @@ public class CargoArmManualCommand extends Command {
   @Override
   protected void initialize() {
     //set how accurate the PID needs to be in percent accuracy
-    Robot.cargoArmSubsystem.setPercentTolerance(1);
-    //start PID Loop
-    Robot.cargoArmSubsystem.enable();
+    Robot.cargoArmSubsystem.setAbsoluteTolerance(5);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -35,6 +33,7 @@ public class CargoArmManualCommand extends Command {
     //If we aren't moving the arm, keep it where it is
     if(RobotMap.GAME_PAD.getY(Hand.kRight)==0){
       Robot.cargoArmSubsystem.setSetpoint(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
+      Robot.cargoArmSubsystem.enable(); // starts PID loop
     }
   }
 

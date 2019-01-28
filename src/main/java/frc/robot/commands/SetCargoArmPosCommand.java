@@ -22,8 +22,8 @@ public class SetCargoArmPosCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    // set how accurate the PID needs to be in percent accuracy
-    Robot.cargoArmSubsystem.setPercentTolerance(1);
+    // set how accurate the PID needs to be in absolute accuracy
+    Robot.cargoArmSubsystem.setAbsoluteTolerance(5);
     // set setpoint
     Robot.cargoArmSubsystem.setSetpoint(this.setpoint);
     // Start PID loop
