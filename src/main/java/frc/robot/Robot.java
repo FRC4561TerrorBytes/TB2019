@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
@@ -28,7 +29,7 @@ public class Robot extends TimedRobot {
   public static CargoArmSubsystem cargoArmSubsystem = new CargoArmSubsystem();
   public static ClimberSubsystem climber = new ClimberSubsystem();
   public static OI oi;
-
+  public static NetworkTable networkTable = NetworkTable.getTable("networkTable");
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -54,6 +55,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    //numbers retrieved from raspi
+    SmartDashboard.putNumber("PixyAngle", networkTable.getNumber("pixyAngle", 0));
+    //numbers retrived from robot
+    SmartDashboard.putNumber("CargoArmEncoderPos", cargoArmSubsystem.getPosition());
+    SmartDashboard.putNumber("GyroAngle", drivetrain.getAngle());
   }
 
   /**
