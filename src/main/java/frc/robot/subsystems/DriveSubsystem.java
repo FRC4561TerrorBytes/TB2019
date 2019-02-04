@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.CurvatureDriveCommand;
 import frc.robot.commands.TankDriveCommand;
@@ -70,9 +71,9 @@ public class DriveSubsystem extends Subsystem {
 	}
 
 	// Gyro Driving Straight
-	public void gyroDriveStraight() {
+	public void gyroDriveStraight(double angle) {
 		// drive toward 0 degrees
-		double error = this.getAngle();
+		double error = angle;
 		// accumulate error between calls, method is called approx. every 16.67 ms
 		this.integral += error * 0.01666666667;
 		// see how the error is changing over time, method is called approx every 16.67 ms

@@ -34,8 +34,11 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  // Drive mode
-	public static final int DRIVE_MODE = 1; // 1 is curve drive, 0 is tank drive
+  // Drive Mode
+  public static final int DRIVE_MODE = 1; // 1 is curve drive, 0 is tank drive
+  
+  // Pixy/Vision toggle Booleans
+  public static final boolean PIXY_DRIVE_TOGGLE = true; //make true if you want to use pixy guidance
 
   // Joystick Ports
   public static final int RIGHT_JOYSTICK_PORT = 0;  // TODO: Assign values to the engine, Scotty.
@@ -74,8 +77,8 @@ public class RobotMap {
   public static final int ARM_TOP_LIMIT_SWITCH_LOC = 0;
 
   //Ski solenoid ports
-  private static final int LEFT_SKI_PORT = 0; //TODO: change the numbers
-  private static final int RIGHT_SKI_PORT = 0; //TODO: change the numbers
+  private static final int LEFT_SKI_PORT = 4; //TODO: change the numbers
+  private static final int RIGHT_SKI_PORT = 5; //TODO: change the numbers
 
   // Declraing all Drivetrian TalonSRX
   private static final WPI_TalonSRX FRONT_LEFT_MOTOR = new WPI_TalonSRX(FRONT_LEFT_MOTOR_PORT);

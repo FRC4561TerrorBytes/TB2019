@@ -11,12 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.DriveStraightCommand;
-import frc.robot.commands.HatchIntakeCommand;
-import frc.robot.commands.HatchOuttakeCommand;
-import frc.robot.commands.HatchPositionCommand;
-import frc.robot.commands.SetCargoArmPosCommand;
-import frc.robot.commands.SkiOutCommand;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -61,7 +56,12 @@ public class OI {
     
     button1.whileHeld(new HatchOuttakeCommand(true)); // (placeholder) When held HatchOuttake pushes out.
     button1.whenReleased(new HatchOuttakeCommand(false)); // (placeholder) When released HatchOuttake pulls in.
-    button2.whileHeld(new DriveStraightCommand());
+    if(RobotMap.PIXY_DRIVE_TOGGLE){
+      button2.whileHeld(new DriveStraightPixyInputCommand());
+    }
+    else{
+      button2.whileHeld(new DriveStraightCommand());
+    }
     button3.whileHeld(new HatchIntakeCommand(true)); // (placeholder) When held Hatchintake pushes out.
     button3.whenReleased(new HatchIntakeCommand(false)); // (placeholder) When released Hatchintake pulls in.
     button4.whenPressed(new HatchPositionCommand(DoubleSolenoid.Value.kForward)); // (placeholder) When pressed Hatchintake goes down.
