@@ -15,14 +15,13 @@ import frc.robot.RobotMap;
 public class CargoArmManualCommand extends Command {
   public CargoArmManualCommand() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.cargoArmSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    //set how accurate the PID needs to be in percent accuracy
+    //set PID tolerance in encoder ticks
     Robot.cargoArmSubsystem.setAbsoluteTolerance(5);
   }
 
@@ -30,11 +29,6 @@ public class CargoArmManualCommand extends Command {
   @Override
   protected void execute() {
     Robot.cargoArmSubsystem.armManual(RobotMap.GAME_PAD.getY(Hand.kRight));
-    //If we aren't moving the arm, keep it where it is
-    if(RobotMap.GAME_PAD.getY(Hand.kRight)==0){
-      Robot.cargoArmSubsystem.setSetpoint(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
-      Robot.cargoArmSubsystem.enable(); // starts PID loop
-    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -46,7 +40,9 @@ public class CargoArmManualCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.cargoArmSubsystem.stop();
+    // If we aren't moving the arm, keep it where it is
+    Robot.cargoArmSubsystem.setSetpoint(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
+    Robot.cargoArmSubsystem.enable(); // starts arm PID loop
   }
 
   // Called when another command which requires one or more of the same

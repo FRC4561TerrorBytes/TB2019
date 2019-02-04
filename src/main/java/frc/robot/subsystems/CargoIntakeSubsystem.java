@@ -35,6 +35,6 @@ public class CargoIntakeSubsystem extends Subsystem {
   }
 
   public void stop(){
-    RobotMap.CARGO_ROLLERS_MOTOR_GROUP.set(0);
+    RobotMap.CARGO_ROLLERS_MOTOR_GROUP.stopMotor();
   }
 }

@@ -27,7 +27,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
   public CargoArmSubsystem(){
     /* values: P,I,D,F,Period (stays constant); Robot_006 Values: TODO: find values for comp robot */ 
     /* Delta Values: 4, 0.0055, 1023, 3.41*/
-    super(4, 0.0055, 1023, 3.41, 0.01666666667);
+    super(4, 0.0055, 1023, 3.41, RobotMap.ROBOT_CONTROL_LOOP_INTERVAL);
     //Setup sensors
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
     RobotMap.CARGO_ARM_MOTOR.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
@@ -48,7 +48,6 @@ public class CargoArmSubsystem extends PIDSubsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new CargoArmManualCommand());
   }
 
   @Override
@@ -62,17 +61,17 @@ public class CargoArmSubsystem extends PIDSubsystem {
   }
 
   /** For manual movement of the arm using the controller */
-  public void armManual(double power){
+  public void armManual(double power) {
     RobotMap.CARGO_ARM_MOTOR.set(ControlMode.PercentOutput, power);
   }
   /** Method to stop the motor from moving*/
-  public void stop(){
-    RobotMap.CARGO_ARM_MOTOR.set(ControlMode.PercentOutput, 0);
+  public void stop() {
+    RobotMap.CARGO_ARM_MOTOR.stopMotor();
   }
-  public boolean getFwdSwitch(){
+  public boolean getFwdSwitch() {
 		return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
 	}
-	public boolean getRevSwitch(){
+	public boolean getRevSwitch() {
 		return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
   }
 }

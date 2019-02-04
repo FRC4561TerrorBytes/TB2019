@@ -36,13 +36,13 @@ public class ClimberSubsystem extends Subsystem {
   }
 
   // Moving the skis onto the hab or back
-  public void skiOutPosition(Boolean activate) {
+  public void skiOutPosition(boolean activate) {
     RobotMap.RIGHT_SKI.set(activate);
     RobotMap.LEFT_SKI.set(activate);
   }
 
   // This method makes the motors on both sides stop.
   public void stop () {
-    RobotMap.CLIMBER_MOTOR_GROUP.set(0);
+    RobotMap.CLIMBER_MOTOR_GROUP.stopMotor();
   }
 }

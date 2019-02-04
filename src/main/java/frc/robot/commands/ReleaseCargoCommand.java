@@ -13,7 +13,6 @@ import frc.robot.Robot;
 public class ReleaseCargoCommand extends Command {
   public ReleaseCargoCommand() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.cargoIntake);
   }
 
