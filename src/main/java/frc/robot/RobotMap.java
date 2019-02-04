@@ -35,7 +35,10 @@ public class RobotMap {
   // public static int rangefinderModule = 1;
 
   // Drive mode
-	public static final int DRIVE_MODE = 1; // 1 is curve drive, 0 is tank drive
+  public static final int DRIVE_MODE = 1; // 1 is curve drive, 0 is tank drive
+  
+  // Robot control loop frequency
+  public static final double ROBOT_CONTROL_LOOP_INTERVAL = 0.01666666667;
 
   // Joystick Ports
   public static final int RIGHT_JOYSTICK_PORT = 0;  // TODO: Assign values to the engine, Scotty.
