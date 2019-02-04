@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -35,7 +34,8 @@ public class HatchIntakeSubsystem extends Subsystem {
     RobotMap.HATCH_OUTTAKE_SOLENOID.set(value);
   }
 
-  public void hatchPosition(DoubleSolenoid.Value value) {
+  // Moving the hatch intake in and out from the robot
+  public void hatchPosition(boolean value) {
     RobotMap.HATCH_POSITION_SOLENOID.set(value);
   }
 }

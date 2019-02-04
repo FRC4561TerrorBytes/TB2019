@@ -10,7 +10,6 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SPI;
@@ -56,8 +55,7 @@ public class RobotMap {
 
   // Intake motor ports
   private static final int INTAKE_HORIZ_PORT = 0; //TODO: change the numbers
-  private static final int INTAKE_VERT_FORWARD_PORT = 1;//TODO: change the numbers 
-  private static final int INTAKE_VERT_BACK_PORT = 2;//TODO: change the numbers 
+  private static final int INTAKE_VERT_PORT = 2; //TODO: change the numbers 
   private static final int INTAKE_OUT_PORT = 3; //TODO: change the numbers
 
   // Xbox Controller Port
@@ -94,7 +92,7 @@ public class RobotMap {
   private static final WPI_TalonSRX CARGO_BOTTOM_ROLLER_MOTOR = new WPI_TalonSRX(CARGO_BOT_ROLLER_PORT);
 
   //Hatch intake variables
-  public static final DoubleSolenoid HATCH_POSITION_SOLENOID = new DoubleSolenoid(INTAKE_VERT_FORWARD_PORT, INTAKE_VERT_BACK_PORT);
+  public static final Solenoid HATCH_POSITION_SOLENOID = new Solenoid(INTAKE_VERT_PORT);
   public static final Solenoid HATCH_INTAKE_SOLENOID = new Solenoid(INTAKE_HORIZ_PORT);
   public static final Solenoid HATCH_OUTTAKE_SOLENOID = new Solenoid(INTAKE_OUT_PORT);
 
