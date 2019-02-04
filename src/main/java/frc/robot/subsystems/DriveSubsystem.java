@@ -24,11 +24,11 @@ public class DriveSubsystem extends Subsystem {
 	// here. Call these from Commands.
 
 	// PID Values set for Delta:
-    // double kP = 0.21, kI = 0.6, kD = 0.01375;
-    // Ku: Maximum kP value that gives ocillation
-    // Tu: Time for full ocillation on the robot
-    // PID Values: kP = 0.6Ku  kI = 1.2Ku/Tu  kD = 3KuTu/40
-    double kP = 0.21, kI = 0.6, kD = 0.01375;
+	// double kP = 0.21, kI = 0.6, kD = 0.01375;
+	// Ku: Maximum kP value that gives ocillation
+	// Tu: Time for full ocillation on the robot
+	// PID Values: kP = 0.6Ku  kI = 1.2Ku/Tu  kD = 3KuTu/40
+  double kP = 0.21, kI = 0.6, kD = 0.01375;
 	double integral = 0, previous_error = 0;
 	DifferentialDrive differentialDrive;
 
@@ -62,7 +62,7 @@ public class DriveSubsystem extends Subsystem {
 	}
 
 	// Initialise gyro PID
-	public void initGyroDrive() {
+	public void initAngleDrive() {
 		// reset integral accumulator and previous_error
 		this.integral = 0;
 		this.previous_error = 0;
@@ -71,13 +71,13 @@ public class DriveSubsystem extends Subsystem {
 	}
 
 	// Gyro Driving Straight
-	public void gyroDriveStraight(double angle) {
+	public void angleDriveStraight(double angle) {
 		// drive toward 0 degrees
 		double error = angle;
 		// accumulate error between calls, method is called approx. every 16.67 ms
-		this.integral += error * 0.01666666667;
+		this.integral += error * RobotMap.ROBOT_CONTROL_LOOP_INTERVAL;
 		// see how the error is changing over time, method is called approx every 16.67 ms
-		double derivative = (error - this.previous_error) / 0.01666666667;
+		double derivative = (error - this.previous_error) / RobotMap.ROBOT_CONTROL_LOOP_INTERVAL;
 		// combine P, I, D terms to produce turning output
 		double turn_power = this.kP * error + this.kI * this.integral + this.kD * derivative;
 		// update previous_error
@@ -95,9 +95,8 @@ public class DriveSubsystem extends Subsystem {
 	public double getAngle() {
 		double angle = RobotMap.navx.getAngle();
 		
-		// correct for values beyond 360 and -360
-		if (angle >= 0) return angle % 360;
-		else return angle % -360;
+		// correct for values beyond 180 and -180
+		return (angle + 180) % 360 - 180;
 	}
 
 }

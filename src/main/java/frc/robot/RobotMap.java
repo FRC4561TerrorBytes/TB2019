@@ -40,6 +40,9 @@ public class RobotMap {
   // Pixy/Vision toggle Booleans
   public static final boolean PIXY_DRIVE_TOGGLE = true; //make true if you want to use pixy guidance
 
+  // Robot control loop frequency
+  public static final double ROBOT_CONTROL_LOOP_INTERVAL = 0.01666666667;
+  
   // Joystick Ports
   public static final int RIGHT_JOYSTICK_PORT = 0;  // TODO: Assign values to the engine, Scotty.
   public static final int LEFT_JOYSTICK_PORT = 1;
