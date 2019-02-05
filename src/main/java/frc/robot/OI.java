@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.*;
@@ -64,8 +62,8 @@ public class OI {
     }
     button3.whileHeld(new HatchIntakeCommand(true)); // (placeholder) When held Hatchintake pushes out.
     button3.whenReleased(new HatchIntakeCommand(false)); // (placeholder) When released Hatchintake pulls in.
-    button4.whenPressed(new HatchPositionCommand(DoubleSolenoid.Value.kForward)); // (placeholder) When pressed Hatchintake goes down.
-    button5.whenPressed(new HatchPositionCommand(DoubleSolenoid.Value.kReverse)); // (placeholder) When pressed Hatchintake goes up.
+    button4.whenPressed(new HatchPositionCommand(false)); // (placeholder) When pressed Hatchintake goes down.
+    button5.whenPressed(new HatchPositionCommand(true)); // (placeholder) When pressed Hatchintake goes up.
     button6.whileHeld(new SkiOutCommand(true)); // (placeholder) When pressed Ski comes out.
     button6.whenReleased(new SkiOutCommand(false)); // (placeholder) When released Ski comes in.
     

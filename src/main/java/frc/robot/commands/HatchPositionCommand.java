@@ -7,7 +7,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -15,9 +14,9 @@ import frc.robot.Robot;
  * @author Max
  */
 public class HatchPositionCommand extends Command {
-  DoubleSolenoid.Value set = DoubleSolenoid.Value.kReverse;
+  boolean set = false;
 
-  public HatchPositionCommand(DoubleSolenoid.Value set) {
+  public HatchPositionCommand(boolean set) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.hatchIntake);
     this.set = set;
