@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -29,7 +30,8 @@ public class Robot extends TimedRobot {
   public static CargoArmSubsystem cargoArmSubsystem = new CargoArmSubsystem();
   public static ClimberSubsystem climber = new ClimberSubsystem();
   public static OI oi;
-  public static NetworkTable networkTable = NetworkTable.getTable("networkTable");
+  public static NetworkTableInstance networkTableInstance = NetworkTableInstance.create();
+  public static edu.wpi.first.networktables.NetworkTable networkTable;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -43,6 +45,8 @@ public class Robot extends TimedRobot {
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    networkTableInstance.startClient("10.45.61.45");
+    networkTable = networkTableInstance.getTable("networkTable");
   }
 
   /**
@@ -56,7 +60,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     //numbers retrieved from raspi
-    SmartDashboard.putNumber("PixyAngle", networkTable.getNumber("pixyAngle", 0));
+    SmartDashboard.putNumber("PixyAngle", networkTable.getEntry("pixyAngle").getDouble(0));
+    SmartDashboard.putNumber("X-Center", networkTable.getEntry("xcenter").getDouble(0));
+    SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(0));
     //numbers retrived from robot
     SmartDashboard.putNumber("CargoArmEncoderPos", cargoArmSubsystem.getPosition());
     SmartDashboard.putNumber("GyroAngle", drivetrain.getAngle());

@@ -26,7 +26,8 @@ public class DriveStraightPixyInputCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drivetrain.angleDriveStraight(Robot.networkTable.getNumber("pixyAngle", 0));
+    Robot.drivetrain.angleDriveStraight(Robot.networkTable.getEntry("pixyAngle").getDouble(0));
+    System.out.println(Robot.networkTable.getEntry("pixyAngle").getDouble(0));
   }
 
   // Make this return true when this Command no longer needs to run execute()
