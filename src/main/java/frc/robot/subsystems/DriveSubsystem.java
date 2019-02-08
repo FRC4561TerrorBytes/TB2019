@@ -94,9 +94,8 @@ public class DriveSubsystem extends Subsystem {
 	// Get angle of drivetrain from NavX correcting for accumulation
 	public double getAngle() {
 		double angle = RobotMap.navx.getAngle();
-		
 		// correct for values beyond 180 and -180
-		return (angle + 180) % 360 - 180;
+		return ((((angle + 180) % 360)) - 180);
 	}
 
 }

@@ -20,14 +20,14 @@ public class DriveStraightPixyInputCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.drivetrain.initAngleDrive();
+    //Robot.drivetrain.initAngleDrive();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drivetrain.angleDriveStraight(Robot.networkTable.getEntry("pixyAngle").getDouble(0));
-    System.out.println(Robot.networkTable.getEntry("pixyAngle").getDouble(0));
+    //If we have input from the pixy turn to the vector else face current heading
+    Robot.drivetrain.angleDriveStraight(Robot.drivetrain.getAngle()-Robot.networkTable.getEntry("pixyAngle").getDouble(0));
   }
 
   // Make this return true when this Command no longer needs to run execute()

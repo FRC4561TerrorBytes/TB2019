@@ -52,20 +52,19 @@ public class OI {
     Button button5 = new JoystickButton(RobotMap.LEFT_STICK, 5); // Placeholder for hatchPosition up.
     Button button6 = new JoystickButton(RobotMap.LEFT_STICK, 6); // Placeholder for skiOutPosition.
     
-    button1.whileHeld(new HatchOuttakeCommand(true)); // (placeholder) When held HatchOuttake pushes out.
-    button1.whenReleased(new HatchOuttakeCommand(false)); // (placeholder) When released HatchOuttake pulls in.
     if(RobotMap.PIXY_DRIVE_TOGGLE){
-      button2.whileHeld(new DriveStraightPixyInputCommand());
+      button1.whileHeld(new DriveStraightPixyInputCommand());
     }
     else{
-      button2.whileHeld(new DriveStraightCommand());
+      button1.whileHeld(new DriveStraightCommand());
     }
+    button2.whileHeld(new HatchOuttakeCommand(true)); // (placeholder) When held HatchOuttake pushes out.
+    button2.whenReleased(new HatchOuttakeCommand(false)); // (placeholder) When released HatchOuttake pulls in.
     button3.whileHeld(new HatchIntakeCommand(true)); // (placeholder) When held Hatchintake pushes out.
     button3.whenReleased(new HatchIntakeCommand(false)); // (placeholder) When released Hatchintake pulls in.
     button4.whenPressed(new HatchPositionCommand(false)); // (placeholder) When pressed Hatchintake goes down.
     button5.whenPressed(new HatchPositionCommand(true)); // (placeholder) When pressed Hatchintake goes up.
     button6.whileHeld(new SkiOutCommand(true)); // (placeholder) When pressed Ski comes out.
     button6.whenReleased(new SkiOutCommand(false)); // (placeholder) When released Ski comes in.
-    
   }
 }
