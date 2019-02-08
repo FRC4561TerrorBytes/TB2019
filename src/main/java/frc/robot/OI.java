@@ -51,6 +51,9 @@ public class OI {
     Button button4 = new JoystickButton(RobotMap.LEFT_STICK, 4); // Placeholder for hatchPosition down.
     Button button5 = new JoystickButton(RobotMap.LEFT_STICK, 5); // Placeholder for hatchPosition up.
     Button button6 = new JoystickButton(RobotMap.LEFT_STICK, 6); // Placeholder for skiOutPosition.
+    Button button7 = new JoystickButton(RobotMap.LEFT_STICK, 7); // 
+    Button button8 = new JoystickButton(RobotMap.LEFT_STICK, 8); // 
+    Button buttonXboxA = new JoystickButton(RobotMap.GAME_PAD, 1);
     
     button1.whileHeld(new HatchOuttakeCommand(true)); // (placeholder) When held HatchOuttake pushes out.
     button1.whenReleased(new HatchOuttakeCommand(false)); // (placeholder) When released HatchOuttake pulls in.
@@ -66,6 +69,7 @@ public class OI {
     button5.whenPressed(new HatchPositionCommand(true)); // (placeholder) When pressed Hatchintake goes up.
     button6.whileHeld(new SkiOutCommand(true)); // (placeholder) When pressed Ski comes out.
     button6.whenReleased(new SkiOutCommand(false)); // (placeholder) When released Ski comes in.
-    
+    button7.whenReleased(new SkiOutCommand(false)); // (placeholder) When released Ski comes in.
+    buttonXboxA.whenPressed(new HatchPresentCommand()); // (placeholder) When pressed, check if Super Suit (hatch) is present
   }
 }

@@ -13,9 +13,9 @@ import frc.robot.Robot;
 /**
  * @author Snehil
  */
-public class InfraredDistanceCommand extends Command {
+public class HatchPresentCommand extends Command {
 
-  public InfraredDistanceCommand() {
+  public HatchPresentCommand() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.hatchIntake);
   }
@@ -28,8 +28,8 @@ public class InfraredDistanceCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // Control ski pistons with a position value on piston (forward/reverse/off)
-    Robot.hatchIntake.getDistance();
+    // Run hatchDetector method from hatch subsystem
+    Robot.hatchIntake.getHatch();
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -10,6 +10,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SPI;
@@ -81,6 +82,9 @@ public class RobotMap {
   private static final int LEFT_SKI_PORT = 4; //TODO: change the numbers
   private static final int RIGHT_SKI_PORT = 5; //TODO: change the numbers
 
+  // Infrared Sensor port
+  private static final int INFRARED_PORT = 0;
+
   // Declraing all Drivetrian TalonSRX
   private static final WPI_TalonSRX FRONT_LEFT_MOTOR = new WPI_TalonSRX(FRONT_LEFT_MOTOR_PORT);
   private static final WPI_TalonSRX FRONT_RIGHT_MOTOR = new WPI_TalonSRX(FRONT_RIGHT_MOTOR_PORT);
@@ -126,5 +130,8 @@ public class RobotMap {
 
   //Creates Xbox Controller object with the controller
   public static final XboxController GAME_PAD = new XboxController(XBOX_CONTROLLER_PORT);
+
+  //Creates object for Infrared Sensor
+  public static final DigitalInput HATCH_DETECTOR = new DigitalInput(INFRARED_PORT);
 
 }
