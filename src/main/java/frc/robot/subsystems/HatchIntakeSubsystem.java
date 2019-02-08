@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 /**
@@ -37,5 +38,13 @@ public class HatchIntakeSubsystem extends Subsystem {
   // Moving the hatch intake in and out from the robot
   public void hatchPosition(boolean value) {
     RobotMap.HATCH_POSITION_SOLENOID.set(value);
+  }
+
+  // Check if there is Super Suit (hatch) in front of the robot
+  public void getHatch() {
+    boolean hatchDetected = RobotMap.HATCH_DETECTOR.get();
+
+    // Display on SmartDashboard on whether Super Suit (hatch) is there or not
+    SmartDashboard.putBoolean("Hatch Present:", !hatchDetected);
   }
 }
