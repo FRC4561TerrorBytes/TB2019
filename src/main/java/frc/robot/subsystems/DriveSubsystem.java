@@ -52,7 +52,11 @@ public class DriveSubsystem extends Subsystem {
 
 	// Create curve drive method to use the left joystick for speed and right joystick for rotation. true - allows in-place turning manuevers, or "QuickTurn"
 	public void curvatureDrive() {
-		differentialDrive.curvatureDrive(RobotMap.LEFT_STICK.getY(), -RobotMap.RIGHT_STICK.getX(), true);
+		// Square inputs to curvatureDrive while maintaining sign
+		differentialDrive.curvatureDrive(
+			Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), RobotMap.LEFT_STICK.getY()),
+			Math.copySign(Math.pow(RobotMap.RIGHT_STICK.getX(), 2), RobotMap.RIGHT_STICK.getX()), 
+			true);
 	}
 
 	// Test Drivetrain control with XBox Controller. Same as curvatureDrive but instead of joystick inputs, it uses game-pad inputs.

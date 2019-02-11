@@ -40,45 +40,45 @@ public class RobotMap {
   // Pixy/Vision toggle Booleans
   public static final boolean PIXY_DRIVE_TOGGLE = true; //make true if you want to use pixy guidance
 
-  // Robot control loop frequency
+  // Robot control loop frequency, in seconds
   public static final double ROBOT_CONTROL_LOOP_INTERVAL = 0.01666666667;
   
   // Joystick Ports
   public static final int RIGHT_JOYSTICK_PORT = 0;  // TODO: Assign values to the engine, Scotty.
   public static final int LEFT_JOYSTICK_PORT = 1;
 
-  //Right motor ports
-  public static final int FRONT_RIGHT_MOTOR_PORT = 8;
-  public static final int MID_RIGHT_MOTOR_PORT = 9;
-  public static final int BOT_RIGHT_MOTOR_PORT = 10;
+  // Right motor ports
+  public static final int FRONT_RIGHT_MOTOR_PORT = 0;
+  public static final int MID_RIGHT_MOTOR_PORT = 1;
+  public static final int BOT_RIGHT_MOTOR_PORT = 2;
 
   // Left motor ports		
-  public static final int FRONT_LEFT_MOTOR_PORT = 7;
-  public static final int MID_LEFT_MOTOR_PORT = 11;
-  public static final int BOT_LEFT_MOTOR_PORT = 12;
+  public static final int FRONT_LEFT_MOTOR_PORT = 3;
+  public static final int MID_LEFT_MOTOR_PORT = 4;
+  public static final int BOT_LEFT_MOTOR_PORT = 5;
 
   // Intake motor ports
-  private static final int INTAKE_HORIZ_PORT = 0; //TODO: change the numbers
-  private static final int INTAKE_VERT_PORT = 2; //TODO: change the numbers 
-  private static final int INTAKE_OUT_PORT = 3; //TODO: change the numbers
+  private static final int INTAKE_HORIZ_PORT = 4561; //TODO: change the numbers
+  private static final int INTAKE_VERT_PORT = 4561; //TODO: change the numbers 
+  private static final int INTAKE_OUT_PORT = 4561; //TODO: change the numbers
 
   // Xbox Controller Port
   public static final int XBOX_CONTROLLER_PORT = 2;
 
   // Cargo Intake motor ports
-  private static final int CARGO_ARM_MOTOR_PORT = 6;
-  private static final int CARGO_TOP_ROLLER_PORT = 0;
-  private static final int CARGO_BOT_ROLLER_PORT = 0;
+  private static final int CARGO_ARM_MOTOR_PORT = 4561;
+  private static final int CARGO_TOP_ROLLER_PORT = 4561;
+  private static final int CARGO_BOT_ROLLER_PORT = 4561;
 
-  //Climber motor ports
-  private static final int CLIMBER_LEFT_PORT = 0;
-  private static final int CLIMBER_RIGHT_PORT = 1;
+  // Climber motor ports
+  private static final int CLIMBER_LEFT_PORT = 4561;
+  private static final int CLIMBER_RIGHT_PORT = 4561;
 
-  //Max/Min arm encoder positions/limit switch locations TODO: find real values
+  // Max/Min arm encoder positions/limit switch locations TODO: find real values
   public static final int ARM_BOT_LIMIT_SWITCH_LOC = 0;
   public static final int ARM_TOP_LIMIT_SWITCH_LOC = 0;
 
-  //Ski solenoid ports
+  // Ski solenoid ports
   private static final int LEFT_SKI_PORT = 4; //TODO: change the numbers
   private static final int RIGHT_SKI_PORT = 5; //TODO: change the numbers
 
@@ -88,30 +88,30 @@ public class RobotMap {
   // Declraing all Drivetrian TalonSRX
   private static final WPI_TalonSRX FRONT_LEFT_MOTOR = new WPI_TalonSRX(FRONT_LEFT_MOTOR_PORT);
   private static final WPI_TalonSRX FRONT_RIGHT_MOTOR = new WPI_TalonSRX(FRONT_RIGHT_MOTOR_PORT);
+  private static final WPI_TalonSRX MID_LEFT_MOTOR = new WPI_TalonSRX(MID_LEFT_MOTOR_PORT);
   private static final WPI_TalonSRX MID_RIGHT_MOTOR = new WPI_TalonSRX(MID_RIGHT_MOTOR_PORT); 
   private static final WPI_TalonSRX BACK_LEFT_MOTOR = new WPI_TalonSRX(BOT_LEFT_MOTOR_PORT);
-  private static final WPI_TalonSRX MID_LEFT_MOTOR = new WPI_TalonSRX(MID_LEFT_MOTOR_PORT);
   private static final WPI_TalonSRX BACK_RIGHT_MOTOR = new WPI_TalonSRX(BOT_RIGHT_MOTOR_PORT);
 
-  //Cargo intake variables
+  // Cargo intake variables
   public static final WPI_TalonSRX CARGO_ARM_MOTOR = new WPI_TalonSRX(CARGO_ARM_MOTOR_PORT);
   private static final WPI_TalonSRX CARGO_TOP_ROLLER_MOTOR = new WPI_TalonSRX(CARGO_TOP_ROLLER_PORT);
   private static final WPI_TalonSRX CARGO_BOTTOM_ROLLER_MOTOR = new WPI_TalonSRX(CARGO_BOT_ROLLER_PORT);
 
-  //Hatch intake variables
+  // Hatch intake variables
   public static final Solenoid HATCH_POSITION_SOLENOID = new Solenoid(INTAKE_VERT_PORT);
   public static final Solenoid HATCH_INTAKE_SOLENOID = new Solenoid(INTAKE_HORIZ_PORT);
   public static final Solenoid HATCH_OUTTAKE_SOLENOID = new Solenoid(INTAKE_OUT_PORT);
 
-  //Climber subsystem variables
+  // Climber subsystem variables
   private static final WPI_TalonSRX LEFT_CLIMBER_MOTOR = new WPI_TalonSRX(CLIMBER_LEFT_PORT);
   private static final WPI_TalonSRX RIGHT_CLIMBER_MOTOR = new WPI_TalonSRX(CLIMBER_RIGHT_PORT);
 
-  //Ski solenoids objects
+  // Ski solenoids objects
   public static final Solenoid RIGHT_SKI = new Solenoid(RIGHT_SKI_PORT);
   public static final Solenoid LEFT_SKI = new Solenoid(LEFT_SKI_PORT);
 
-  //Creates SpeedController object to combine left and right side motors
+  // Creates SpeedController object to combine left and right side motors
   public static final SpeedControllerGroup LEFT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_LEFT_MOTOR, MID_LEFT_MOTOR, BACK_LEFT_MOTOR);
   public static final SpeedControllerGroup RIGHT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_RIGHT_MOTOR, MID_RIGHT_MOTOR, BACK_RIGHT_MOTOR);
   
@@ -121,17 +121,17 @@ public class RobotMap {
   // Climber motor group
   public static final SpeedControllerGroup CLIMBER_MOTOR_GROUP = new SpeedControllerGroup(LEFT_CLIMBER_MOTOR, RIGHT_CLIMBER_MOTOR);
 
-  //Declaring NavX MXP
+  // Declaring NavX MXP
   public static final AHRS navx = new AHRS(SPI.Port.kMXP);
 
-  //Creates Joystick objects for each joystick
+  // Creates Joystick objects for each joystick
   public static final Joystick LEFT_STICK = new Joystick (LEFT_JOYSTICK_PORT);
   public static final Joystick RIGHT_STICK = new Joystick (RIGHT_JOYSTICK_PORT);
 
-  //Creates Xbox Controller object with the controller
+  // Creates Xbox Controller object with the controller
   public static final XboxController GAME_PAD = new XboxController(XBOX_CONTROLLER_PORT);
 
-  //Creates object for Infrared Sensor
+  // Creates object for Infrared Sensor
   public static final DigitalInput HATCH_DETECTOR = new DigitalInput(INFRARED_PORT);
 
 }
