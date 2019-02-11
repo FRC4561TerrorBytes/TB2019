@@ -36,7 +36,7 @@ public class ClimberSubsystem extends Subsystem {
   }
 
   // Moving the skis onto the hab or back
-  public void skiOutPosition(Boolean activate) {
+  public void skiOutPosition(boolean activate) {
     RobotMap.RIGHT_SKI.set(activate);
     RobotMap.LEFT_SKI.set(activate);
   }

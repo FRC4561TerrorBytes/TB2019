@@ -35,5 +35,4 @@ public class CurvatureDriveCommand extends Command {
 		Robot.drivetrain.stop();
 	}
 
-	
 }
