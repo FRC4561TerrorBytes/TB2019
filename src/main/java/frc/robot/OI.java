@@ -7,8 +7,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 
 /**
@@ -45,31 +47,68 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   public OI() {
-    Button button1 = new JoystickButton(RobotMap.LEFT_STICK, 1); // Placeholder for hatchOuttake.
-    Button button2 = new JoystickButton(RobotMap.LEFT_STICK, 2); // Placeholder for driveForward.
-    Button button3 = new JoystickButton(RobotMap.LEFT_STICK, 3); // Placeholder for hatchIntake.
-    Button button4 = new JoystickButton(RobotMap.LEFT_STICK, 4); // Placeholder for hatchPosition down.
-    Button button5 = new JoystickButton(RobotMap.LEFT_STICK, 5); // Placeholder for hatchPosition up.
-    Button button6 = new JoystickButton(RobotMap.LEFT_STICK, 6); // Placeholder for skiOutPosition.
-    Button button7 = new JoystickButton(RobotMap.LEFT_STICK, 7); // 
-    Button button8 = new JoystickButton(RobotMap.LEFT_STICK, 8); // 
-    Button buttonXboxA = new JoystickButton(RobotMap.GAME_PAD, 1);
-    
-    if(RobotMap.PIXY_DRIVE_TOGGLE){
-      button1.whileHeld(new DriveStraightPixyInputCommand());
+    Button lButton1 = new JoystickButton(RobotMap.LEFT_STICK, 1); // (real: Hatch outtake) Placeholder for Pixy line tracking.
+    Button lButton2 = new JoystickButton(RobotMap.LEFT_STICK, 2); // (real: Cargo outtake (slow)) Placeholder for HatchOuttake.
+    Button lButton3 = new JoystickButton(RobotMap.LEFT_STICK, 3); // (real: Auto Align)
+    Button lButton4 = new JoystickButton(RobotMap.LEFT_STICK, 4); // (real: Cargo outtake (fast)) Placeholder for hatchPosition down.
+    Button lButton5 = new JoystickButton(RobotMap.LEFT_STICK, 5); // (real: N/A) Placeholder for hatchPosition up.
+    Button rButton1 = new JoystickButton(RobotMap.RIGHT_STICK, 1); // Cargo intake in.
+    Button rButton2 = new JoystickButton(RobotMap.RIGHT_STICK, 2); // Hatch extend/retract.
+    Button buttonXboxA = new JoystickButton(RobotMap.GAME_PAD, 1); // TODO: chage to Arm at Cargo ground/intake posistion.
+    Button buttonXboxB = new JoystickButton(RobotMap.GAME_PAD, 2); // Arm at Cargo Level 1 rocket position.
+    Button buttonXboxX = new JoystickButton(RobotMap.GAME_PAD, 3); // Arm at Cargoship position.
+    Button buttonXboxY = new JoystickButton(RobotMap.GAME_PAD, 4); // Arm at Storage position.
+    Button buttonXboxLB = new JoystickButton(RobotMap.GAME_PAD, 5); // Deploy skis.
+    Button buttonXboxRB = new JoystickButton(RobotMap.GAME_PAD, 6); // Retract skis.
+
+    if (RobotMap.PIXY_DRIVE_TOGGLE) {
+      lButton1.whileHeld(new DriveStraightPixyInputCommand());
     }
-    else{
-      button1.whileHeld(new DriveStraightCommand());
+    else {
+      lButton1.whileHeld(new DriveStraightCommand());
     }
-    button2.whileHeld(new HatchOuttakeCommand(true)); // (placeholder) When held HatchOuttake pushes out.
-    button2.whenReleased(new HatchOuttakeCommand(false)); // (placeholder) When released HatchOuttake pulls in.
-    button3.whileHeld(new HatchIntakeCommand(true)); // (placeholder) When held Hatchintake pushes out.
-    button3.whenReleased(new HatchIntakeCommand(false)); // (placeholder) When released Hatchintake pulls in.
-    button4.whenPressed(new HatchPositionCommand(false)); // (placeholder) When pressed Hatchintake goes down.
-    button5.whenPressed(new HatchPositionCommand(true)); // (placeholder) When pressed Hatchintake goes up.
-    button6.whileHeld(new SkiOutCommand(true)); // (placeholder) When pressed Ski comes out.
-    button6.whenReleased(new SkiOutCommand(false)); // (placeholder) When released Ski comes in.
-    button7.whenReleased(new SkiOutCommand(false)); // (placeholder) When released Ski comes in.
+
+    // If Left trigger is held, release cargo.
+    if (RobotMap.GAME_PAD.getTriggerAxis(Hand.kLeft) > 0.25) {
+      new ReleaseCargoCommand();
+      SmartDashboard.putString("Trigger:", "Left");
+    } 
+
+    // If right trigger is held, intake cargo.
+    if (RobotMap.GAME_PAD.getTriggerAxis(Hand.kRight) > 0.25) {
+      new IntakeCargoCommand();
+      SmartDashboard.putString("Trigger:", "Right");
+    }
+
+    // If the top D-Pad is pressed, Hatch mechanism is moved up.
+    if (RobotMap.GAME_PAD.getPOV() == 0) {
+       new HatchPositionCommand(false);
+    }
+
+    // If the down D-Pad is pressed, Hatch mechanism is moved down.
+    if (RobotMap.GAME_PAD.getPOV() == 180) {
+      new HatchPositionCommand(true);
+    }
+
+    // If the left D-Pad is pressed, Hatch mechanism is extended.
+    if (RobotMap.GAME_PAD.getPOV() == 270) {
+      new HatchIntakeCommand(true);
+    }
+
+    // If the right D-Pad is pressed, Hatch mechanism is retracted.
+    if (RobotMap.GAME_PAD.getPOV() == 90) {
+      new HatchIntakeCommand(false);
+    }
+
+    lButton2.whileHeld(new HatchOuttakeCommand(true)); // (placeholder) When held HatchOuttake pushes out.
+    lButton2.whenReleased(new HatchOuttakeCommand(false)); // (placeholder) When released HatchOuttake pulls in.
+    lButton4.whenPressed(new HatchPositionCommand(false)); // When pressed Hatchintake goes down.
+    lButton5.whenPressed(new HatchPositionCommand(true)); // (placeholder) When pressed Hatchintake goes up.
+    rButton1.whileHeld(new IntakeCargoCommand()); // When held cargo intakes.
+    rButton2.whileHeld(new HatchIntakeCommand(true)); // (placeholder) When held Hatchintake pushes out.
+    rButton2.whenReleased(new HatchIntakeCommand(false)); // When released Hatchintake pulls in.
+    buttonXboxLB.whileHeld(new SkiOutCommand(true)); // When pressed Ski comes out.
+    buttonXboxRB.whileHeld(new SkiOutCommand(false)); // When pressed Ski comes in.
     buttonXboxA.whenPressed(new HatchPresentCommand()); // (placeholder) When pressed, check if Super Suit (hatch) is present
   }
 }

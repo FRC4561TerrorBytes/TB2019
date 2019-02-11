@@ -7,15 +7,17 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
- * @author Karthik
+ * @author Karthik, Max
  */
 
-public class ClimberDescendCommand extends Command {
-  public ClimberDescendCommand() {
+public class ClimberManualCommand extends Command {
+  public ClimberManualCommand() {
     requires(Robot.climber);
   }
 
@@ -25,14 +27,14 @@ public class ClimberDescendCommand extends Command {
   }
 
   // Called repeatedly when this Command is scheduled to run
-  // Called when the robot needs to descend into space like it's an X-Wing
+  // Called when the robot needs to ascend into space like it's the Enterprise
   @Override
   protected void execute() {
-    Robot.climber.descend();
+    Robot.climber.set(RobotMap.GAME_PAD.getY(Hand.kRight));
   }
 
   // Make this return true when this Command no longer needs to run execute()
-  // It is set to false since the robot does not need to always descend
+  // It is set to false since the robot does not need to always ascend
   @Override
   protected boolean isFinished() {
     return false;

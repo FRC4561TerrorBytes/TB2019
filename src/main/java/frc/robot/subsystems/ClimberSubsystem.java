@@ -9,9 +9,10 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.ClimberManualCommand;
 
 /**
- * @author Karthik, Snehil, Lucas
+ * @author Karthik, Snehil, Lucas, Max
  */
 
 public class ClimberSubsystem extends Subsystem {
@@ -22,17 +23,12 @@ public class ClimberSubsystem extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new ClimberManualCommand());
   }
 
   // This method makes the motors on both sides make the robot ascend
-  public void ascend () {
-    RobotMap.CLIMBER_MOTOR_GROUP.set(1);
-  }
-
-  // This method makes the motors on both sides make the robot descend
-  public void descend () {
-    RobotMap.CLIMBER_MOTOR_GROUP.set(-1);
+  public void set(double power) {
+    RobotMap.CLIMBER_MOTOR_GROUP.set(power);
   }
 
   // Moving the skis onto the hab or back

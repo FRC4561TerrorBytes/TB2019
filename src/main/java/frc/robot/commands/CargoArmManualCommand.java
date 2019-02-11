@@ -28,9 +28,9 @@ public class CargoArmManualCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoArmSubsystem.armManual(RobotMap.GAME_PAD.getY(Hand.kRight));
+    Robot.cargoArmSubsystem.armManual(RobotMap.GAME_PAD.getY(Hand.kLeft));
     // If we aren't moving the arm, keep it where it is
-    if (RobotMap.GAME_PAD.getY(Hand.kRight) == 0) {
+    if (RobotMap.GAME_PAD.getY(Hand.kLeft) == 0) {
       Robot.cargoArmSubsystem.setSetpoint(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
       Robot.cargoArmSubsystem.enable(); // starts PID loop
     }
