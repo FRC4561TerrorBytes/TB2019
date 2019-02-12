@@ -87,7 +87,11 @@ public class DriveSubsystem extends Subsystem {
 		// update previous_error
 		this.previous_error = error;
 		// drive with 'LEFT_STICK' throttle, and 'turn_power' rotation; no squared inputs
-		differentialDrive.arcadeDrive(RobotMap.LEFT_STICK.getY(), turn_power, false);
+		if(RobotMap.PIXY_DRIVE_TOGGLE){
+			differentialDrive.arcadeDrive(RobotMap.LEFT_STICK.getY(), -turn_power*.005, false);
+		} else {
+			differentialDrive.arcadeDrive(RobotMap.LEFT_STICK.getY(), turn_power, false);
+		}
 	}
 
 	// Creates stop method to stop all motors on drivetrain
@@ -95,11 +99,9 @@ public class DriveSubsystem extends Subsystem {
 		differentialDrive.stopMotor();
 	}
 
-	// Get angle of drivetrain from NavX correcting for accumulation
+	// Get angle of drivetrain from NavX
 	public double getAngle() {
-		double angle = RobotMap.navx.getAngle();
-		// correct for values beyond 180 and -180
-		return ((((angle + 180) % 360)) - 180);
+		return RobotMap.navx.getYaw();
 	}
 
 }

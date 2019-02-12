@@ -47,20 +47,20 @@ public class RobotMap {
   public static final int RIGHT_JOYSTICK_PORT = 0;  // TODO: Assign values to the engine, Scotty.
   public static final int LEFT_JOYSTICK_PORT = 1;
 
-  // Right motor ports
+  // Right motor ports. Delta Ports: 8,9,10
   public static final int FRONT_RIGHT_MOTOR_PORT = 0;
   public static final int MID_RIGHT_MOTOR_PORT = 1;
   public static final int BOT_RIGHT_MOTOR_PORT = 2;
 
-  // Left motor ports		
+  // Left motor ports	Delta Ports: 7,11,12
   public static final int FRONT_LEFT_MOTOR_PORT = 3;
   public static final int MID_LEFT_MOTOR_PORT = 4;
   public static final int BOT_LEFT_MOTOR_PORT = 5;
 
-  // Intake motor ports
-  private static final int INTAKE_HORIZ_PORT = 4561; //TODO: change the numbers
-  private static final int INTAKE_VERT_PORT = 4561; //TODO: change the numbers 
-  private static final int INTAKE_OUT_PORT = 4561; //TODO: change the numbers
+  // Intake Solenoid ports
+  private static final int INTAKE_HORIZ_PORT = 0; //TODO: change the numbers
+  private static final int INTAKE_VERT_PORT = 1; //TODO: change the numbers 
+  private static final int INTAKE_OUT_PORT = 2; //TODO: change the numbers
 
   // Xbox Controller Port
   public static final int XBOX_CONTROLLER_PORT = 2;
@@ -79,8 +79,8 @@ public class RobotMap {
   public static final int ARM_TOP_LIMIT_SWITCH_LOC = 0;
 
   // Ski solenoid ports
-  private static final int LEFT_SKI_PORT = 4; //TODO: change the numbers
-  private static final int RIGHT_SKI_PORT = 5; //TODO: change the numbers
+  private static final int LEFT_SKI_PORT = 3; //TODO: change the numbers
+  private static final int RIGHT_SKI_PORT = 4; //TODO: change the numbers
 
   // Infrared Sensor port
   private static final int INFRARED_PORT = 0;
