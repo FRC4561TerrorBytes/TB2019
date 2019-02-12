@@ -11,8 +11,20 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.POVButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.*;
+import frc.robot.commands.CargoArmManualCommand;
+import frc.robot.commands.DriveStraightCommand;
+import frc.robot.commands.DriveStraightPixyInputCommand;
+import frc.robot.commands.HatchIntakeCommand;
+import frc.robot.commands.HatchOuttakeCommand;
+import frc.robot.commands.HatchPositionCommand;
+import frc.robot.commands.HatchPresentCommand;
+import frc.robot.commands.IntakeCargoCommand;
+import frc.robot.commands.ReleaseCargoCommand;
+import frc.robot.commands.SkiOutCommand;
+import frc.robot.triggers.CargoIntakeTrigger;
+import frc.robot.triggers.CargoOuttakeTrigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -61,10 +73,12 @@ public class OI {
     Button buttonXboxY = new JoystickButton(RobotMap.GAME_PAD, 4);    // Arm at Storage position.
     Button buttonXboxLB = new JoystickButton(RobotMap.GAME_PAD, 5);   // Deploy skis.
     Button buttonXboxRB = new JoystickButton(RobotMap.GAME_PAD, 6);   // Retract skis.
-    POVButton buttonXboxUp = new POVButton(RobotMap.GAME_PAD, 0);     // Xbox d-pad up 
-    POVButton buttonXboxDown = new POVButton(RobotMap.GAME_PAD, 180); // Xbox d-pad down
-    POVButton buttonXboxLeft = new POVButton(RobotMap.GAME_PAD, 270); // Xbox d-pad left
-    POVButton buttonXboxRight = new POVButton(RobotMap.GAME_PAD, 90); // Xbox d-pad right
+    POVButton buttonXboxUp = new POVButton(RobotMap.GAME_PAD, 0);     // Hatch mechanism up.
+    POVButton buttonXboxDown = new POVButton(RobotMap.GAME_PAD, 180); // Hatch mechanism down.
+    POVButton buttonXboxLeft = new POVButton(RobotMap.GAME_PAD, 270); // Extend Hatch mechanism.
+    POVButton buttonXboxRight = new POVButton(RobotMap.GAME_PAD, 90); // Retract Hatch mechanism.
+    Trigger triggerXboxLeft = new CargoIntakeTrigger(); // Cargo outtake.
+    Trigger triggerXboxRight = new CargoOuttakeTrigger(); // Cargo intake.
 
     if (RobotMap.PIXY_DRIVE_TOGGLE) {
       lButton1.whileHeld(new DriveStraightPixyInputCommand());
@@ -95,9 +109,11 @@ public class OI {
     buttonXboxLB.whileHeld(new SkiOutCommand(true)); // When pressed Ski comes out.
     buttonXboxRB.whileHeld(new SkiOutCommand(false)); // When pressed Ski comes in.
     buttonXboxA.whenPressed(new HatchPresentCommand()); // (placeholder) When pressed, check if Super Suit (hatch) is present
-    buttonXboxUp.whenPressed(new HatchPositionCommand(false));
-    buttonXboxDown.whenPressed(new HatchPositionCommand(true));
-    buttonXboxLeft.whenPressed(new HatchPositionCommand(true));
-    buttonXboxRight.whenPressed(new HatchPositionCommand(false));
+    buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
+    buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
+    buttonXboxLeft.whenPressed(new HatchPositionCommand(true)); // When pressed hatch intake goes out.
+    buttonXboxRight.whenPressed(new HatchPositionCommand(false)); // When pressed hatch intake comes in.
+    triggerXboxLeft.whileActive(new IntakeCargoCommand()); // When held cargo outtakes.
+    triggerXboxRight.whileActive(new ReleaseCargoCommand()); // When held cargo intakes.
   }
 }

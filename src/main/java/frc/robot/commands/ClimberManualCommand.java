@@ -17,8 +17,11 @@ import frc.robot.RobotMap;
  */
 
 public class ClimberManualCommand extends Command {
-  public ClimberManualCommand() {
+  double climberSpeed = 0;
+
+  public ClimberManualCommand(double climberSpeed) {
     requires(Robot.climber);
+    this.climberSpeed = climberSpeed;
   }
 
   // Called just before this Command runs the first time
@@ -30,7 +33,7 @@ public class ClimberManualCommand extends Command {
   // Called when the robot needs to ascend into space like it's the Enterprise
   @Override
   protected void execute() {
-    Robot.climber.set(RobotMap.GAME_PAD.getY(Hand.kRight));
+    Robot.climber.set(this.climberSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()

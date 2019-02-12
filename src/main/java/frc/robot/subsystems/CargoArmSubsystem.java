@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.CargoArmManualCommand;
@@ -47,8 +48,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new CargoArmManualCommand());
+    setDefaultCommand(new CargoArmManualCommand(RobotMap.GAME_PAD.getY(Hand.kRight)));
   }
 
   @Override

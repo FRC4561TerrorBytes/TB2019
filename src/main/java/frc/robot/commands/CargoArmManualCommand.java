@@ -13,9 +13,12 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class CargoArmManualCommand extends Command {
-  public CargoArmManualCommand() {
+  double cargoArmSpeed = 0;
+
+  public CargoArmManualCommand(double cargoArmSpeed) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.cargoArmSubsystem);
+    this.cargoArmSpeed = cargoArmSpeed;
   }
 
   // Called just before this Command runs the first time
@@ -28,12 +31,7 @@ public class CargoArmManualCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoArmSubsystem.armManual(RobotMap.GAME_PAD.getY(Hand.kLeft));
-    // If we aren't moving the arm, keep it where it is
-    if (RobotMap.GAME_PAD.getY(Hand.kLeft) == 0) {
-      Robot.cargoArmSubsystem.setSetpoint(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
-      Robot.cargoArmSubsystem.enable(); // starts PID loop
-    }
+    Robot.cargoArmSubsystem.armManual(this.cargoArmSpeed);    
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -45,7 +43,9 @@ public class CargoArmManualCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.cargoArmSubsystem.stop();
+    // If we aren't moving the arm, keep it where it is
+    Robot.cargoArmSubsystem.setSetpoint(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
+    Robot.cargoArmSubsystem.enable(); // starts PID loop
   }
 
   // Called when another command which requires one or more of the same
