@@ -57,7 +57,7 @@ public class RobotMap {
   public static final int MID_LEFT_MOTOR_PORT = 4;
   public static final int BOT_LEFT_MOTOR_PORT = 5;
 
-  // Intake Solenoid ports
+  // hatch intake solenoid ports
   private static final int INTAKE_HORIZ_PORT = 0; //TODO: change the numbers
   private static final int INTAKE_VERT_PORT = 1; //TODO: change the numbers 
   private static final int INTAKE_OUT_PORT = 2; //TODO: change the numbers
