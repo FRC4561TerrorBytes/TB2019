@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ReleaseCargoCommand extends Command {
-  public ReleaseCargoCommand() {
+public class ReleaseCargoSlowCommand extends Command {
+  public ReleaseCargoSlowCommand() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.cargoIntake);
   }
@@ -24,7 +24,7 @@ public class ReleaseCargoCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoIntake.outtakeCargoFast();
+    Robot.cargoIntake.outtakeCargoSlow();
   }
 
   // Make this return true when this Command no longer needs to run execute()

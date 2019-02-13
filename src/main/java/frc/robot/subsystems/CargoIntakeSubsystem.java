@@ -30,9 +30,14 @@ public class CargoIntakeSubsystem extends Subsystem {
     RobotMap.CARGO_ROLLERS_MOTOR_GROUP.set(1);
   }
 
-  public void outtakeCargo(){
+  public void outtakeCargoFast(){
     RobotMap.CARGO_ROLLERS_MOTOR_GROUP.set(-1);
   }
+
+  public void outtakeCargoSlow(){
+    RobotMap.CARGO_ROLLERS_MOTOR_GROUP.set(-0.5);
+  }
+
 
   public void stop(){
     RobotMap.CARGO_ROLLERS_MOTOR_GROUP.set(0);

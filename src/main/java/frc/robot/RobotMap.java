@@ -58,9 +58,9 @@ public class RobotMap {
   public static final int BOT_LEFT_MOTOR_PORT = 5;
 
   // hatch intake solenoid ports
-  private static final int INTAKE_HORIZ_PORT = 0; //TODO: change the numbers
-  private static final int INTAKE_VERT_PORT = 1; //TODO: change the numbers 
-  private static final int INTAKE_OUT_PORT = 2; //TODO: change the numbers
+  private static final int INTAKE_HORIZ_PORT = 5;
+  private static final int INTAKE_VERT_PORT = 3;
+  private static final int INTAKE_OUT_PORT = 2;
 
   // Xbox Controller Port
   public static final int XBOX_CONTROLLER_PORT = 2;
@@ -79,8 +79,7 @@ public class RobotMap {
   public static final int ARM_TOP_LIMIT_SWITCH_LOC = 0;
 
   // Ski solenoid ports
-  private static final int LEFT_SKI_PORT = 3; //TODO: change the numbers
-  private static final int RIGHT_SKI_PORT = 4; //TODO: change the numbers
+  private static final int SKI_PORT = 4; //TODO: change the numbers
 
   // Infrared Sensor port
   private static final int INFRARED_PORT = 0;
@@ -108,8 +107,7 @@ public class RobotMap {
   private static final WPI_TalonSRX RIGHT_CLIMBER_MOTOR = new WPI_TalonSRX(CLIMBER_RIGHT_PORT);
 
   // Ski solenoids objects
-  public static final Solenoid RIGHT_SKI = new Solenoid(RIGHT_SKI_PORT);
-  public static final Solenoid LEFT_SKI = new Solenoid(LEFT_SKI_PORT);
+  public static final Solenoid SKI_SOLENOID = new Solenoid(SKI_PORT);
 
   // Creates SpeedController object to combine left and right side motors
   public static final SpeedControllerGroup LEFT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_LEFT_MOTOR, MID_LEFT_MOTOR, BACK_LEFT_MOTOR);
