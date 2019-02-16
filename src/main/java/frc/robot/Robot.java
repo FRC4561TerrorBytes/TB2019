@@ -22,7 +22,7 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static DriveSubsystem drivetrain = new DriveSubsystem();
+  public static DriveSubsystem drivetrain;
   public static HatchIntakeSubsystem hatchIntake = new HatchIntakeSubsystem();
   public static CargoIntakeSubsystem cargoIntake = new CargoIntakeSubsystem();
   public static CargoArmSubsystem cargoArmSubsystem = new CargoArmSubsystem();
@@ -38,6 +38,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    RobotMap.checkIfDelta();
+    drivetrain = new DriveSubsystem();
     oi = new OI();
     RobotMap.navx.reset();
     networkTableInstance.startServer();

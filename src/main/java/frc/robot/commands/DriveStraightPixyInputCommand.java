@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class DriveStraightPixyInputCommand extends Command {
   public DriveStraightPixyInputCommand() {
@@ -26,8 +27,12 @@ public class DriveStraightPixyInputCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //If we have input from the pixy turn to the vector else face current heading
-    Robot.drivetrain.angleDriveStraight(Robot.networkTable.getEntry("pixyAngle").getDouble(0));
+    RobotMap.navx.reset();
+    double pixyAngle = Robot.networkTable.getEntry("pixyAngle").getDouble(0);
+    if(Math.abs(pixyAngle)>10){
+      pixyAngle=Math.copySign(10, pixyAngle);
+    }
+    Robot.drivetrain.angleDriveStraight(pixyAngle);
   }
 
   // Make this return true when this Command no longer needs to run execute()

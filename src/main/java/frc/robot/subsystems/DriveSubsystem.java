@@ -28,7 +28,7 @@ public class DriveSubsystem extends Subsystem {
 	// Ku: Maximum kP value that gives ocillation
 	// Tu: Time for full ocillation on the robot
 	// PID Values: kP = 0.6Ku  kI = 1.2Ku/Tu  kD = 3KuTu/40
-  double kP = 0.21, kI = 0.6, kD = 0.01375;
+  	double kP = 0.21, kI = 0.6, kD = 0.01375;
 	double integral = 0, previous_error = 0;
 	DifferentialDrive differentialDrive;
 
@@ -53,10 +53,18 @@ public class DriveSubsystem extends Subsystem {
 	// Create curve drive method to use the left joystick for speed and right joystick for rotation. true - allows in-place turning manuevers, or "QuickTurn"
 	public void curvatureDrive() {
 		// Square inputs to curvatureDrive while maintaining sign
-		differentialDrive.curvatureDrive(
+		if(RobotMap.ON_DELTA){
+			differentialDrive.curvatureDrive(
+			Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), RobotMap.LEFT_STICK.getY()),
+			Math.copySign(-Math.pow(RobotMap.RIGHT_STICK.getX(), 2), RobotMap.RIGHT_STICK.getX()), 
+			true);
+		}
+		else{
+			differentialDrive.curvatureDrive(
 			Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), RobotMap.LEFT_STICK.getY()),
 			Math.copySign(Math.pow(RobotMap.RIGHT_STICK.getX(), 2), RobotMap.RIGHT_STICK.getX()), 
 			true);
+		}
 	}
 
 	// Test Drivetrain control with XBox Controller. Same as curvatureDrive but instead of joystick inputs, it uses game-pad inputs.
@@ -88,7 +96,7 @@ public class DriveSubsystem extends Subsystem {
 		this.previous_error = error;
 		// drive with 'LEFT_STICK' throttle, and 'turn_power' rotation; no squared inputs
 		if(RobotMap.PIXY_DRIVE_TOGGLE){
-			differentialDrive.arcadeDrive(RobotMap.LEFT_STICK.getY(), -turn_power*.005, false);
+			differentialDrive.arcadeDrive(RobotMap.LEFT_STICK.getY(), -turn_power, false);
 		} else {
 			differentialDrive.arcadeDrive(RobotMap.LEFT_STICK.getY(), turn_power, false);
 		}
