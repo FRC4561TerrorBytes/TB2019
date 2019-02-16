@@ -28,9 +28,10 @@ public class DriveSubsystem extends Subsystem {
 	// Ku: Maximum kP value that gives ocillation
 	// Tu: Time for full ocillation on the robot
 	// PID Values: kP = 0.6Ku  kI = 1.2Ku/Tu  kD = 3KuTu/40
-  double kP = 0.21, kI = 0.6, kD = 0.01375;
+  	double kP = 0.21, kI = 0.6, kD = 0.01375;
 	double integral = 0, previous_error = 0;
 	DifferentialDrive differentialDrive;
+	int invertDrive = 1;
 
 	public DriveSubsystem() {
 		// Seting differentialDrive object to control the motor groups
@@ -54,9 +55,13 @@ public class DriveSubsystem extends Subsystem {
 	public void curvatureDrive() {
 		// Square inputs to curvatureDrive while maintaining sign
 		differentialDrive.curvatureDrive(
-			Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), RobotMap.LEFT_STICK.getY()),
+			invertDrive * Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), RobotMap.LEFT_STICK.getY()),
 			Math.copySign(Math.pow(RobotMap.RIGHT_STICK.getX(), 2), RobotMap.RIGHT_STICK.getX()), 
 			true);
+	}
+
+	public void invertDrive() {
+		invertDrive = invertDrive * -1;
 	}
 
 	// Test Drivetrain control with XBox Controller. Same as curvatureDrive but instead of joystick inputs, it uses game-pad inputs.

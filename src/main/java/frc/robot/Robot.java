@@ -8,11 +8,16 @@
 package frc.robot;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.CargoArmSubsystem;
+import frc.robot.subsystems.CargoIntakeSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.HatchIntakeSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -59,6 +64,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("X-Center", networkTable.getEntry("xcenter").getDouble(0));
     SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(0));
     //numbers retrived from robot
+    SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
     SmartDashboard.putNumber("CargoArmEncoderPos", cargoArmSubsystem.getPosition());
     SmartDashboard.putNumber("GyroAngle", drivetrain.getAngle());
   }

@@ -48,7 +48,9 @@ public class CargoArmSubsystem extends PIDSubsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new CargoArmManualCommand(RobotMap.GAME_PAD.getY(Hand.kRight)));
+    
+       setDefaultCommand(new CargoArmManualCommand(RobotMap.GAME_PAD.getY(Hand.kLeft)));
+    
   }
 
   @Override
