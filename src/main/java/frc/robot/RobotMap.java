@@ -58,21 +58,21 @@ public class RobotMap {
   public static final int BOT_LEFT_MOTOR_PORT = 5;
 
   // hatch intake solenoid ports
-  private static final int INTAKE_HORIZ_PORT = 5;
-  private static final int INTAKE_VERT_PORT = 3;
-  private static final int INTAKE_OUT_PORT = 2;
+  private static final int INTAKE_HORIZ_PORT = 3;
+  private static final int INTAKE_IN_PORT = 2;
+  private static final int INTAKE_OUT_PORT = 5;
 
   // Xbox Controller Port
   public static final int XBOX_CONTROLLER_PORT = 2;
 
   // Cargo Intake motor ports
-  private static final int CARGO_ARM_MOTOR_PORT = 4561;
-  private static final int CARGO_TOP_ROLLER_PORT = 4561;
-  private static final int CARGO_BOT_ROLLER_PORT = 4561;
+  private static final int CARGO_ARM_MOTOR_PORT = 8;
+  private static final int CARGO_TOP_ROLLER_PORT = 9;
+  private static final int CARGO_BOT_ROLLER_PORT = 10;
 
   // Climber motor ports
-  private static final int CLIMBER_LEFT_PORT = 4561;
-  private static final int CLIMBER_RIGHT_PORT = 4561;
+  private static final int CLIMBER_LEFT_PORT = 6;
+  private static final int CLIMBER_RIGHT_PORT = 7;
 
   // Max/Min arm encoder positions/limit switch locations TODO: find real values
   public static final int ARM_BOT_LIMIT_SWITCH_LOC = 0;
@@ -98,7 +98,7 @@ public class RobotMap {
   private static final WPI_TalonSRX CARGO_BOTTOM_ROLLER_MOTOR = new WPI_TalonSRX(CARGO_BOT_ROLLER_PORT);
 
   // Hatch intake variables
-  public static final Solenoid HATCH_POSITION_SOLENOID = new Solenoid(INTAKE_VERT_PORT);
+  public static final Solenoid HATCH_POSITION_SOLENOID = new Solenoid(INTAKE_IN_PORT);
   public static final Solenoid HATCH_INTAKE_SOLENOID = new Solenoid(INTAKE_HORIZ_PORT);
   public static final Solenoid HATCH_OUTTAKE_SOLENOID = new Solenoid(INTAKE_OUT_PORT);
 
