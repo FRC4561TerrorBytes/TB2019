@@ -104,9 +104,20 @@ public class DriveSubsystem extends Subsystem {
 		differentialDrive.stopMotor();
 	}
 
-	// Get angle of drivetrain from NavX
-	public double getAngle() {
+	// Get Yaw angle of drivetrain from NavX
+	public double getYawAngle() {
 		return RobotMap.navx.getYaw();
 	}
+
+	// Get Pitch angle of drivetrain from NavX
+	public double getPitchAngle() {
+		return RobotMap.navx.getPitch();
+	}
+
+	// Get Roll angle of drivetrain from NavX
+	public double getRollAngle() {
+		return RobotMap.navx.getRoll();
+	}
+
 
 }

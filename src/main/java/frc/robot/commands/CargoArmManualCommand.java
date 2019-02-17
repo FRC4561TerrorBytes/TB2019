@@ -7,17 +7,16 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class CargoArmManualCommand extends Command {
-  double cargoArmSpeed = 0;
 
-  public CargoArmManualCommand(double cargoArmSpeed) {
+  public CargoArmManualCommand() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.cargoArmSubsystem);
-    this.cargoArmSpeed = cargoArmSpeed;
   }
 
   // Called just before this Command runs the first time
@@ -30,7 +29,7 @@ public class CargoArmManualCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoArmSubsystem.armManual(this.cargoArmSpeed);    
+    Robot.cargoArmSubsystem.armManual(-(Math.pow(RobotMap.GAME_PAD.getY(Hand.kLeft), 2)));
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
@@ -59,8 +61,8 @@ public class RobotMap {
   public static final int BOT_LEFT_MOTOR_PORT = 2;
 
   // hatch intake solenoid ports
-  private static final int INTAKE_HORIZ_PORT = 3;
-  private static final int INTAKE_IN_PORT = 2;
+  private static final int INTAKE_POS_PORT = 2;
+  private static final int INTAKE_IN_PORT = 3;
   private static final int INTAKE_OUT_PORT = 5;
 
   // Xbox Controller Port
@@ -76,14 +78,22 @@ public class RobotMap {
   private static final int CLIMBER_RIGHT_PORT = 8;
 
   // Max/Min arm encoder positions/limit switch locations TODO: find real values
-  public static final int ARM_BOT_LIMIT_SWITCH_LOC = 0;
-  public static final int ARM_TOP_LIMIT_SWITCH_LOC = 0;
+  public static final int ARM_BOT_LIMIT_SWITCH_LOC = -7190;
+  public static final int ARM_TOP_LIMIT_SWITCH_LOC = 2025;
 
   // Ski solenoid ports
   private static final int SKI_PORT = 4; //TODO: change the numbers
 
   // Infrared Sensor port
   private static final int INFRARED_PORT = 0;
+
+  // Arm limit switch ports
+  private static final int LIMIT_SWITCH_ARM_BOT_PORT = 0;
+  private static final int LIMIT_SWITCH_ARM_TOP_PORT = 0;
+
+  // Climber limit switch ports
+  private static final int LIMIT_SWITCH_CLIMBER_PORT = 0;
+  
 
   // Declraing all Drivetrian TalonSRX
   private static final WPI_TalonSRX FRONT_LEFT_MOTOR = new WPI_TalonSRX(FRONT_LEFT_MOTOR_PORT);
@@ -99,8 +109,8 @@ public class RobotMap {
   public static final WPI_VictorSPX CARGO_BOTTOM_ROLLER_MOTOR = new WPI_VictorSPX(CARGO_BOT_ROLLER_PORT);
 
   // Hatch intake variables
-  public static final Solenoid HATCH_POSITION_SOLENOID = new Solenoid(INTAKE_IN_PORT);
-  public static final Solenoid HATCH_INTAKE_SOLENOID = new Solenoid(INTAKE_HORIZ_PORT);
+  public static final Solenoid HATCH_POSITION_SOLENOID = new Solenoid(INTAKE_POS_PORT);
+  public static final Solenoid HATCH_INTAKE_SOLENOID = new Solenoid(INTAKE_IN_PORT);
   public static final Solenoid HATCH_OUTTAKE_SOLENOID = new Solenoid(INTAKE_OUT_PORT);
 
   // Climber subsystem variables
@@ -130,4 +140,10 @@ public class RobotMap {
   // Creates object for Infrared Sensor
   public static final DigitalInput HATCH_DETECTOR = new DigitalInput(INFRARED_PORT);
 
+  // Creates object for Arm limit switches
+  public static final DigitalInput ARM_LIMIT_SWITCH_TOP = new DigitalInput(LIMIT_SWITCH_ARM_TOP_PORT);
+  public static final DigitalInput ARM_LIMIT_SWITCH_BOT = new DigitalInput(LIMIT_SWITCH_ARM_BOT_PORT);
+
+  // Creates object for Climber limit switches
+  public static final DigitalInput CLIMBER_LIMIT_SWITCH = new DigitalInput(LIMIT_SWITCH_CLIMBER_PORT);
 }

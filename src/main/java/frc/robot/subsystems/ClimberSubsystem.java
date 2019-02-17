@@ -25,7 +25,7 @@ public class ClimberSubsystem extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new ClimberManualCommand(RobotMap.GAME_PAD.getY(Hand.kRight)));
+    setDefaultCommand(new ClimberManualCommand());
     SmartDashboard.putNumber("Controller Right Y Axis", RobotMap.GAME_PAD.getY(Hand.kRight));
   }
 
