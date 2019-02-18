@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.CargoArmManualCommand;
 
@@ -25,24 +26,26 @@ public class CargoArmSubsystem extends PIDSubsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  private int goalPos = 0;
+
   public CargoArmSubsystem(){
     /* values: P,I,D,F,Period (stays constant); Robot_006 Values: TODO: find values for comp robot */ 
     /* Delta Values: 4, 0.0055, 1023, 3.41*/
-    super(2, 0.0, 0, 0.0, 0.01666666667);
+    super(0, 0.0, 0, 0.0, 0.01666666667);
     //Setup sensors
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-    RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LIMIT_SWITCH_LOC);
+    RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
     RobotMap.CARGO_ARM_MOTOR.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
     RobotMap.CARGO_ARM_MOTOR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
     //Make it so that the PID will recognize that it has upper and lower limits
     getPIDController().setContinuous(false);
-    setInputRange(RobotMap.ARM_BOT_LIMIT_SWITCH_LOC, RobotMap.ARM_TOP_LIMIT_SWITCH_LOC);
+    setInputRange(RobotMap.ARM_BOT_LOC, RobotMap.ARM_TOP_LOC);
     //Set the encoder value to it's maximum value when it hits the top limit switch and vice versa
     if(getFwdSwitch()){ 
-      RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LIMIT_SWITCH_LOC);
+      RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
     }
     if(getRevSwitch()){
-      RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_BOT_LIMIT_SWITCH_LOC);
+      RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_BOT_LOC);
     }
   }
 
@@ -64,9 +67,13 @@ public class CargoArmSubsystem extends PIDSubsystem {
     RobotMap.CARGO_ARM_MOTOR.set(ControlMode.PercentOutput, output);
   }
 
+  public void setToGoal() {
+    RobotMap.CARGO_ARM_MOTOR.set(ControlMode.Position, goalPos);
+  }
+
   /** For manual movement of the arm using the controller */
   public void armManual(double power){
-    RobotMap.CARGO_ARM_MOTOR.set(power);
+    RobotMap.CARGO_ARM_MOTOR.set(-power);
   }
   /** Method to stop the motor from moving*/
   public void stop(){
@@ -77,5 +84,26 @@ public class CargoArmSubsystem extends PIDSubsystem {
 	}
 	public boolean getRevSwitch(){
 		return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
+  }
+
+  public void groundPosition() {
+    goalPos = RobotMap.ARM_BOT_LOC;
+    setToGoal();
+    SmartDashboard.putString("Arm Position:", "Ground Position");
+  }
+  public void shipPosition() {
+    goalPos = RobotMap.ARM_BOT_LOC;
+    setToGoal();
+    SmartDashboard.putString("Arm Position:", "Ship Position");
+  }
+  public void rocketPosition() {
+    goalPos = RobotMap.ARM_BOT_LOC;
+    setToGoal();
+    SmartDashboard.putString("Arm Position:", "Rocket Position");
+  }
+  public void storagePosition() {
+    goalPos = RobotMap.ARM_BOT_LOC;
+    setToGoal();
+    SmartDashboard.putString("Arm Position:", "Storage Position");
   }
 }

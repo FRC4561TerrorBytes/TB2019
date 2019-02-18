@@ -31,7 +31,7 @@ public class ClimberManualCommand extends Command {
   // Called when the robot needs to ascend into space like it's the Enterprise
   @Override
   protected void execute() {
-    Robot.climber.set(RobotMap.GAME_PAD.getY(Hand.kRight));
+    Robot.climber.set(Math.pow(RobotMap.GAME_PAD.getY(Hand.kRight), 3));
   }
 
   // Make this return true when this Command no longer needs to run execute()

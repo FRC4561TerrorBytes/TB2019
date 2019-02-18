@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
@@ -39,6 +40,10 @@ public class RobotMap {
 
   // Drive Mode
   public static final int DRIVE_MODE = 1; // 1 is curve drive, 0 is tank drive
+
+  // Invert Drive. -1 : Hatch is front, 1 : Cargo is front
+
+  public static int INVERT_DRIVE = -1;
   
   // Pixy/Vision toggle Booleans
   public static final boolean PIXY_DRIVE_TOGGLE = true; //make true if you want to use pixy guidance
@@ -70,29 +75,31 @@ public class RobotMap {
 
   // Cargo Intake motor ports
   private static final int CARGO_ARM_MOTOR_PORT = 7;
-  private static final int CARGO_TOP_ROLLER_PORT = 9;
-  private static final int CARGO_BOT_ROLLER_PORT = 10;
+  private static final int CARGO_TOP_ROLLER_PORT = 10;
+  private static final int CARGO_BOT_ROLLER_PORT = 9;
 
   // Climber motor ports
   private static final int CLIMBER_LEFT_PORT = 0;
   private static final int CLIMBER_RIGHT_PORT = 8;
 
-  // Max/Min arm encoder positions/limit switch locations TODO: find real values
-  public static final int ARM_BOT_LIMIT_SWITCH_LOC = -7190;
-  public static final int ARM_TOP_LIMIT_SWITCH_LOC = 2025;
+  // Max/Min arm encoder positions/limit switch locations
+  public static final int ARM_BOT_LOC = -7119;
+  public static final int ARM_TOP_LOC = 2025;
+  public static final int ARM_CARGO_LOC = 1448;
+  public static final int ARM_ROCKET_LOC = 2025;
 
   // Ski solenoid ports
-  private static final int SKI_PORT = 4; //TODO: change the numbers
+  private static final int SKI_PORT = 4;
 
   // Infrared Sensor port
-  private static final int INFRARED_PORT = 0;
+  private static final int INFRARED_PORT = 3;
 
   // Arm limit switch ports
-  private static final int LIMIT_SWITCH_ARM_BOT_PORT = 0;
+  private static final int LIMIT_SWITCH_ARM_BOT_PORT = 1;
   private static final int LIMIT_SWITCH_ARM_TOP_PORT = 0;
 
   // Climber limit switch ports
-  private static final int LIMIT_SWITCH_CLIMBER_PORT = 0;
+  private static final int LIMIT_SWITCH_CLIMBER_PORT = 2;
   
 
   // Declraing all Drivetrian TalonSRX
