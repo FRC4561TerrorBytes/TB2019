@@ -63,11 +63,11 @@ public class Robot extends TimedRobot {
     RobotMap.navx.reset();
     networkTableInstance.startServer();
     networkTable = networkTableInstance.getTable("networkTable");
-    camera1 = cameraServer.startAutomaticCapture();
-    camera2 = cameraServer.startAutomaticCapture();
+    camera1 = cameraServer.getInstance().startAutomaticCapture(0);
+    camera2 = cameraServer.getInstance().startAutomaticCapture(1);
     camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
     camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-    server = cameraServer.getServer();
+    server = cameraServer.getInstance().getServer();
   }
 
   /**
@@ -99,12 +99,8 @@ public class Robot extends TimedRobot {
         cargoArmSubsystem.setSetpoint(2025);
     } if (!RobotMap.ARM_LIMIT_SWITCH_BOT.get()) {
         cargoArmSubsystem.setSetpoint(-7119); // Change numbers
+     }
     }
-    /*
-    if (RobotMap.CLIMBER_LIMIT_SWITCH.get()) {
-        climber.stop();
-    }
-
   /**
    * This function is called once each time the robot enters Disabled mode.
    * You can use it to reset any subsystem information you want to clear when
@@ -180,4 +176,4 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
-}
+  }

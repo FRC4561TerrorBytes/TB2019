@@ -19,6 +19,7 @@ public class SwitchToCamera1Command extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    System.out.println("Changing to camera 1");
     Robot.server.setSource(Robot.camera1);
   }
 
