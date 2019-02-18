@@ -7,19 +7,19 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
  * @author Karthik, Max
  */
 
 public class ClimberManualCommand extends Command {
-  double climberSpeed = 0;
 
-  public ClimberManualCommand(double climberSpeed) {
+  public ClimberManualCommand() {
     requires(Robot.climber);
-    this.climberSpeed = climberSpeed;
   }
 
   // Called just before this Command runs the first time
@@ -31,7 +31,7 @@ public class ClimberManualCommand extends Command {
   // Called when the robot needs to ascend into space like it's the Enterprise
   @Override
   protected void execute() {
-    Robot.climber.set(this.climberSpeed);
+    Robot.climber.set(Math.pow(RobotMap.GAME_PAD.getY(Hand.kRight), 3));
   }
 
   // Make this return true when this Command no longer needs to run execute()

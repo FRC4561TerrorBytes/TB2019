@@ -13,24 +13,24 @@ import frc.robot.Robot;
 public class InvertDriveCommand extends Command {
   public InvertDriveCommand() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.drivetrain);
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.drivetrain.invertDrive();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drivetrain.invertDrive();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

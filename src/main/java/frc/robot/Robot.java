@@ -4,7 +4,13 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
+/**
+ * TODO: Do these below
+ * Check axes for gyro
+ * check encoder position for top and bottom for climber cargo arm
+ * tune and bind cargo arm PID
+ * PID buttons
+ */
 package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
@@ -81,8 +87,23 @@ public class Robot extends TimedRobot {
     //numbers retrived from robot
     SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
     SmartDashboard.putNumber("CargoArmEncoderPos", cargoArmSubsystem.getPosition());
-    SmartDashboard.putNumber("GyroAngle", drivetrain.getAngle());
-  }
+    SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
+    SmartDashboard.putNumber("GyroPitchAngle", drivetrain.getPitchAngle());
+    SmartDashboard.putNumber("GyroRollAngle", drivetrain.getRollAngle());
+    SmartDashboard.putBoolean("Cargo Arm Bottom Limit Switch:", RobotMap.ARM_LIMIT_SWITCH_BOT.get());
+    SmartDashboard.putBoolean("Cargo Arm Top Limit Switch:", RobotMap.ARM_LIMIT_SWITCH_TOP.get());
+    //SmartDashboard.putBoolean("Climber Limit Switch:", RobotMap.CLIMBER_LIMIT_SWITCH.get());
+    
+    // Limit switch code
+    if (!RobotMap.ARM_LIMIT_SWITCH_TOP.get()) {
+        cargoArmSubsystem.setSetpoint(2025);
+    } if (!RobotMap.ARM_LIMIT_SWITCH_BOT.get()) {
+        cargoArmSubsystem.setSetpoint(-7119); // Change numbers
+    }
+    /*
+    if (RobotMap.CLIMBER_LIMIT_SWITCH.get()) {
+        climber.stop();
+    }
 
   /**
    * This function is called once each time the robot enters Disabled mode.
