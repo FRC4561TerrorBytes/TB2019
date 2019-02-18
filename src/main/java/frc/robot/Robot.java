@@ -63,8 +63,8 @@ public class Robot extends TimedRobot {
     RobotMap.navx.reset();
     networkTableInstance.startServer();
     networkTable = networkTableInstance.getTable("networkTable");
-    camera1 = cameraServer.getInstance().startAutomaticCapture(0);
-    camera2 = cameraServer.getInstance().startAutomaticCapture(1);
+    camera1 = cameraServer.getInstance().startAutomaticCapture();
+    camera2 = cameraServer.getInstance().startAutomaticCapture();
     camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
     camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
     server = cameraServer.getInstance().getServer();
