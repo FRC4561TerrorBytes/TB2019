@@ -27,19 +27,23 @@ public class CargoIntakeSubsystem extends Subsystem {
   }
 
   public void intakeCargo(){
-    RobotMap.CARGO_ROLLERS_MOTOR_GROUP.set(1);
+    RobotMap.CARGO_BOTTOM_ROLLER_MOTOR.set(-1);
+    RobotMap.CARGO_TOP_ROLLER_MOTOR.set(1);
   }
 
   public void outtakeCargoFast(){
-    RobotMap.CARGO_ROLLERS_MOTOR_GROUP.set(-1);
+    RobotMap.CARGO_BOTTOM_ROLLER_MOTOR.set(1);
+    RobotMap.CARGO_TOP_ROLLER_MOTOR.set(-1);
   }
 
   public void outtakeCargoSlow(){
-    RobotMap.CARGO_ROLLERS_MOTOR_GROUP.set(-0.5);
+    RobotMap.CARGO_BOTTOM_ROLLER_MOTOR.set(0.5);
+    RobotMap.CARGO_TOP_ROLLER_MOTOR.set(-0.5);
   }
 
 
   public void stop(){
-    RobotMap.CARGO_ROLLERS_MOTOR_GROUP.set(0);
+    RobotMap.CARGO_BOTTOM_ROLLER_MOTOR.set(0);
+    RobotMap.CARGO_TOP_ROLLER_MOTOR.set(0);
   }
 }

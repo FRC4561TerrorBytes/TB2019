@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ClimberManualCommand;
 
@@ -25,6 +26,7 @@ public class ClimberSubsystem extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new ClimberManualCommand(RobotMap.GAME_PAD.getY(Hand.kRight)));
+    SmartDashboard.putNumber("Controller Right Y Axis", RobotMap.GAME_PAD.getY(Hand.kRight));
   }
 
   // This method makes the motors on both sides make the robot ascend

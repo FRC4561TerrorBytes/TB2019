@@ -7,12 +7,21 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSink;
+import edu.wpi.cscore.VideoSource;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.CargoArmSubsystem;
+import frc.robot.subsystems.CargoIntakeSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.HatchIntakeSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,6 +39,10 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static NetworkTableInstance networkTableInstance = NetworkTableInstance.getDefault();
   public static edu.wpi.first.networktables.NetworkTable networkTable;
+  public static CameraServer cameraServer;
+  public static UsbCamera camera1;
+  public static UsbCamera camera2;
+  public static VideoSink server;
   Command autonomousCommand;
 
   /**
@@ -44,6 +57,11 @@ public class Robot extends TimedRobot {
     RobotMap.navx.reset();
     networkTableInstance.startServer();
     networkTable = networkTableInstance.getTable("networkTable");
+    camera1 = cameraServer.startAutomaticCapture();
+    camera2 = cameraServer.startAutomaticCapture();
+    camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+    camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+    server = cameraServer.getServer();
   }
 
   /**
@@ -61,6 +79,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("X-Center", networkTable.getEntry("xcenter").getDouble(0));
     SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(0));
     //numbers retrived from robot
+    SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
     SmartDashboard.putNumber("CargoArmEncoderPos", cargoArmSubsystem.getPosition());
     SmartDashboard.putNumber("GyroAngle", drivetrain.getAngle());
   }

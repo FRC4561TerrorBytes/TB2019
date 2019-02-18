@@ -8,12 +8,13 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.XboxController;
 
@@ -71,31 +72,31 @@ public class RobotMap {
       BOT_LEFT_MOTOR_PORT = 12;
     }
     else {
-      FRONT_RIGHT_MOTOR_PORT = 0;
-      MID_RIGHT_MOTOR_PORT = 1;
-      BOT_RIGHT_MOTOR_PORT = 2;
+      FRONT_RIGHT_MOTOR_PORT = 3;
+      MID_RIGHT_MOTOR_PORT = 4;
+      BOT_RIGHT_MOTOR_PORT = 5;
 
-      FRONT_LEFT_MOTOR_PORT = 3;
-      MID_LEFT_MOTOR_PORT = 4;
-      BOT_LEFT_MOTOR_PORT = 5;
+      FRONT_LEFT_MOTOR_PORT = 6;
+      MID_LEFT_MOTOR_PORT = 1;
+      BOT_LEFT_MOTOR_PORT = 2;
     }
   }
   // hatch intake solenoid ports
-  private static final int INTAKE_HORIZ_PORT = 5;
-  private static final int INTAKE_VERT_PORT = 3;
-  private static final int INTAKE_OUT_PORT = 2;
+  private static final int INTAKE_HORIZ_PORT = 3;
+  private static final int INTAKE_IN_PORT = 2;
+  private static final int INTAKE_OUT_PORT = 5;
 
   // Xbox Controller Port
   public static final int XBOX_CONTROLLER_PORT = 2;
 
   // Cargo Intake motor ports
-  private static final int CARGO_ARM_MOTOR_PORT = 4561;
-  private static final int CARGO_TOP_ROLLER_PORT = 4561;
-  private static final int CARGO_BOT_ROLLER_PORT = 4561;
+  private static final int CARGO_ARM_MOTOR_PORT = 7;
+  private static final int CARGO_TOP_ROLLER_PORT = 9;
+  private static final int CARGO_BOT_ROLLER_PORT = 10;
 
   // Climber motor ports
-  private static final int CLIMBER_LEFT_PORT = 4561;
-  private static final int CLIMBER_RIGHT_PORT = 4561;
+  private static final int CLIMBER_LEFT_PORT = 0;
+  private static final int CLIMBER_RIGHT_PORT = 8;
 
   // Max/Min arm encoder positions/limit switch locations TODO: find real values
   public static final int ARM_BOT_LIMIT_SWITCH_LOC = 0;
@@ -117,11 +118,11 @@ public class RobotMap {
 
   // Cargo intake variables
   public static final WPI_TalonSRX CARGO_ARM_MOTOR = new WPI_TalonSRX(CARGO_ARM_MOTOR_PORT);
-  private static final WPI_TalonSRX CARGO_TOP_ROLLER_MOTOR = new WPI_TalonSRX(CARGO_TOP_ROLLER_PORT);
-  private static final WPI_TalonSRX CARGO_BOTTOM_ROLLER_MOTOR = new WPI_TalonSRX(CARGO_BOT_ROLLER_PORT);
+  public static final WPI_VictorSPX CARGO_TOP_ROLLER_MOTOR = new WPI_VictorSPX(CARGO_TOP_ROLLER_PORT);
+  public static final WPI_VictorSPX CARGO_BOTTOM_ROLLER_MOTOR = new WPI_VictorSPX(CARGO_BOT_ROLLER_PORT);
 
   // Hatch intake variables
-  public static final Solenoid HATCH_POSITION_SOLENOID = new Solenoid(INTAKE_VERT_PORT);
+  public static final Solenoid HATCH_POSITION_SOLENOID = new Solenoid(INTAKE_IN_PORT);
   public static final Solenoid HATCH_INTAKE_SOLENOID = new Solenoid(INTAKE_HORIZ_PORT);
   public static final Solenoid HATCH_OUTTAKE_SOLENOID = new Solenoid(INTAKE_OUT_PORT);
 
@@ -135,10 +136,7 @@ public class RobotMap {
   // Creates SpeedController object to combine left and right side motors
   public static final SpeedControllerGroup LEFT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_LEFT_MOTOR, MID_LEFT_MOTOR, BACK_LEFT_MOTOR);
   public static final SpeedControllerGroup RIGHT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_RIGHT_MOTOR, MID_RIGHT_MOTOR, BACK_RIGHT_MOTOR);
-  
-  // Cargo roller motor group
-  public static final SpeedControllerGroup CARGO_ROLLERS_MOTOR_GROUP = new SpeedControllerGroup(CARGO_TOP_ROLLER_MOTOR, CARGO_BOTTOM_ROLLER_MOTOR);
-  
+    
   // Climber motor group
   public static final SpeedControllerGroup CLIMBER_MOTOR_GROUP = new SpeedControllerGroup(LEFT_CLIMBER_MOTOR, RIGHT_CLIMBER_MOTOR);
 

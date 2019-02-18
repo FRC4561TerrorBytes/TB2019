@@ -31,6 +31,7 @@ public class DriveSubsystem extends Subsystem {
   	double kP = 0.21, kI = 0.6, kD = 0.01375;
 	double integral = 0, previous_error = 0;
 	DifferentialDrive differentialDrive;
+	int invertDrive = 1;
 
 	public DriveSubsystem() {
 		// Seting differentialDrive object to control the motor groups
@@ -60,11 +61,15 @@ public class DriveSubsystem extends Subsystem {
 			true);
 		}
 		else{
-			differentialDrive.curvatureDrive(
-			Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), RobotMap.LEFT_STICK.getY()),
+		differentialDrive.curvatureDrive(
+			invertDrive * Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), RobotMap.LEFT_STICK.getY()),
 			Math.copySign(Math.pow(RobotMap.RIGHT_STICK.getX(), 2), RobotMap.RIGHT_STICK.getX()), 
 			true);
 		}
+	}
+
+	public void invertDrive() {
+		invertDrive = invertDrive * -1;
 	}
 
 	// Test Drivetrain control with XBox Controller. Same as curvatureDrive but instead of joystick inputs, it uses game-pad inputs.
