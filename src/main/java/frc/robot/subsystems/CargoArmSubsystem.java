@@ -54,7 +54,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    double angle = RobotMap.ARM_BOT_LOC - this.getSetpoint() * TICKS_TO_DEGREES;
+    double angle = (RobotMap.ARM_STRAIGHT_LOC - this.getSetpoint()) * TICKS_TO_DEGREES;
     double feedForward = (ARM_WEIGHT * ARM_LENGTH / TORQUE_CONSTANT) * Math.cos(angle);
     getPIDController().setF(feedForward);
     RobotMap.CARGO_ARM_MOTOR.set(output);
@@ -64,6 +64,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
   public void armManual(double power) {
     RobotMap.CARGO_ARM_MOTOR.set(power);
   }
+  
   /** Method to stop the motor from moving*/
   public void stop() {
     RobotMap.CARGO_ARM_MOTOR.stopMotor();
