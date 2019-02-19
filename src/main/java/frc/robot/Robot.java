@@ -16,6 +16,7 @@ package frc.robot;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSink;
 import edu.wpi.cscore.VideoSource;
+import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -71,6 +72,12 @@ public class Robot extends TimedRobot {
     camera2.setResolution(176, 144);
     camera1.setFPS(10);
     camera2.setFPS(10);
+    camera1.setBrightness(25);
+    camera2.setBrightness(20);
+    camera1.setExposureManual(10);
+    camera2.setExposureManual(10);
+    camera1.setWhiteBalanceManual(10);
+    camera2.setWhiteBalanceManual(10);
     server = cameraServer.getInstance().getServer();
   }
 
