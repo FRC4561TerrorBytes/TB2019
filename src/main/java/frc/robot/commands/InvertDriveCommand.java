@@ -13,7 +13,6 @@ import frc.robot.Robot;
 public class InvertDriveCommand extends Command {
   public InvertDriveCommand() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time

@@ -54,7 +54,7 @@ public class OI {
     Button lButton3 = new JoystickButton(RobotMap.LEFT_STICK, 3);     // Auto Align
     Button lButton4 = new JoystickButton(RobotMap.LEFT_STICK, 4);     // Cargo outtake (fast)
     Button rButton1 = new JoystickButton(RobotMap.RIGHT_STICK, 1);    // Cargo intake in.
-    Button rButton2 = new JoystickButton(RobotMap.RIGHT_STICK, 2);
+    Button rButton2 = new JoystickButton(RobotMap.RIGHT_STICK, 2);    // Invert drive
     Button rButton3 = new JoystickButton(RobotMap.RIGHT_STICK, 3);    // Hatch extend/retract.
     Button rButton4 = new JoystickButton(RobotMap.RIGHT_STICK, 4);
     Button rButton5 = new JoystickButton(RobotMap.RIGHT_STICK, 5);
@@ -70,7 +70,9 @@ public class OI {
     POVButton buttonXboxRight = new POVButton(RobotMap.GAME_PAD, 90); // Retract Hatch mechanism.
     Trigger triggerXboxLeft = new CargoIntakeTrigger(); // Cargo outtake.
     Trigger triggerXboxRight = new CargoOuttakeTrigger(); // Cargo intake.
+    Trigger xboxStickLeft = new CargoArmTrigger(); // xbox left joystick is active when moved out of deadzone
 
+    // while the button is pressed and RobotMap.PIXY_DRIVE_TOGGLE is true, drive along line, otherwise drive straight based on gyro
     if (RobotMap.PIXY_DRIVE_TOGGLE) {
       lButton3.whileHeld(new DriveStraightPixyInputCommand());
     }
@@ -81,12 +83,12 @@ public class OI {
     lButton1.whileHeld(new HatchOuttakeCommand(true)); // While held HatchOuttake pushes out.
     lButton1.whenReleased(new HatchOuttakeCommand(false)); // When released HatchOuttake pulls in.
     lButton2.whileHeld(new ReleaseCargoSlowCommand()); // While held Cargo outtakes slowly.
-    lButton2.whenReleased(new StopCargoCommand());
+    lButton2.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
     lButton4.whileHeld(new ReleaseCargoCommand()); // While held cargo outtakes.
-    lButton4.whenReleased(new StopCargoCommand());
+    lButton4.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
     rButton1.whileHeld(new IntakeCargoCommand()); // While held cargo intakes.
-    rButton1.whenReleased(new StopCargoCommand());
-    rButton2.whenPressed(new InvertDriveCommand());
+    rButton1.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
+    rButton2.whenPressed(new InvertDriveCommand()); // invert the front of the robot
     rButton3.whileHeld(new HatchIntakeCommand(true)); // While held Hatchintake pushes out.
     rButton3.whenReleased(new HatchIntakeCommand(false)); // When released Hatchintake pulls in.
     rButton4.whenPressed(new SwitchToCamera1Command()); // Switch to viewing camera1
@@ -99,10 +101,14 @@ public class OI {
     buttonXboxLeft.whenPressed(new HatchIntakeCommand(true)); // When pressed hatch intake goes out.
     buttonXboxRight.whenPressed(new HatchIntakeCommand(false)); // When pressed hatch intake comes in.
     triggerXboxLeft.whenActive(new IntakeCargoCommand()); // When held cargo outtakes.
-    triggerXboxLeft.whenInactive(new StopCargoCommand());
+    triggerXboxLeft.whenInactive(new StopCargoCommand()); // when the trigger is inactive, or not held, stop the cargo intake
     triggerXboxRight.whenActive(new ReleaseCargoCommand()); // When held cargo intakes.
-    triggerXboxRight.whenInactive(new StopCargoCommand());
-    buttonXboxB.whileHeld(new IntakeCargoCommand());
-    buttonXboxB.whenReleased(new IntakeCargoCommand());
-  }
+    triggerXboxRight.whenInactive(new StopCargoCommand()); // when the trigger is inactive, or not held, stop the cargo intake
+    buttonXboxA.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_BOT_LOC)); // when the A button is clicked, move the cargo arm to the bottom location.
+    buttonXboxB.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_ROCKET_LOC)); // when the B button is clicked, move the cargo arm to the rocket level one location.
+    buttonXboxX.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_CARGO_LOC)); // when the X button is clicked, move the cargo arm to the cargo location.
+    buttonXboxY.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_TOP_LOC)); // when the Y button is clicked, move the cargo arm to the top, or storage, location.
+    xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
+    //rButton4.whileHeld(new DriveStraightCommand()); // (placeholder button) when pressed and moved forward with joystick, the robot will move straight based on gyro
+ }
 }

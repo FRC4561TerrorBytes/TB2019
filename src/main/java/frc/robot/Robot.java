@@ -94,17 +94,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
     SmartDashboard.putNumber("GyroPitchAngle", drivetrain.getPitchAngle());
     SmartDashboard.putNumber("GyroRollAngle", drivetrain.getRollAngle());
-    SmartDashboard.putBoolean("Cargo Arm Bottom Limit Switch:", RobotMap.ARM_LIMIT_SWITCH_BOT.get());
-    SmartDashboard.putBoolean("Cargo Arm Top Limit Switch:", RobotMap.ARM_LIMIT_SWITCH_TOP.get());
-    //SmartDashboard.putBoolean("Climber Limit Switch:", RobotMap.CLIMBER_LIMIT_SWITCH.get());
-    
-    // Limit switch code
-    if (!RobotMap.ARM_LIMIT_SWITCH_TOP.get()) {
-        cargoArmSubsystem.setSetpoint(2025);
-    } if (!RobotMap.ARM_LIMIT_SWITCH_BOT.get()) {
-        cargoArmSubsystem.setSetpoint(-7119); // Change numbers
-     }
-    }
+    SmartDashboard.putBoolean("Arm Bottom Limit Switch", RobotMap.ARM_LIMIT_SWITCH_BOT.get());
+    SmartDashboard.putBoolean("Arm Top Limit Switch", RobotMap.ARM_LIMIT_SWITCH_TOP.get());
+    //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();
+  }
+
   /**
    * This function is called once each time the robot enters Disabled mode.
    * You can use it to reset any subsystem information you want to clear when
