@@ -67,6 +67,10 @@ public class Robot extends TimedRobot {
     camera2 = cameraServer.getInstance().startAutomaticCapture();
     camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
     camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+    camera1.setResolution(176, 144);
+    camera2.setResolution(176, 144);
+    camera1.setFPS(10);
+    camera2.setFPS(10);
     server = cameraServer.getInstance().getServer();
   }
 
