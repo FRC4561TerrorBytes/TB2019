@@ -14,7 +14,6 @@ public class SetCargoArmPosCommand extends Command {
   int setpoint;
   public SetCargoArmPosCommand(int setpoint) {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.cargoArmSubsystem);
     this.setpoint = setpoint;
   }
@@ -33,7 +32,9 @@ public class SetCargoArmPosCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //System.out.println(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
+    // Reset the encoder value to the right position when the according limit switch is pressed
+    if (Robot.cargoArmSubsystem.getTopSwitch()) Robot.cargoArmSubsystem.resetEncoder();;
+    if (Robot.cargoArmSubsystem.getBottomSwitch()) Robot.cargoArmSubsystem.setEncoder();;
   }
 
   // Make this return true when this Command no longer needs to run execute()
