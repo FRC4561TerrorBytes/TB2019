@@ -64,6 +64,8 @@ public class Robot extends TimedRobot {
     RobotMap.navx.reset();
     networkTableInstance.startServer();
     networkTable = networkTableInstance.getTable("networkTable");
+    //start cameras and configure settings
+    if(RobotMap.TWO_CAMERAS){ //if we are using to cameras create 2 cameras running at 10 fps
     camera1 = cameraServer.getInstance().startAutomaticCapture();
     camera2 = cameraServer.getInstance().startAutomaticCapture();
     camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
@@ -78,7 +80,16 @@ public class Robot extends TimedRobot {
     camera2.setExposureManual(10);
     camera1.setWhiteBalanceManual(10);
     camera2.setWhiteBalanceManual(10);
+    } else { // if we are not using two cameras, create one camera running at 30 fps
+    camera1 = cameraServer.getInstance().startAutomaticCapture();
+    camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+    camera1.setResolution(176, 144);
+    camera1.setFPS(30);
+    camera1.setBrightness(25);
+    camera1.setExposureManual(10);
+    camera1.setWhiteBalanceManual(10);
     server = cameraServer.getInstance().getServer();
+    }
   }
 
   /**

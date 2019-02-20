@@ -46,6 +46,9 @@ public class RobotMap {
   // Toggle for switching between various settings different Delta and the competition robot
   public static final boolean ON_DELTA = false;
 
+  // Toggle for using one camera (false) or two cameras (true)
+  public static final boolean TWO_CAMERAS = false;
+
   // Robot control loop frequency, in seconds
   public static final double ROBOT_CONTROL_LOOP_INTERVAL = 0.01666666667;
   
