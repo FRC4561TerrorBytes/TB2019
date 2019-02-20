@@ -108,13 +108,21 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(0));
     //numbers retrived from robot
     SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
-    SmartDashboard.putNumber("CargoArmEncoderPos", cargoArmSubsystem.getPosition());
+    SmartDashboard.putNumber("CargoArmEncoderPos", RobotMap.CARGO_ARM_MOTOR.getSensorCollection().getPulseWidthPosition());
     SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
     SmartDashboard.putNumber("GyroPitchAngle", drivetrain.getPitchAngle());
     SmartDashboard.putNumber("GyroRollAngle", drivetrain.getRollAngle());
-    SmartDashboard.putBoolean("Arm Bottom Limit Switch", RobotMap.ARM_LIMIT_SWITCH_BOT.get());
-    SmartDashboard.putBoolean("Arm Top Limit Switch", RobotMap.ARM_LIMIT_SWITCH_TOP.get());
+    SmartDashboard.putBoolean("Arm Bottom Limit Switch", Robot.cargoArmSubsystem.getBottomSwitch());
+    SmartDashboard.putBoolean("Arm Top Limit Switch", Robot.cargoArmSubsystem.getTopSwitch());
     //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();
+
+    // Reset the encoder value to the right position when the according limit switch is pressed
+    if (Robot.cargoArmSubsystem.getTopSwitch()) {
+      Robot.cargoArmSubsystem.resetEncoder();
+    }
+    if (Robot.cargoArmSubsystem.getBottomSwitch()) {
+      Robot.cargoArmSubsystem.setEncoder();
+    }
   }
 
   /**

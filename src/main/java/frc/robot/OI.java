@@ -71,6 +71,8 @@ public class OI {
     Trigger triggerXboxLeft = new CargoIntakeTrigger(); // Cargo outtake.
     Trigger triggerXboxRight = new CargoOuttakeTrigger(); // Cargo intake.
     Trigger xboxStickLeft = new CargoArmTrigger(); // xbox left joystick is active when moved out of deadzone
+    Trigger xboxStickRight = new ClimberTrigger(); // xbox right joystick is active when moved out of deadzone
+    Trigger driveStraight = new DriveStraightTrigger(); // left joystick is active when moved out of deadzone
 
     // while the button is pressed and RobotMap.PIXY_DRIVE_TOGGLE is true, drive along line, otherwise drive straight based on gyro
     if (RobotMap.PIXY_DRIVE_TOGGLE) {
@@ -109,6 +111,7 @@ public class OI {
     buttonXboxX.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_CARGO_LOC)); // when the X button is clicked, move the cargo arm to the cargo location.
     buttonXboxY.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_TOP_LOC)); // when the Y button is clicked, move the cargo arm to the top, or storage, location.
     xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
-    //rButton4.whileHeld(new DriveStraightCommand()); // (placeholder button) when pressed and moved forward with joystick, the robot will move straight based on gyro
- }
+    xboxStickRight.whileActive(new PassiveClimberPowerCommand()); // Have the climber keeping itself up when the climber is not being controlled
+    driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
+  }
 }

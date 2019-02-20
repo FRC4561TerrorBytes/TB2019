@@ -10,31 +10,21 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SetCargoArmPosCommand extends Command {
-  int setpoint;
-  public SetCargoArmPosCommand(int setpoint) {
+public class PassiveClimberPowerCommand extends Command {
+  public PassiveClimberPowerCommand() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.cargoArmSubsystem);
-    this.setpoint = setpoint;
+    requires(Robot.climber);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    // set how accurate the PID needs to be in absolute accuracy
-    Robot.cargoArmSubsystem.setAbsoluteTolerance(10);
-    // set setpoint
-    Robot.cargoArmSubsystem.setSetpoint(this.setpoint);
-    // Start PID loop
-    Robot.cargoArmSubsystem.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // Reset the encoder value to the right position when the according limit switch is pressed
-    if (Robot.cargoArmSubsystem.getTopSwitch()) Robot.cargoArmSubsystem.resetEncoder();
-    if (Robot.cargoArmSubsystem.getBottomSwitch()) Robot.cargoArmSubsystem.setEncoder();
+    Robot.climber.passivePower();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -52,7 +42,5 @@ public class SetCargoArmPosCommand extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    // Stop PID loop
-    Robot.cargoArmSubsystem.disable();
   }
 }

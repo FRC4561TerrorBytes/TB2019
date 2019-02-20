@@ -24,7 +24,7 @@ public class CargoArmManualCommand extends Command {
   @Override
   protected void initialize() {
     // set how accurate the PID needs to be in absolute accuracy
-    Robot.cargoArmSubsystem.setAbsoluteTolerance(2);
+    Robot.cargoArmSubsystem.setAbsoluteTolerance(10);
     Robot.cargoArmSubsystem.disable();
   }
 
@@ -32,10 +32,20 @@ public class CargoArmManualCommand extends Command {
   @Override
   protected void execute() {
     // squares the input from the xbox left joystick to make the cargo arm ovement slower and more precise, but keeps the sign the same as the original input
-    Robot.cargoArmSubsystem.armManual(-Math.copySign(Math.pow(RobotMap.GAME_PAD.getY(Hand.kLeft), 2), RobotMap.GAME_PAD.getY(Hand.kLeft)));
+    Robot.cargoArmSubsystem.armManual((-Math.copySign(Math.pow(RobotMap.GAME_PAD.getY(Hand.kLeft), 2), RobotMap.GAME_PAD.getY(Hand.kLeft))) / 2);
     // Reset the encoder value to the right position when the according limit switch is pressed
-    if (Robot.cargoArmSubsystem.getTopSwitch()) Robot.cargoArmSubsystem.resetEncoder();
-    if (Robot.cargoArmSubsystem.getBottomSwitch()) Robot.cargoArmSubsystem.setEncoder();
+    if (Robot.cargoArmSubsystem.getTopSwitch()) {
+      Robot.cargoArmSubsystem.resetEncoder();
+      SmartDashboard.putString("Top Limit Switch Pressed:", "Yes");
+    } else {
+      SmartDashboard.putString("Top Limit Switch Pressed:", "No");
+    }
+    if (Robot.cargoArmSubsystem.getBottomSwitch()) {
+      //Robot.cargoArmSubsystem.setEncoder();
+      SmartDashboard.putString("Bottom Limit Switch Pressed:", "Yes");
+    } else {
+      SmartDashboard.putString("Bottom Limit Switch Pressed:", "No");
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
