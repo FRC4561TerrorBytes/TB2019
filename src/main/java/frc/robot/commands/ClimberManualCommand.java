@@ -32,7 +32,7 @@ public class ClimberManualCommand extends Command {
   @Override
   protected void execute() {
     // Cobe the input from the xbox joystick to make the speed of the climber slower
-    Robot.climber.set(Math.pow(RobotMap.GAME_PAD.getY(Hand.kRight), 3));
+    Robot.climber.set((Math.pow(RobotMap.GAME_PAD.getY(Hand.kRight), 3)));
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -31,14 +31,20 @@ public class CargoArmSubsystem extends PIDSubsystem {
   public CargoArmSubsystem() {
     /* values: P,I,D,F,Period (stays constant); Robot_006 Values: TODO: find values for comp robot */ 
     /* Delta Values: 4, 0.0055, 1023, 3.41*/
-    super("CargoArmSubsystem", 1.0, 0.0, 0.0);
+    //0.0005, 0.0, 0.0
+    super("CargoArmSubsystem", 0.0005, 0.0, 0.0004);
     //Setup sensors
-    RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+    RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
     this.resetEncoder();
     // Make it so that the PID will recognize that it has upper and lower limits
     getPIDController().setContinuous(false);
     setInputRange(RobotMap.ARM_BOT_LOC, RobotMap.ARM_TOP_LOC);
+
+    // Synchronise encoder
+    int absolutePosition = RobotMap.CARGO_ARM_MOTOR.getSensorCollection().getPulseWidthPosition();
+    absolutePosition &= 0xFFF;
+    RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(absolutePosition);
   }
 
   @Override
@@ -48,16 +54,22 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
   @Override
   protected double returnPIDInput() {
-    SmartDashboard.putNumber("PID Input", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition(0));
-    return RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition(0);
+    SmartDashboard.putNumber("PID Input", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
+    return RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition();
   }
 
   @Override
   protected void usePIDOutput(double output) {
-    double angle = (RobotMap.ARM_STRAIGHT_LOC - this.getSetpoint()) * TICKS_TO_DEGREES;
-    double feedForward = (ARM_WEIGHT * ARM_LENGTH / TORQUE_CONSTANT) * Math.cos(angle);
-    getPIDController().setF(feedForward);
-    RobotMap.CARGO_ARM_MOTOR.set(output);
+    // int setpointPosition = (int) this.getSetpoint();
+    // setpointPosition &= 0xFFF;
+    // double angle = (RobotMap.ARM_STRAIGHT_LOC - setpointPosition) * TICKS_TO_DEGREES;
+    // double feedForward = (ARM_WEIGHT * ARM_LENGTH / TORQUE_CONSTANT) * Math.cos(angle);
+    // getPIDController().setF(feedForward);
+
+    // limit the output of the cargo arm to keep it from slamming around the robot
+    if (output > 0.5) RobotMap.CARGO_ARM_MOTOR.set(0.5);
+    else if (output < -0.5) RobotMap.CARGO_ARM_MOTOR.set(-0.5);
+    else RobotMap.CARGO_ARM_MOTOR.set(output);
   }
 
   /** For manual movement of the arm using the controller */
@@ -72,10 +84,12 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
   public boolean getTopSwitch() {
     //return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
+    // gives the status of the top limit switch (true is pressed, false is not pressed)
     return !RobotMap.ARM_LIMIT_SWITCH_TOP.get();
 	}
 	public boolean getBottomSwitch() {
     //return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
+    // gives the status of the bottom limit switch (true is pressed, false is not pressed)
     return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();
   }
 

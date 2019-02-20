@@ -39,6 +39,11 @@ public class ClimberSubsystem extends Subsystem {
     RobotMap.SKI_SOLENOID.set(activate);
   }
 
+  // procides passive power to the climber to keep it from draging on the ground
+  public void passivePower() {
+    RobotMap.CLIMBER_MOTOR_GROUP.set(0.01);
+  }
+
   // This method makes the motors on both sides stop.
   public void stop () {
     RobotMap.CLIMBER_MOTOR_GROUP.set(0);

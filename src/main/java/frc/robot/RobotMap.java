@@ -47,8 +47,8 @@ public class RobotMap {
   public static final double ROBOT_CONTROL_LOOP_INTERVAL = 0.01666666667;
   
   // Joystick Ports
-  public static final int RIGHT_JOYSTICK_PORT = 0;  // TODO: Assign values to the engine, Scotty.
-  public static final int LEFT_JOYSTICK_PORT = 1;
+  public static final int RIGHT_JOYSTICK_PORT = 1;
+  public static final int LEFT_JOYSTICK_PORT = 0;
 
   // Right motor ports. Delta Ports: 8,9,10
   public static final int FRONT_RIGHT_MOTOR_PORT = 3;
@@ -78,11 +78,11 @@ public class RobotMap {
   private static final int CLIMBER_RIGHT_PORT = 8;
 
   // Max/Min arm encoder positions/limit switch locations TODO: find real values
-  public static final int ARM_BOT_LOC = -8550;
+  public static final int ARM_BOT_LOC = -9000;
   public static final int ARM_TOP_LOC = 0;
   public static final int ARM_STRAIGHT_LOC = 0;
-  public static final int ARM_CARGO_LOC = 0;
-  public static final int ARM_ROCKET_LOC = -6820;
+  public static final int ARM_CARGO_LOC = 150;
+  public static final int ARM_ROCKET_LOC = -5285;
 
   // Ski solenoid ports
   private static final int SKI_PORT = 4; //TODO: change the numbers
@@ -91,8 +91,8 @@ public class RobotMap {
   private static final int INFRARED_PORT = 3;
 
   // Arm limit switch ports
-  private static final int LIMIT_SWITCH_ARM_TOP_PORT = 0;
-  private static final int LIMIT_SWITCH_ARM_BOT_PORT = 1;
+  private static final int LIMIT_SWITCH_ARM_TOP_PORT = 1;
+  private static final int LIMIT_SWITCH_ARM_BOT_PORT = 0;
 
   // Climber limit switch ports
   private static final int LIMIT_SWITCH_CLIMBER_PORT = 2;
