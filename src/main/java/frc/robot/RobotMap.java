@@ -42,10 +42,7 @@ public class RobotMap {
   
   // Pixy/Vision toggle Booleans
   public static final boolean PIXY_DRIVE_TOGGLE = true; //make true if you want to use pixy guidance
-
-  // Toggle for switching between various settings different Delta and the competition robot
-  public static final boolean ON_DELTA = false;
-
+  
   // Toggle for using one camera (false) or two cameras (true)
   public static final boolean TWO_CAMERAS = false;
 
@@ -57,35 +54,15 @@ public class RobotMap {
   public static final int LEFT_JOYSTICK_PORT = 0;
 
   // Right motor ports. Delta Ports: 8,9,10
-  public static int FRONT_RIGHT_MOTOR_PORT;
-  public static int MID_RIGHT_MOTOR_PORT;
-  public static int BOT_RIGHT_MOTOR_PORT;
+  public static int FRONT_RIGHT_MOTOR_PORT = 3;
+  public static int MID_RIGHT_MOTOR_PORT = 4;
+  public static int BOT_RIGHT_MOTOR_PORT = 5;
 
   // Left motor ports	Delta Ports: 7,11,12
-  public static int FRONT_LEFT_MOTOR_PORT;
-  public static int MID_LEFT_MOTOR_PORT;
-  public static int BOT_LEFT_MOTOR_PORT;
+  public static int FRONT_LEFT_MOTOR_PORT = 6;
+  public static int MID_LEFT_MOTOR_PORT = 1;
+  public static int BOT_LEFT_MOTOR_PORT = 2;
 
-  public static void checkIfDelta(){
-    if(ON_DELTA) {
-      FRONT_RIGHT_MOTOR_PORT = 8;
-      MID_RIGHT_MOTOR_PORT = 9;
-      BOT_RIGHT_MOTOR_PORT = 10;
-
-      FRONT_LEFT_MOTOR_PORT = 7;
-      MID_LEFT_MOTOR_PORT = 11;
-      BOT_LEFT_MOTOR_PORT = 12;
-    }
-    else {
-      FRONT_RIGHT_MOTOR_PORT = 3;
-      MID_RIGHT_MOTOR_PORT = 4;
-      BOT_RIGHT_MOTOR_PORT = 5;
-
-      FRONT_LEFT_MOTOR_PORT = 6;
-      MID_LEFT_MOTOR_PORT = 1;
-      BOT_LEFT_MOTOR_PORT = 2;
-    }
-  }
   // hatch intake solenoid ports
   private static final int INTAKE_POS_PORT = 2;
   private static final int INTAKE_IN_PORT = 3;

@@ -58,7 +58,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    RobotMap.checkIfDelta();
     drivetrain = new DriveSubsystem();
     oi = new OI();
     RobotMap.navx.reset();
@@ -85,7 +84,7 @@ public class Robot extends TimedRobot {
     camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
     camera1.setResolution(176, 144);
     camera1.setFPS(30);
-    camera1.setBrightness(25);
+    camera1.setBrightness(30);
     camera1.setExposureManual(10);
     camera1.setWhiteBalanceManual(10);
     server = cameraServer.getInstance().getServer();
