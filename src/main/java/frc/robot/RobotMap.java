@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
-import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
@@ -80,7 +78,7 @@ public class RobotMap {
   private static final int CLIMBER_LEFT_PORT = 0;
   private static final int CLIMBER_RIGHT_PORT = 8;
 
-  // Max/Min arm encoder positions/limit switch locations TODO: find real values
+  // Max/Min arm encoder positions/limit switch locations
   public static final int ARM_BOT_LOC = -9000;
   public static final int ARM_TOP_LOC = 0;
   public static final int ARM_STRAIGHT_LOC = 0;
@@ -88,7 +86,7 @@ public class RobotMap {
   public static final int ARM_ROCKET_LOC = -5285;
 
   // Ski solenoid ports
-  private static final int SKI_PORT = 4; //TODO: change the numbers
+  private static final int SKI_PORT = 4;
 
   // Infrared Sensor port
   private static final int INFRARED_PORT = 3;

@@ -4,19 +4,12 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-/**
- * TODO: Do these below
- * Check axes for gyro
- * check encoder position for top and bottom for climber cargo arm
- * tune and bind cargo arm PID
- * PID buttons
- */
+
 package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSink;
 import edu.wpi.cscore.VideoSource;
-import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -106,22 +99,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("X-Center", networkTable.getEntry("xcenter").getDouble(0));
     SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(0));
     //numbers retrived from robot
-    SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
     SmartDashboard.putNumber("CargoArmEncoderPos", RobotMap.CARGO_ARM_MOTOR.getSensorCollection().getPulseWidthPosition());
     SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
-    SmartDashboard.putNumber("GyroPitchAngle", drivetrain.getPitchAngle());
-    SmartDashboard.putNumber("GyroRollAngle", drivetrain.getRollAngle());
-    SmartDashboard.putBoolean("Arm Bottom Limit Switch", Robot.cargoArmSubsystem.getBottomSwitch());
-    SmartDashboard.putBoolean("Arm Top Limit Switch", Robot.cargoArmSubsystem.getTopSwitch());
-    //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();
-
-    // Reset the encoder value to the right position when the according limit switch is pressed
-    if (Robot.cargoArmSubsystem.getTopSwitch()) {
-      Robot.cargoArmSubsystem.resetEncoder();
-    }
-    if (Robot.cargoArmSubsystem.getBottomSwitch()) {
-      Robot.cargoArmSubsystem.setEncoder();
-    }
   }
 
   /**
@@ -131,6 +110,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    // Reset the gyro sensor on the robot
     RobotMap.navx.reset();
   }
 

@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.CurvatureDriveCommand;
 import frc.robot.commands.TankDriveCommand;
@@ -28,7 +27,6 @@ public class DriveSubsystem extends Subsystem {
 	// Ku: Maximum kP value that gives ocillation
 	// Tu: Time for full ocillation on the robot
 	// PID Values: kP = 0.6Ku  kI = 1.2Ku/Tu  kD = 3KuTu/40
-	//double kP = 0.21, kI = 0.6, kD = 0.01375;
 	double kP = 0.1, kI = 0.0, kD = 0.0003;
 	double integral = 0, previous_error = 0;
 	DifferentialDrive differentialDrive;
@@ -109,17 +107,5 @@ public class DriveSubsystem extends Subsystem {
 	// Get Yaw angle of drivetrain from NavX
 	public double getYawAngle() {
 		return RobotMap.navx.getYaw();
-	}
-	
-	// Get Pitch angle of drivetrain from NavX
-	public double getPitchAngle() {
-		return RobotMap.navx.getPitch();
-	}
-	
-	// Get Roll angle of drivetrain from NavX
-	public double getRollAngle() {
-		return RobotMap.navx.getRoll();
-	}
-	
-	
+	}	
 }
