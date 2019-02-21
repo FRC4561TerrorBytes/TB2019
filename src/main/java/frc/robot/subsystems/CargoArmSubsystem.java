@@ -29,9 +29,9 @@ public class CargoArmSubsystem extends PIDSubsystem {
   final double TICKS_TO_DEGREES = 360 / 4096; // degrees / pulses per revolution
 
   public CargoArmSubsystem() {
-    /* values: P,I,D,F,Period (stays constant); Robot_006 Values: TODO: find values for comp robot */ 
+    /* values: P,I,D,F,Period (stays constant) */ 
     /* Delta Values: 4, 0.0055, 1023, 3.41*/
-    //0.0005, 0.0, 0.0
+    /* Orion Values: 0.0005, 0.0, 0.0004 Note: not using F-Term*/
     super("CargoArmSubsystem", 0.0005, 0.0, 0.0004);
     //Setup sensors
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);

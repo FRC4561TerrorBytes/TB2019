@@ -9,7 +9,11 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-
+/**
+ * Command for moving the cargo arm to a
+ * set position. This command is used for
+ * the 'preset' buttons.
+ */
 public class SetCargoArmPosCommand extends Command {
   int setpoint;
   public SetCargoArmPosCommand(int setpoint) {
