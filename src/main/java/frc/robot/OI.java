@@ -56,9 +56,9 @@ public class OI {
     Button rButton1 = new JoystickButton(RobotMap.RIGHT_STICK, 1);    // Cargo intake in.
     Button rButton2 = new JoystickButton(RobotMap.RIGHT_STICK, 2);    // Invert drive
     Button rButton3 = new JoystickButton(RobotMap.RIGHT_STICK, 3);    // Hatch extend/retract.
-    Button rButton4 = new JoystickButton(RobotMap.RIGHT_STICK, 4);
-    Button rButton5 = new JoystickButton(RobotMap.RIGHT_STICK, 5);
-    Button buttonXboxA = new JoystickButton(RobotMap.GAME_PAD, 1);    // TODO: chage to Arm at Cargo ground/intake posistion.
+    Button rButton4 = new JoystickButton(RobotMap.RIGHT_STICK, 4);    // Switch to Camera 1
+    Button rButton5 = new JoystickButton(RobotMap.RIGHT_STICK, 5);    // Switch to camera 2
+    Button buttonXboxA = new JoystickButton(RobotMap.GAME_PAD, 1);    // Arm at intake/bottom location
     Button buttonXboxB = new JoystickButton(RobotMap.GAME_PAD, 2);    // Arm at Cargo Level 1 rocket position.
     Button buttonXboxX = new JoystickButton(RobotMap.GAME_PAD, 3);    // Arm at Cargoship position.
     Button buttonXboxY = new JoystickButton(RobotMap.GAME_PAD, 4);    // Arm at Storage position.
@@ -94,7 +94,7 @@ public class OI {
     rButton3.whileHeld(new HatchIntakeCommand(true)); // While held Hatchintake pushes out.
     rButton3.whenReleased(new HatchIntakeCommand(false)); // When released Hatchintake pulls in.
     rButton4.whenPressed(new SwitchToCamera1Command()); // Switch to viewing camera1
-    rButton5.whenPressed(new SwitchToCamera2Command()); // Switch to viewing camera1
+    rButton5.whenPressed(new SwitchToCamera2Command()); // Switch to viewing camera2
     buttonXboxLB.whileHeld(new SkiOutCommand(true)); // When pressed Ski comes out.
     buttonXboxRB.whileHeld(new SkiOutCommand(false)); // When pressed Ski comes in.
     buttonXboxA.whenPressed(new HatchPresentCommand()); // (placeholder) When pressed, check if Super Suit (hatch) is present
