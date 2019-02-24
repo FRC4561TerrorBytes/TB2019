@@ -48,37 +48,37 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  public OI() {
-    Button lButton1 = new JoystickButton(RobotMap.LEFT_STICK, 1);     // Hatch outtake
-    Button lButton2 = new JoystickButton(RobotMap.LEFT_STICK, 2);     // Cargo outtake (slow)
-    Button lButton3 = new JoystickButton(RobotMap.LEFT_STICK, 3);     // Auto Align
-    Button lButton4 = new JoystickButton(RobotMap.LEFT_STICK, 4);     // Cargo outtake (fast)
-    Button rButton1 = new JoystickButton(RobotMap.RIGHT_STICK, 1);    // Cargo intake in.
-    Button rButton2 = new JoystickButton(RobotMap.RIGHT_STICK, 2);    // Invert drive
-    Button rButton3 = new JoystickButton(RobotMap.RIGHT_STICK, 3);    // Hatch extend/retract.
-    Button rButton4 = new JoystickButton(RobotMap.RIGHT_STICK, 4);    // Switch to Camera 1
-    Button rButton5 = new JoystickButton(RobotMap.RIGHT_STICK, 5);    // Switch to camera 2
-    Button buttonXboxA = new JoystickButton(RobotMap.GAME_PAD, 1);    // Arm at intake/bottom location
-    Button buttonXboxB = new JoystickButton(RobotMap.GAME_PAD, 2);    // Arm at Cargo Level 1 rocket position.
-    Button buttonXboxX = new JoystickButton(RobotMap.GAME_PAD, 3);    // Arm at Cargoship position.
-    Button buttonXboxY = new JoystickButton(RobotMap.GAME_PAD, 4);    // Arm at Storage position.
-    Button buttonXboxLB = new JoystickButton(RobotMap.GAME_PAD, 5);   // Deploy skis.
-    Button buttonXboxRB = new JoystickButton(RobotMap.GAME_PAD, 6);   // Retract skis.
-    POVButton buttonXboxUp = new POVButton(RobotMap.GAME_PAD, 0);     // Hatch mechanism up.
-    POVButton buttonXboxDown = new POVButton(RobotMap.GAME_PAD, 180); // Hatch mechanism down.
-    POVButton buttonXboxLeft = new POVButton(RobotMap.GAME_PAD, 270); // Extend Hatch mechanism.
-    POVButton buttonXboxRight = new POVButton(RobotMap.GAME_PAD, 90); // Retract Hatch mechanism.
-    Trigger triggerXboxLeft = new CargoIntakeTrigger(); // Cargo outtake.
-    Trigger triggerXboxRight = new CargoOuttakeTrigger(); // Cargo intake.
-    Trigger xboxStickLeft = new CargoArmTrigger(); // xbox left joystick is active when moved out of deadzone
-    Trigger xboxStickRight = new ClimberTrigger(); // xbox right joystick is active when moved out of deadzone
-    Trigger driveStraight = new DriveStraightTrigger(); // left joystick is active when moved out of deadzone
+  Button lButton1 = new JoystickButton(RobotMap.LEFT_STICK, 1); // Hatch outtake
+  Button lButton2 = new JoystickButton(RobotMap.LEFT_STICK, 2); // Cargo outtake (slow)
+  Button lButton3 = new JoystickButton(RobotMap.LEFT_STICK, 3); // Auto Align
+  Button lButton4 = new JoystickButton(RobotMap.LEFT_STICK, 4); // Cargo outtake (fast)
+  Button rButton1 = new JoystickButton(RobotMap.RIGHT_STICK, 1); // Cargo intake in.
+  Button rButton2 = new JoystickButton(RobotMap.RIGHT_STICK, 2); // Invert drive
+  Button rButton3 = new JoystickButton(RobotMap.RIGHT_STICK, 3); // Hatch extend/retract.
+  Button rButton4 = new JoystickButton(RobotMap.RIGHT_STICK, 4); // Switch to Camera 1
+  Button rButton5 = new JoystickButton(RobotMap.RIGHT_STICK, 5); // Switch to camera 2
+  Button buttonXboxA = new JoystickButton(RobotMap.GAME_PAD, 1); // Arm at intake/bottom location
+  Button buttonXboxB = new JoystickButton(RobotMap.GAME_PAD, 2); // Arm at Cargo Level 1 rocket position.
+  Button buttonXboxX = new JoystickButton(RobotMap.GAME_PAD, 3); // Arm at Cargoship position.
+  Button buttonXboxY = new JoystickButton(RobotMap.GAME_PAD, 4); // Arm at Storage position.
+  Button buttonXboxLB = new JoystickButton(RobotMap.GAME_PAD, 5); // Deploy skis.
+  Button buttonXboxRB = new JoystickButton(RobotMap.GAME_PAD, 6); // Retract skis.
+  POVButton buttonXboxUp = new POVButton(RobotMap.GAME_PAD, 0); // Hatch mechanism up.
+  POVButton buttonXboxDown = new POVButton(RobotMap.GAME_PAD, 180); // Hatch mechanism down.
+  POVButton buttonXboxLeft = new POVButton(RobotMap.GAME_PAD, 270); // Extend Hatch mechanism.
+  POVButton buttonXboxRight = new POVButton(RobotMap.GAME_PAD, 90); // Retract Hatch mechanism.
+  Trigger triggerXboxLeft = new CargoIntakeTrigger(); // Cargo outtake.
+  Trigger triggerXboxRight = new CargoOuttakeTrigger(); // Cargo intake.
+  Trigger xboxStickLeft = new CargoArmTrigger(); // xbox left joystick is active when moved out of deadzone
+  Trigger xboxStickRight = new ClimberTrigger(); // xbox right joystick is active when moved out of deadzone
+  Trigger driveStraight = new DriveStraightTrigger(); // left joystick is active when moved out of deadzone
 
-    // while the button is pressed and RobotMap.PIXY_DRIVE_TOGGLE is true, drive along line, otherwise drive straight based on gyro
+  public OI() {
+    // while the button is pressed and RobotMap.PIXY_DRIVE_TOGGLE is true, drive
+    // along line, otherwise drive straight based on gyro
     if (RobotMap.PIXY_DRIVE_TOGGLE) {
       lButton3.whileHeld(new DriveStraightPixyInputCommand());
-    }
-    else {
+    } else {
       lButton3.whileHeld(new DriveStraightCommand());
     }
 

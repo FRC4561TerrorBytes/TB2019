@@ -38,15 +38,14 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static NetworkTableInstance networkTableInstance = NetworkTableInstance.getDefault();
   public static edu.wpi.first.networktables.NetworkTable networkTable;
-  public static CameraServer cameraServer;
   public static UsbCamera camera1;
   public static UsbCamera camera2;
   public static VideoSink server;
   Command autonomousCommand;
 
   /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
+   * This function is run when the robot is first started up and should be used
+   * for any initialization code.
    */
   @Override
   public void robotInit() {
@@ -55,57 +54,61 @@ public class Robot extends TimedRobot {
     RobotMap.navx.reset();
     networkTableInstance.startServer();
     networkTable = networkTableInstance.getTable("networkTable");
-    //start cameras and configure settings
-    if(RobotMap.TWO_CAMERAS){ //if we are using to cameras create 2 cameras running at 10 fps
-    camera1 = cameraServer.getInstance().startAutomaticCapture();
-    camera2 = cameraServer.getInstance().startAutomaticCapture();
-    camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-    camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-    camera1.setResolution(176, 144);
-    camera2.setResolution(176, 144);
-    camera1.setFPS(10);
-    camera2.setFPS(10);
-    camera1.setBrightness(25);
-    camera2.setBrightness(20);
-    camera1.setExposureManual(10);
-    camera2.setExposureManual(10);
-    camera1.setWhiteBalanceManual(10);
-    camera2.setWhiteBalanceManual(10);
-    } else { // if we are not using two cameras, create one camera running at 30 fps
-    camera1 = cameraServer.getInstance().startAutomaticCapture();
-    camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-    camera1.setResolution(176, 144);
-    camera1.setFPS(30);
-    camera1.setBrightness(30);
-    camera1.setExposureManual(10);
-    camera1.setWhiteBalanceManual(10);
-    server = cameraServer.getInstance().getServer();
+    // start cameras and configure settings
+    if (RobotMap.TWO_CAMERAS) {
+      // if we are using to cameras create 2 cameras running at 10 fps
+      camera1 = CameraServer.getInstance().startAutomaticCapture();
+      camera2 = CameraServer.getInstance().startAutomaticCapture();
+      camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+      camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+      camera1.setResolution(176, 144);
+      camera2.setResolution(176, 144);
+      camera1.setFPS(10);
+      camera2.setFPS(10);
+      camera1.setBrightness(25);
+      camera2.setBrightness(20);
+      camera1.setExposureManual(10);
+      camera2.setExposureManual(10);
+      camera1.setWhiteBalanceManual(10);
+      camera2.setWhiteBalanceManual(10);
+    } else {
+      // if we are not using two cameras, create one camera running at 30 fps
+      camera1 = CameraServer.getInstance().startAutomaticCapture();
+      camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+      camera1.setResolution(176, 144);
+      camera1.setFPS(30);
+      camera1.setBrightness(30);
+      camera1.setExposureManual(10);
+      camera1.setWhiteBalanceManual(10);
+      server = CameraServer.getInstance().getServer();
     }
   }
 
   /**
-   * This function is called every robot packet, no matter the mode. Use
-   * this for items like diagnostics that you want ran during disabled,
-   * autonomous, teleoperated and test.
+   * This function is called every robot packet, no matter the mode. Use this for
+   * items like diagnostics that you want ran during disabled, autonomous,
+   * teleoperated and test.
    *
-   * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
+   * <p>
+   * This runs after the mode specific periodic functions, but before LiveWindow
+   * and SmartDashboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
-    //numbers retrieved from raspi
+    // numbers retrieved from raspi
     SmartDashboard.putNumber("PixyAngle", networkTable.getEntry("pixyAngle").getDouble(4561));
     SmartDashboard.putNumber("X-Center", networkTable.getEntry("xcenter").getDouble(0));
     SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(0));
-    //numbers retrived from robot
-    SmartDashboard.putNumber("CargoArmEncoderPos", RobotMap.CARGO_ARM_MOTOR.getSensorCollection().getPulseWidthPosition());
+    // numbers retrived from robot
+    SmartDashboard.putNumber("CargoArmEncoderPos",
+        RobotMap.CARGO_ARM_MOTOR.getSensorCollection().getPulseWidthPosition());
     SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
   }
 
   /**
-   * This function is called once each time the robot enters Disabled mode.
-   * You can use it to reset any subsystem information you want to clear when
-   * the robot is disabled.
+   * This function is called once each time the robot enters Disabled mode. You
+   * can use it to reset any subsystem information you want to clear when the
+   * robot is disabled.
    */
   @Override
   public void disabledInit() {
@@ -120,23 +123,24 @@ public class Robot extends TimedRobot {
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
-   * between different autonomous modes using the dashboard. The sendable
-   * chooser code works with the Java SmartDashboard. If you prefer the
-   * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-   * getString code to get the auto name from the text box below the Gyro
+   * between different autonomous modes using the dashboard. The sendable chooser
+   * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
+   * remove all of the chooser code and uncomment the getString code to get the
+   * auto name from the text box below the Gyro
    *
-   * <p>You can add additional auto modes by adding additional commands to the
-   * chooser code above (like the commented example) or additional comparisons
-   * to the switch structure below with additional strings & commands.
+   * <p>
+   * You can add additional auto modes by adding additional commands to the
+   * chooser code above (like the commented example) or additional comparisons to
+   * the switch structure below with additional strings & commands.
    */
   @Override
   public void autonomousInit() {
 
     /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
+     * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+     * switch(autoSelected) { case "My Auto": autonomousCommand = new
+     * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
+     * ExampleCommand(); break; }
      */
 
     // schedule the autonomous command (example)
@@ -178,4 +182,4 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
-  }
+}

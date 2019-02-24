@@ -16,6 +16,7 @@ import frc.robot.RobotMap;
 public class DriveStraightTrigger extends Trigger {
   @Override
   public boolean get() {
-    return (Math.abs(RobotMap.RIGHT_STICK.getX()) < 0.01) && (Math.abs(RobotMap.LEFT_STICK.getY()) > 0.01); // left joystick is active when moved out of deadzone
+    // Return when driver is not trying to turn the robot
+    return (Math.abs(RobotMap.RIGHT_STICK.getX()) < 0.01) && (Math.abs(RobotMap.LEFT_STICK.getY()) > 0.01);
   }
 }

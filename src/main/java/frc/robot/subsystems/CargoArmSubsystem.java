@@ -15,7 +15,6 @@ import frc.robot.RobotMap;
 
 /**
  * @author Lucas
- * TODO: Comment code
  */
 
 public class CargoArmSubsystem extends PIDSubsystem {
@@ -28,17 +27,19 @@ public class CargoArmSubsystem extends PIDSubsystem {
   final double TICKS_TO_DEGREES = 360 / 4096; // degrees / pulses per revolution
 
   public CargoArmSubsystem() {
-    /* values: P,I,D,F,Period (stays constant) */ 
-    /* Delta Values: 4, 0.0055, 1023, 3.41*/
-    /* Orion Values: 0.0005, 0.0, 0.0004 Note: not using F-Term*/
+    /* values: P,I,D,F,Period (stays constant) */
+    /* Delta Values: 4, 0.0055, 1023, 3.41 */
+    /* Orion Values: 0.0005, 0.0, 0.0004 Note: not using F-Term */
     super("CargoArmSubsystem", 0.0005, 0.0, 0.0004);
-    //Setup sensors
+    // Setup sensors
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
     this.resetEncoder();
     // Make it so that the PID will recognize that it has upper and lower limits
     getPIDController().setContinuous(false);
     setInputRange(RobotMap.ARM_BOT_LOC, RobotMap.ARM_TOP_LOC);
+    // Set PID max speed
+    setOutputRange(-0.4, 0.4);
 
     // Synchronise encoder
     int absolutePosition = RobotMap.CARGO_ARM_MOTOR.getSensorCollection().getPulseWidthPosition();
@@ -61,34 +62,38 @@ public class CargoArmSubsystem extends PIDSubsystem {
   protected void usePIDOutput(double output) {
     // int setpointPosition = (int) this.getSetpoint();
     // setpointPosition &= 0xFFF;
-    // double angle = (RobotMap.ARM_STRAIGHT_LOC - setpointPosition) * TICKS_TO_DEGREES;
-    // double feedForward = (ARM_WEIGHT * ARM_LENGTH / TORQUE_CONSTANT) * Math.cos(angle);
+    // double angle = (RobotMap.ARM_STRAIGHT_LOC - setpointPosition) *
+    // TICKS_TO_DEGREES;
+    // double feedForward = (ARM_WEIGHT * ARM_LENGTH / TORQUE_CONSTANT) *
+    // Math.cos(angle);
     // getPIDController().setF(feedForward);
 
-    // limit the output of the cargo arm to keep it from slamming around the robot
-    if (output > 0.5) RobotMap.CARGO_ARM_MOTOR.set(0.5);
-    else if (output < -0.5) RobotMap.CARGO_ARM_MOTOR.set(-0.5);
-    else RobotMap.CARGO_ARM_MOTOR.set(output);
+    RobotMap.CARGO_ARM_MOTOR.set(output);
   }
 
   /** For manual movement of the arm using the controller */
   public void armManual(double power) {
     RobotMap.CARGO_ARM_MOTOR.set(power);
   }
-  
-  /** Method to stop the motor from moving*/
+
+  /** Method to stop the motor from moving */
   public void stop() {
     RobotMap.CARGO_ARM_MOTOR.stopMotor();
   }
 
   public boolean getTopSwitch() {
-    //return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
-    // gives the status of the top limit switch (true is pressed, false is not pressed)
+    // return
+    // RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
+    // gives the status of the top limit switch (true is pressed, false is not
+    // pressed)
     return !RobotMap.ARM_LIMIT_SWITCH_TOP.get();
-	}
-	public boolean getBottomSwitch() {
-    //return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
-    // gives the status of the bottom limit switch (true is pressed, false is not pressed)
+  }
+
+  public boolean getBottomSwitch() {
+    // return
+    // RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
+    // gives the status of the bottom limit switch (true is pressed, false is not
+    // pressed)
     return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();
   }
 
