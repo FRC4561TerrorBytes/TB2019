@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -28,13 +29,17 @@ public class CargoArmSubsystem extends PIDSubsystem {
   final double TICKS_TO_DEGREES = 360 / 4096; // degrees / pulses per revolution
 
   public CargoArmSubsystem() {
-    /* values: P,I,D,F,Period (stays constant) */ 
+    /* values: P,I,D*/ 
     /* Delta Values: 4, 0.0055, 1023, 3.41*/
-    /* Orion Values: 0.0005, 0.0, 0.0004 Note: not using F-Term*/
-    super("CargoArmSubsystem", 0.0005, 0.0, 0.0004);
+    //0.0005, 0.0, 0.0005
+    super("CargoArmSubsystem", 0.0005, 0.0, 0.0005);
     //Setup sensors
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
+    RobotMap.CARGO_ARM_MOTOR.config_kP(0, 1);
+    RobotMap.CARGO_ARM_MOTOR.config_kI(0, 0);
+    RobotMap.CARGO_ARM_MOTOR.config_kD(0, 0);
+
     this.resetEncoder();
     // Make it so that the PID will recognize that it has upper and lower limits
     getPIDController().setContinuous(false);
@@ -44,6 +49,9 @@ public class CargoArmSubsystem extends PIDSubsystem {
     int absolutePosition = RobotMap.CARGO_ARM_MOTOR.getSensorCollection().getPulseWidthPosition();
     absolutePosition &= 0xFFF;
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(absolutePosition);
+
+    // Used to invert the encoder sensor phase WIP
+    RobotMap.CARGO_ARM_MOTOR.setSensorPhase(false);
   }
 
   @Override
@@ -53,6 +61,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
   @Override
   protected double returnPIDInput() {
+    // Use cargo arm encoder position for PID input
     SmartDashboard.putNumber("PID Input", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
     return RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition();
   }
@@ -66,14 +75,21 @@ public class CargoArmSubsystem extends PIDSubsystem {
     // getPIDController().setF(feedForward);
 
     // limit the output of the cargo arm to keep it from slamming around the robot
-    if (output > 0.5) RobotMap.CARGO_ARM_MOTOR.set(0.5);
-    else if (output < -0.5) RobotMap.CARGO_ARM_MOTOR.set(-0.5);
+    if (output > 0.4) RobotMap.CARGO_ARM_MOTOR.set(0.4);
+    else if (output < -0.4) RobotMap.CARGO_ARM_MOTOR.set(-0.4);
     else RobotMap.CARGO_ARM_MOTOR.set(output);
+
+    SmartDashboard.putNumber("PID Output", output);
   }
 
   /** For manual movement of the arm using the controller */
   public void armManual(double power) {
     RobotMap.CARGO_ARM_MOTOR.set(power);
+  }
+
+  // Method for moving the arm to a position with motion magic WIP
+  public void armMotionMagic(double position) {
+    RobotMap.CARGO_ARM_MOTOR.set(ControlMode.MotionMagic, position);
   }
   
   /** Method to stop the motor from moving*/

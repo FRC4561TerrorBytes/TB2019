@@ -12,6 +12,7 @@ import edu.wpi.cscore.VideoSink;
 import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -53,6 +54,7 @@ public class Robot extends TimedRobot {
     drivetrain = new DriveSubsystem();
     oi = new OI();
     RobotMap.navx.reset();
+    cargoArmSubsystem.resetEncoder();
     networkTableInstance.startServer();
     networkTable = networkTableInstance.getTable("networkTable");
     //start cameras and configure settings
@@ -98,8 +100,20 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("X-Center", networkTable.getEntry("xcenter").getDouble(0));
     SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(0));
     //numbers retrived from robot
-    SmartDashboard.putNumber("CargoArmEncoderPos", RobotMap.CARGO_ARM_MOTOR.getSensorCollection().getPulseWidthPosition());
+    SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
+    SmartDashboard.putNumber("CargoArmEncoderPos", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
     SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
+    SmartDashboard.putBoolean("Arm Bottom Limit Switch", Robot.cargoArmSubsystem.getBottomSwitch());
+    SmartDashboard.putBoolean("Arm Top Limit Switch", Robot.cargoArmSubsystem.getTopSwitch());
+    //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();
+
+    // Reset the encoder value to the right position when the according limit switch is pressed
+    if (Robot.cargoArmSubsystem.getTopSwitch()) {
+      Robot.cargoArmSubsystem.resetEncoder();
+    }
+    if (Robot.cargoArmSubsystem.getBottomSwitch()) {
+      Robot.cargoArmSubsystem.setEncoder();
+    }
   }
 
   /**
@@ -109,7 +123,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    // Reset the gyro sensor on the robot
     RobotMap.navx.reset();
   }
 

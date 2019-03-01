@@ -78,15 +78,14 @@ public class RobotMap {
   private static final int CLIMBER_LEFT_PORT = 0;
   private static final int CLIMBER_RIGHT_PORT = 8;
 
-  // Max/Min arm encoder positions/limit switch locations
+  // Max/Min arm encoder positions/limit switch locations TODO: find real values
   public static final int ARM_BOT_LOC = -9000;
   public static final int ARM_TOP_LOC = 0;
-  public static final int ARM_STRAIGHT_LOC = 0;
-  public static final int ARM_CARGO_LOC = 150;
-  public static final int ARM_ROCKET_LOC = -5285;
+  public static final int ARM_CARGO_LOC = -1500;
+  public static final int ARM_ROCKET_LOC = -7200;
 
   // Ski solenoid ports
-  private static final int SKI_PORT = 4;
+  private static final int SKI_PORT = 4; //TODO: change the numbers
 
   // Infrared Sensor port
   private static final int INFRARED_PORT = 3;
