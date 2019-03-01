@@ -41,7 +41,7 @@ public class CargoArmManualCommand extends Command {
       SmartDashboard.putString("Top Limit Switch Pressed:", "No");
     }
     if (Robot.cargoArmSubsystem.getBottomSwitch()) {
-      //Robot.cargoArmSubsystem.setEncoder();
+      // Robot.cargoArmSubsystem.setEncoder();
       SmartDashboard.putString("Bottom Limit Switch Pressed:", "Yes");
     } else {
       SmartDashboard.putString("Bottom Limit Switch Pressed:", "No");
@@ -58,7 +58,7 @@ public class CargoArmManualCommand extends Command {
   @Override
   protected void end() {
     // If we aren't moving the arm, keep it where it is
-    Robot.cargoArmSubsystem.setSetpoint(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition(0));
+    Robot.cargoArmSubsystem.setSetpoint(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
     Robot.cargoArmSubsystem.enable(); // starts PID loop
   }
 
