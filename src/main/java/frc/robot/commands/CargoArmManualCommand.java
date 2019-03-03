@@ -41,7 +41,7 @@ public class CargoArmManualCommand extends Command {
       SmartDashboard.putString("Top Limit Switch Pressed:", "No");
     }
     if (Robot.cargoArmSubsystem.getBottomSwitch()) {
-      // Robot.cargoArmSubsystem.setEncoder();
+      Robot.cargoArmSubsystem.setEncoder();
       SmartDashboard.putString("Bottom Limit Switch Pressed:", "Yes");
     } else {
       SmartDashboard.putString("Bottom Limit Switch Pressed:", "No");
