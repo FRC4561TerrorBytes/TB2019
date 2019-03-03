@@ -102,8 +102,8 @@ public class OI {
     triggerXboxRight.whenActive(new ReleaseCargoCommand()); // When held cargo intakes.
     triggerXboxRight.whenInactive(new StopCargoCommand()); // when the trigger is inactive, or not held, stop the cargo intake
     buttonXboxA.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_BOT_LOC)); // when the A button is clicked, move the cargo arm to the bottom location.
-    buttonXboxB.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_ROCKET_LOC)); // when the B button is clicked, move the cargo arm to the rocket level one location.
-    buttonXboxX.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_CARGO_LOC)); // when the X button is clicked, move the cargo arm to the cargo location.
+    buttonXboxB.whenPressed(new CargoArmRocketPosCommand()); // when the B button is clicked, move the cargo arm to the rocket level one location.
+    buttonXboxX.whenPressed(new CargoArmCargoShipPosCommand()); // when the X button is clicked, move the cargo arm to the cargo location.
     buttonXboxY.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_TOP_LOC)); // when the Y button is clicked, move the cargo arm to the top, or storage, location.
     xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
     xboxStickRight.whileActive(new PassiveClimberPowerCommand()); // Have the climber keeping itself up when the climber is not being controlled
