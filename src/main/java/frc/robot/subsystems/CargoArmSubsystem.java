@@ -7,8 +7,11 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -54,6 +57,12 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
     // Used to invert the encoder sensor phase WIP
     RobotMap.CARGO_ARM_MOTOR.setSensorPhase(true);
+
+    RobotMap.CARGO_ARM_MOTOR.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+    RobotMap.CARGO_ARM_MOTOR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+
+    RobotMap.CARGO_ARM_MOTOR.configSetParameter(ParamEnum.eClearPositionOnLimitR, 0, 0, 0, 0);
+    RobotMap.CARGO_ARM_MOTOR.configSetParameter(ParamEnum.eClearPositionOnLimitF, 1, 0, 0, 0);
   }
 
   @Override
@@ -102,19 +111,16 @@ public class CargoArmSubsystem extends PIDSubsystem {
   }
 
   public boolean getTopSwitch() {
-    // return
-    // RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
-    // gives the status of the top limit switch (true is pressed, false is not
-    // pressed)
-    return !RobotMap.ARM_LIMIT_SWITCH_TOP.get();
+    return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
+    // gives the status of the top limit switch (true is pressed, false is not pressed)
+    // return !RobotMap.ARM_LIMIT_SWITCH_TOP.get();
   }
 
   public boolean getBottomSwitch() {
-    // return
-    // RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
+    return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
     // gives the status of the bottom limit switch (true is pressed, false is not
     // pressed)
-    return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();
+    // return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();
   }
 
   public void resetEncoder() {

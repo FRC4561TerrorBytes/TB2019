@@ -48,6 +48,7 @@ public class OI {
   Button lButton2 = new JoystickButton(RobotMap.LEFT_STICK, 2); // Cargo outtake (slow)
   Button lButton3 = new JoystickButton(RobotMap.LEFT_STICK, 3); // Auto Align
   Button lButton4 = new JoystickButton(RobotMap.LEFT_STICK, 4); // Cargo outtake (fast)
+  Button lButton5 = new JoystickButton(RobotMap.LEFT_STICK, 5);
   Button rButton1 = new JoystickButton(RobotMap.RIGHT_STICK, 1); // Cargo intake in.
   Button rButton2 = new JoystickButton(RobotMap.RIGHT_STICK, 2); // Invert drive
   Button rButton3 = new JoystickButton(RobotMap.RIGHT_STICK, 3); // Hatch extend/retract.
@@ -102,11 +103,12 @@ public class OI {
     triggerXboxRight.whenActive(new ReleaseCargoCommand()); // When held cargo intakes.
     triggerXboxRight.whenInactive(new StopCargoCommand()); // when the trigger is inactive, or not held, stop the cargo intake
     buttonXboxA.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_BOT_LOC)); // when the A button is clicked, move the cargo arm to the bottom location.
-    buttonXboxB.whenPressed(new CargoArmRocketPosCommand()); // when the B button is clicked, move the cargo arm to the rocket level one location.
-    buttonXboxX.whenPressed(new CargoArmCargoShipPosCommand()); // when the X button is clicked, move the cargo arm to the cargo location.
+    buttonXboxB.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_ROCKET_LOC)); // when the B button is clicked, move the cargo arm to the rocket level one location.
+    buttonXboxX.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_CARGO_LOC)); // when the X button is clicked, move the cargo arm to the cargo location.
     buttonXboxY.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_TOP_LOC)); // when the Y button is clicked, move the cargo arm to the top, or storage, location.
     xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
     xboxStickRight.whileActive(new PassiveClimberPowerCommand()); // Have the climber keeping itself up when the climber is not being controlled
-    driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
+    // driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
+    lButton5.whenPressed(new DriveStraightCommand());
   }
 }
