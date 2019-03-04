@@ -48,7 +48,6 @@ public class OI {
   Button lButton2 = new JoystickButton(RobotMap.LEFT_STICK, 2); // Cargo outtake (slow)
   Button lButton3 = new JoystickButton(RobotMap.LEFT_STICK, 3); // Auto Align
   Button lButton4 = new JoystickButton(RobotMap.LEFT_STICK, 4); // Cargo outtake (fast)
-  Button lButton5 = new JoystickButton(RobotMap.LEFT_STICK, 5);
   Button rButton1 = new JoystickButton(RobotMap.RIGHT_STICK, 1); // Cargo intake in.
   Button rButton2 = new JoystickButton(RobotMap.RIGHT_STICK, 2); // Invert drive
   Button rButton3 = new JoystickButton(RobotMap.RIGHT_STICK, 3); // Hatch extend/retract.
@@ -108,7 +107,6 @@ public class OI {
     buttonXboxY.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_TOP_LOC)); // when the Y button is clicked, move the cargo arm to the top, or storage, location.
     xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
     xboxStickRight.whileActive(new PassiveClimberPowerCommand()); // Have the climber keeping itself up when the climber is not being controlled
-    // driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
-    lButton5.whenPressed(new DriveStraightCommand());
+    driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
   }
 }

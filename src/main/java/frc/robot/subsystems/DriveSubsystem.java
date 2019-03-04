@@ -34,7 +34,6 @@ public class DriveSubsystem extends Subsystem {
 	
 	public DriveSubsystem() {
 		// Seting differentialDrive object to control the motor groups
-		RobotMap.BACK_RIGHT_MOTOR.setInverted(false);
 		differentialDrive = new DifferentialDrive(RobotMap.LEFT_SIDE_MOTOR_GROUP, RobotMap.RIGHT_SIDE_MOTOR_GROUP);
 	}
 	

@@ -7,11 +7,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
-import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,10 +35,9 @@ public class CargoArmSubsystem extends PIDSubsystem {
     //Setup sensors
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
-    RobotMap.CARGO_ARM_MOTOR.config_kP(0, 30);
+    RobotMap.CARGO_ARM_MOTOR.config_kP(0, 1);
     RobotMap.CARGO_ARM_MOTOR.config_kI(0, 0);
     RobotMap.CARGO_ARM_MOTOR.config_kD(0, 0);
-    RobotMap.CARGO_ARM_MOTOR.selectProfileSlot(0, 0);
 
     this.resetEncoder();
     // Make it so that the PID will recognize that it has upper and lower limits
@@ -56,13 +52,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(absolutePosition);
 
     // Used to invert the encoder sensor phase WIP
-    RobotMap.CARGO_ARM_MOTOR.setSensorPhase(true);
-
-    RobotMap.CARGO_ARM_MOTOR.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-    RobotMap.CARGO_ARM_MOTOR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-
-    RobotMap.CARGO_ARM_MOTOR.configSetParameter(ParamEnum.eClearPositionOnLimitR, 0, 0, 0, 0);
-    RobotMap.CARGO_ARM_MOTOR.configSetParameter(ParamEnum.eClearPositionOnLimitF, 1, 0, 0, 0);
+    RobotMap.CARGO_ARM_MOTOR.setSensorPhase(false);
   }
 
   @Override
@@ -111,16 +101,19 @@ public class CargoArmSubsystem extends PIDSubsystem {
   }
 
   public boolean getTopSwitch() {
-    return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
-    // gives the status of the top limit switch (true is pressed, false is not pressed)
-    // return !RobotMap.ARM_LIMIT_SWITCH_TOP.get();
+    // return
+    // RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
+    // gives the status of the top limit switch (true is pressed, false is not
+    // pressed)
+    return !RobotMap.ARM_LIMIT_SWITCH_TOP.get();
   }
 
   public boolean getBottomSwitch() {
-    return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
+    // return
+    // RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
     // gives the status of the bottom limit switch (true is pressed, false is not
     // pressed)
-    // return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();
+    return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();
   }
 
   public void resetEncoder() {
