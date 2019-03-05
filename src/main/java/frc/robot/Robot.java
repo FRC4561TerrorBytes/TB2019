@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
     drivetrain = new DriveSubsystem();
     oi = new OI();
     RobotMap.navx.reset();
-    //cargoArmSubsystem.resetEncoder();
+    cargoArmSubsystem.resetEncoder();
     networkTableInstance.startServer();
     networkTable = networkTableInstance.getTable("networkTable");
     // start cameras and configure settings

@@ -35,6 +35,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     //Setup sensors
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
+    // Set PID values for Motion Magic.
     RobotMap.CARGO_ARM_MOTOR.config_kP(0, 1);
     RobotMap.CARGO_ARM_MOTOR.config_kI(0, 0);
     RobotMap.CARGO_ARM_MOTOR.config_kD(0, 0);
@@ -52,7 +53,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(absolutePosition);
 
     // Used to invert the encoder sensor phase WIP
-    RobotMap.CARGO_ARM_MOTOR.setSensorPhase(false);
+    RobotMap.CARGO_ARM_MOTOR.setSensorPhase(true); // TODO: Should be set as false on robot (0 to 9000 is true and 0 to -9000 is false)
   }
 
   @Override
