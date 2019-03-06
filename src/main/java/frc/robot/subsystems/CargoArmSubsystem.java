@@ -31,7 +31,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     /* values: P,I,D*/ 
     /* Delta Values: 4, 0.0055, 1023, 3.41*/
     //0.0005, 0.0, 0.0005
-    super("CargoArmSubsystem", 0.0005, 0.0, 0.0005);
+    super("CargoArmSubsystem", 0.0005, 0.0, 0.003);
     //Setup sensors
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
@@ -39,6 +39,8 @@ public class CargoArmSubsystem extends PIDSubsystem {
     RobotMap.CARGO_ARM_MOTOR.config_kP(0, 1);
     RobotMap.CARGO_ARM_MOTOR.config_kI(0, 0);
     RobotMap.CARGO_ARM_MOTOR.config_kD(0, 0);
+
+    RobotMap.CARGO_ARM_MOTOR.configOpenloopRamp(.5);
 
     this.resetEncoder();
     // Make it so that the PID will recognize that it has upper and lower limits
@@ -53,7 +55,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(absolutePosition);
 
     // Used to invert the encoder sensor phase WIP
-    RobotMap.CARGO_ARM_MOTOR.setSensorPhase(true); // TODO: Should be set as false on robot (0 to 9000 is true and 0 to -9000 is false)
+    RobotMap.CARGO_ARM_MOTOR.setSensorPhase(true); // TODO: Should be set as false on robot, true on test platform.
   }
 
   @Override
