@@ -82,7 +82,8 @@ public class RobotMap {
   public static final int ARM_BOT_LOC = -9000;
   public static final int ARM_TOP_LOC = 0;
   public static final int ARM_CARGO_LOC = -1500;
-  public static final int ARM_ROCKET_LOC = -7200;
+  public static final int ARM_ROCKET_LOC = -6800;
+  public static final int ARM_DEPOT_LOC = -8000;
 
   // Ski solenoid ports
   private static final int SKI_PORT = 4; //TODO: change the numbers
