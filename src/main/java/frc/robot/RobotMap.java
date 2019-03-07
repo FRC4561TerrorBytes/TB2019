@@ -45,7 +45,7 @@ public class RobotMap {
   public static final boolean PIXY_DRIVE_TOGGLE = true; //make true if you want to use pixy guidance
   
   // Toggle for using one camera (false) or two cameras (true)
-  public static final boolean TWO_CAMERAS = false;
+  public static final boolean TWO_CAMERAS = true;
 
   // Robot control loop frequency, in seconds
   public static final double ROBOT_CONTROL_LOOP_INTERVAL = 0.01666666667;
