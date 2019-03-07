@@ -85,6 +85,13 @@ public class CargoArmSubsystem extends PIDSubsystem {
     else if (output < -0.4) RobotMap.CARGO_ARM_MOTOR.set(-0.4);
     else RobotMap.CARGO_ARM_MOTOR.set(output);
 
+    // limit the output of the cargo arm when moving where it would be most affected by gravity
+    /*
+    if (RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() > RobotMap.ARM_CARGO_LOC || RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() < RobotMap.ARM_ROCKET_LOC) {
+      RobotMap.CARGO_ARM_MOTOR.set(output / 2);
+    }
+    */
+
     SmartDashboard.putNumber("PID Output", output);
   }
 
@@ -104,19 +111,17 @@ public class CargoArmSubsystem extends PIDSubsystem {
   }
 
   public boolean getTopSwitch() {
-    // return
-    // RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
+    return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
     // gives the status of the top limit switch (true is pressed, false is not
     // pressed)
-    return !RobotMap.ARM_LIMIT_SWITCH_TOP.get();
+    // return !RobotMap.ARM_LIMIT_SWITCH_TOP.get();
   }
 
   public boolean getBottomSwitch() {
-    // return
-    // RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
+    return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
     // gives the status of the bottom limit switch (true is pressed, false is not
     // pressed)
-    return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();
+    //return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();
   }
 
   public void resetEncoder() {

@@ -40,7 +40,7 @@ public class ClimberSubsystem extends Subsystem {
   }
 
   // procides passive power to the climber to keep it from draging on the ground
-  // TODO: fix this.
+  // TODO: test this
   public void passivePower() {
     RobotMap.CLIMBER_MOTOR_GROUP.set(0.1);
   }

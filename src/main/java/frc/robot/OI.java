@@ -7,9 +7,32 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.buttons.*;
-import frc.robot.commands.*;
-import frc.robot.triggers.*;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.POVButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
+import frc.robot.commands.CargoArmManualCommand;
+import frc.robot.commands.DriveStraightCommand;
+import frc.robot.commands.DriveStraightPixyInputCommand;
+import frc.robot.commands.DrivetrainPIDToggleCommand;
+import frc.robot.commands.HatchIntakeCommand;
+import frc.robot.commands.HatchOuttakeCommand;
+import frc.robot.commands.HatchPositionCommand;
+import frc.robot.commands.IntakeCargoCommand;
+import frc.robot.commands.InvertDriveCommand;
+import frc.robot.commands.PassiveClimberPowerCommand;
+import frc.robot.commands.ReleaseCargoCommand;
+import frc.robot.commands.ReleaseCargoSlowCommand;
+import frc.robot.commands.SetCargoArmPosCommand;
+import frc.robot.commands.SkiOutCommand;
+import frc.robot.commands.StopCargoCommand;
+import frc.robot.commands.SwitchToCamera1Command;
+import frc.robot.commands.SwitchToCamera2Command;
+import frc.robot.triggers.CargoArmTrigger;
+import frc.robot.triggers.CargoIntakeTrigger;
+import frc.robot.triggers.CargoOuttakeTrigger;
+import frc.robot.triggers.ClimberTrigger;
+import frc.robot.triggers.DriveStraightTrigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -51,6 +74,7 @@ public class OI {
   Button rButton1 = new JoystickButton(RobotMap.RIGHT_STICK, 1); // Cargo intake in.
   Button rButton2 = new JoystickButton(RobotMap.RIGHT_STICK, 2); // Invert drive
   Button rButton3 = new JoystickButton(RobotMap.RIGHT_STICK, 3); // Hatch extend/retract.
+  Button rButton5 = new JoystickButton(RobotMap.RIGHT_STICK, 5); // Disable Drivetrain PID
   Button rButton14 = new JoystickButton(RobotMap.RIGHT_STICK, 14); // Switch to Camera 1
   Button rButton8 = new JoystickButton(RobotMap.RIGHT_STICK, 8); // Switch to camera 2
   Button buttonXboxA = new JoystickButton(RobotMap.GAME_PAD, 1); // Arm at intake/bottom location
@@ -90,6 +114,7 @@ public class OI {
     rButton2.whenPressed(new InvertDriveCommand()); // invert the front of the robot
     rButton3.whileHeld(new HatchIntakeCommand(true)); // While held Hatchintake pushes out.
     rButton3.whenReleased(new HatchIntakeCommand(false)); // When released Hatchintake pulls in.
+    rButton5.whenPressed(new DrivetrainPIDToggleCommand());
     rButton8.whenPressed(new SwitchToCamera1Command()); // Switch to viewing camera1
     rButton14.whenPressed(new SwitchToCamera2Command()); // Switch to viewing camera2
     buttonXboxLB.whileHeld(new SkiOutCommand(true)); // When pressed Ski comes out.
@@ -111,6 +136,10 @@ public class OI {
     buttonXboxStart.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_DEPOT_LOC));
     xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
     xboxStickRight.whileActive(new PassiveClimberPowerCommand()); // Have the climber keeping itself up when the climber is not being controlled
-    driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
+    if (RobotMap.DRIVE_PID_TOGGLE) {
+      driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
+    } else {
+
+    }
   }
 }

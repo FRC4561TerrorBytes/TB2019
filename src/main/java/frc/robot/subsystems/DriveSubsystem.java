@@ -109,4 +109,10 @@ public class DriveSubsystem extends Subsystem {
 	public double getYawAngle() {
 		return RobotMap.navx.getYaw();
 	}	
+	
+	// Toggle Drivetrian PID
+	public void togglePID() {
+		RobotMap.DRIVE_PID_TOGGLE = !RobotMap.DRIVE_PID_TOGGLE;
+	}
+	
 }

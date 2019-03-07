@@ -37,6 +37,9 @@ public class RobotMap {
 
   // Drive Mode
   public static final int DRIVE_MODE = 1; // 1 is curve drive, 0 is tank drive
+
+  // Drivetrain toggle
+  public static boolean DRIVE_PID_TOGGLE = true; // -1 is disabled, 1 is enabled
   
   // Pixy/Vision toggle Booleans
   public static final boolean PIXY_DRIVE_TOGGLE = true; //make true if you want to use pixy guidance
@@ -86,7 +89,7 @@ public class RobotMap {
   public static final int ARM_DEPOT_LOC = -8000;
 
   // Ski solenoid ports
-  private static final int SKI_PORT = 4; //TODO: change the numbers
+  private static final int SKI_PORT = 4;
 
   // Infrared Sensor port
   private static final int INFRARED_PORT = 3;
