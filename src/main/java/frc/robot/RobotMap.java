@@ -121,7 +121,7 @@ public class RobotMap {
   public static final Solenoid HATCH_OUTTAKE_SOLENOID = new Solenoid(INTAKE_OUT_PORT);
 
   // Climber subsystem variables
-  private static final WPI_TalonSRX LEFT_CLIMBER_MOTOR = new WPI_TalonSRX(CLIMBER_LEFT_PORT);
+  public static final WPI_TalonSRX LEFT_CLIMBER_MOTOR = new WPI_TalonSRX(CLIMBER_LEFT_PORT);
   private static final WPI_TalonSRX RIGHT_CLIMBER_MOTOR = new WPI_TalonSRX(CLIMBER_RIGHT_PORT);
 
   // Ski solenoids objects

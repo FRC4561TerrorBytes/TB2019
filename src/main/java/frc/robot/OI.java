@@ -7,32 +7,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.POVButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
-import frc.robot.commands.CargoArmManualCommand;
-import frc.robot.commands.DriveStraightCommand;
-import frc.robot.commands.DriveStraightPixyInputCommand;
-import frc.robot.commands.DrivetrainPIDToggleCommand;
-import frc.robot.commands.HatchIntakeCommand;
-import frc.robot.commands.HatchOuttakeCommand;
-import frc.robot.commands.HatchPositionCommand;
-import frc.robot.commands.IntakeCargoCommand;
-import frc.robot.commands.InvertDriveCommand;
-import frc.robot.commands.PassiveClimberPowerCommand;
-import frc.robot.commands.ReleaseCargoCommand;
-import frc.robot.commands.ReleaseCargoSlowCommand;
-import frc.robot.commands.SetCargoArmPosCommand;
-import frc.robot.commands.SkiOutCommand;
-import frc.robot.commands.StopCargoCommand;
-import frc.robot.commands.SwitchToCamera1Command;
-import frc.robot.commands.SwitchToCamera2Command;
-import frc.robot.triggers.CargoArmTrigger;
-import frc.robot.triggers.CargoIntakeTrigger;
-import frc.robot.triggers.CargoOuttakeTrigger;
-import frc.robot.triggers.ClimberTrigger;
-import frc.robot.triggers.DriveStraightTrigger;
+import edu.wpi.first.wpilibj.buttons.*;
+import frc.robot.commands.*;
+import frc.robot.triggers.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -93,6 +70,8 @@ public class OI {
   Trigger xboxStickLeft = new CargoArmTrigger(); // xbox left joystick is active when moved out of deadzone
   Trigger xboxStickRight = new ClimberTrigger(); // xbox right joystick is active when moved out of deadzone
   Trigger driveStraight = new DriveStraightTrigger(); // left joystick is active when moved out of deadzone
+  Trigger topLimSwitch = new TopLimitSwitchTrigger();
+  Trigger botLimSwitch = new BotLimitSwitchTrigger();
 
   public OI() {
     // while the button is pressed and RobotMap.PIXY_DRIVE_TOGGLE is true, drive
@@ -119,8 +98,10 @@ public class OI {
     rButton14.whenPressed(new SwitchToCamera2Command()); // Switch to viewing camera2
     buttonXboxLB.whileHeld(new SkiOutCommand(true)); // When pressed Ski comes out.
     buttonXboxRB.whileHeld(new SkiOutCommand(false)); // When pressed Ski comes in.
-    // buttonXboxLB.whenPressed(new SetEncoderCommand());
-    // buttonXboxRB.whenPressed(new ResetEncoderCommand());
+    buttonXboxLB.whenPressed(new SetEncoderCommand());
+    buttonXboxRB.whenPressed(new ResetEncoderCommand());
+    topLimSwitch.whileActive(new SetEncoderCommand());
+    botLimSwitch.whileActive(new ResetEncoderCommand());
     buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
     buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
     buttonXboxLeft.whenPressed(new HatchIntakeCommand(true)); // When pressed hatch intake goes out.

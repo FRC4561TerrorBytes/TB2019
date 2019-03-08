@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
     drivetrain = new DriveSubsystem();
     oi = new OI();
     RobotMap.navx.reset();
-    //cargoArmSubsystem.resetEncoder();
+    cargoArmSubsystem.resetEncoder();
     networkTableInstance.startServer();
     networkTable = networkTableInstance.getTable("networkTable");
     // start cameras and configure settings
@@ -101,21 +101,24 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("PixyAngle", networkTable.getEntry("pixyAngle").getDouble(4561));
     SmartDashboard.putNumber("X-Center", networkTable.getEntry("xcenter").getDouble(0));
     SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(0));
-    //numbers retrived from robot
-    SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
+    // numbers retrived from robot
+    // SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
     SmartDashboard.putNumber("CargoArmEncoderPos", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
-    SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
-    SmartDashboard.putBoolean("Arm Bottom Limit Switch", Robot.cargoArmSubsystem.getBottomSwitch());
-    SmartDashboard.putBoolean("Arm Top Limit Switch", Robot.cargoArmSubsystem.getTopSwitch());
+    // SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
+    SmartDashboard.putBoolean("Arm Bottom Limit Switch", RobotMap.LEFT_CLIMBER_MOTOR.getSensorCollection().isRevLimitSwitchClosed());
+    SmartDashboard.putBoolean("Arm Top Limit Switch", RobotMap.LEFT_CLIMBER_MOTOR.getSensorCollection().isFwdLimitSwitchClosed());
+    SmartDashboard.putNumber("Arm Velocity", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorVelocity());
     //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();
 
     // Reset the encoder value to the right position when the according limit switch is pressed
+    /*
     if (Robot.cargoArmSubsystem.getTopSwitch()) {
       Robot.cargoArmSubsystem.resetEncoder();
     }
     if (Robot.cargoArmSubsystem.getBottomSwitch()) {
       Robot.cargoArmSubsystem.setEncoder();
     }
+    */
   }
 
   /**
