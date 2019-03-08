@@ -43,6 +43,9 @@ public class RobotMap {
 
   // Climber toggle
   public static boolean CLIMBER_TOGGLE = true; // true is dissabled(passive is on) false is enabled(can control climber)
+
+  // Hatch Intake toggle
+  public static boolean HATCH_TOGGLE = false; // false is retracted, true is extended
   
   // Pixy/Vision toggle Booleans
   public static final boolean PIXY_DRIVE_TOGGLE = true; //make true if you want to use pixy guidance

@@ -92,8 +92,7 @@ public class OI {
     rButton1.whileHeld(new IntakeCargoCommand()); // While held cargo intakes.
     rButton1.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
     rButton2.whenPressed(new InvertDriveCommand()); // invert the front of the robot
-    rButton3.whileHeld(new HatchIntakeCommand(true)); // While held Hatchintake pushes out.
-    rButton3.whenReleased(new HatchIntakeCommand(false)); // When released Hatchintake pulls in.
+    rButton3.whenPressed(new HatchIntakeCommand()); // When pressed, change hatch intake position
     rButton5.whenPressed(new DrivetrainPIDToggleCommand());
     rButton8.whenPressed(new SwitchToCamera1Command()); // Switch to viewing camera1
     rButton14.whenPressed(new SwitchToCamera2Command()); // Switch to viewing camera2
@@ -105,8 +104,8 @@ public class OI {
     botLimSwitch.whileActive(new ResetEncoderCommand());
     buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
     buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
-    buttonXboxLeft.whenPressed(new HatchIntakeCommand(true)); // When pressed hatch intake goes out.
-    buttonXboxRight.whenPressed(new HatchIntakeCommand(false)); // When pressed hatch intake comes in.
+    buttonXboxLeft.whenPressed(new HatchIntakeXboxCommand(true)); // When pressed hatch intake goes out.
+    buttonXboxRight.whenPressed(new HatchIntakeXboxCommand(false)); // When pressed hatch intake comes in.
     triggerXboxLeft.whenActive(new IntakeCargoCommand()); // When held cargo outtakes.
     triggerXboxLeft.whenInactive(new StopCargoCommand()); // when the trigger is inactive, or not held, stop the cargo intake
     triggerXboxRight.whenActive(new ReleaseCargoCommand()); // When held cargo intakes.
