@@ -12,6 +12,8 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class DriveStraightPixyInputCommand extends Command {
+  double prevPixyAngle = 0;
+  double prevVisionAngle = 0;
   public DriveStraightPixyInputCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -29,9 +31,7 @@ public class DriveStraightPixyInputCommand extends Command {
   protected void execute() {
     RobotMap.navx.reset();
     double pixyAngle = Robot.networkTable.getEntry("pixyAngle").getDouble(0);
-    double prevPixyAngle = 0;
     double visionAngle = Robot.networkTable.getEntry("centerangle").getDouble(0);
-    double prevVisionAngle = 0;
     if(Robot.networkTable.getEntry("validleft").getBoolean(false)&&Robot.networkTable.getEntry("validright").getBoolean(false)){
       //If the robot is not going the right way, go the other direction
       //System.out.println("target acquired");
