@@ -108,6 +108,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Arm Bottom Limit Switch", RobotMap.LEFT_CLIMBER_MOTOR.getSensorCollection().isRevLimitSwitchClosed());
     SmartDashboard.putBoolean("Arm Top Limit Switch", RobotMap.LEFT_CLIMBER_MOTOR.getSensorCollection().isFwdLimitSwitchClosed());
     SmartDashboard.putNumber("Arm Velocity", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorVelocity());
+    SmartDashboard.putBoolean("Climber Toggle", RobotMap.CLIMBER_TOGGLE);
     //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();
 
     // Reset the encoder value to the right position when the according limit switch is pressed

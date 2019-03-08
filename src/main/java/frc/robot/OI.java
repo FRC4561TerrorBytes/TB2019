@@ -61,6 +61,7 @@ public class OI {
   Button buttonXboxLB = new JoystickButton(RobotMap.GAME_PAD, 5); // Deploy skis.
   Button buttonXboxRB = new JoystickButton(RobotMap.GAME_PAD, 6); // Retract skis.
   Button buttonXboxStart = new JoystickButton(RobotMap.GAME_PAD, 8); // Depot Arm Position.
+  Button buttonXboxRS = new JoystickButton(RobotMap.GAME_PAD, 10);
   POVButton buttonXboxUp = new POVButton(RobotMap.GAME_PAD, 0); // Hatch mechanism up.
   POVButton buttonXboxDown = new POVButton(RobotMap.GAME_PAD, 180); // Hatch mechanism down.
   POVButton buttonXboxLeft = new POVButton(RobotMap.GAME_PAD, 270); // Extend Hatch mechanism.
@@ -98,8 +99,8 @@ public class OI {
     rButton14.whenPressed(new SwitchToCamera2Command()); // Switch to viewing camera2
     buttonXboxLB.whileHeld(new SkiOutCommand(true)); // When pressed Ski comes out.
     buttonXboxRB.whileHeld(new SkiOutCommand(false)); // When pressed Ski comes in.
-    buttonXboxLB.whenPressed(new SetEncoderCommand());
-    buttonXboxRB.whenPressed(new ResetEncoderCommand());
+    // buttonXboxLB.whenPressed(new SetEncoderCommand());
+    // buttonXboxRB.whenPressed(new ResetEncoderCommand());
     topLimSwitch.whileActive(new SetEncoderCommand());
     botLimSwitch.whileActive(new ResetEncoderCommand());
     buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
@@ -114,13 +115,10 @@ public class OI {
     buttonXboxB.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_ROCKET_LOC)); // when the B button is clicked, move the cargo arm to the rocket level one location.
     buttonXboxX.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_CARGO_LOC)); // when the X button is clicked, move the cargo arm to the cargo location.
     buttonXboxY.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_TOP_LOC)); // when the Y button is clicked, move the cargo arm to the top, or storage, location.
-    buttonXboxStart.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_DEPOT_LOC));
+    buttonXboxStart.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_DEPOT_LOC)); // When the START button is pressed, move the cargo arm to the Depot loction.
+    buttonXboxRS.whenPressed(new ToggleClimberCommand()); // When the right stick is pressed, toggle on/off Climber toggle.
     xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
-    xboxStickRight.whileActive(new PassiveClimberPowerCommand()); // Have the climber keeping itself up when the climber is not being controlled
-    if (RobotMap.DRIVE_PID_TOGGLE) {
-      driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
-    } else {
-
-    }
+    if (RobotMap.CLIMBER_TOGGLE) xboxStickRight.whileActive(new PassiveClimberPowerCommand()); // Have the climber keeping itself up when the climber is not being controlled
+    if (RobotMap.DRIVE_PID_TOGGLE) driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
   }
 }

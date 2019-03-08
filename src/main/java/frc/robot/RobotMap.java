@@ -39,7 +39,10 @@ public class RobotMap {
   public static final int DRIVE_MODE = 1; // 1 is curve drive, 0 is tank drive
 
   // Drivetrain toggle
-  public static boolean DRIVE_PID_TOGGLE = true; // -1 is disabled, 1 is enabled
+  public static boolean DRIVE_PID_TOGGLE = true; // false is disabled, true is enabled
+
+  // Climber toggle
+  public static boolean CLIMBER_TOGGLE = true; // true is dissabled(passive is on) false is enabled(can control climber)
   
   // Pixy/Vision toggle Booleans
   public static final boolean PIXY_DRIVE_TOGGLE = true; //make true if you want to use pixy guidance
