@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -36,15 +35,9 @@ public class CargoArmManualCommand extends Command {
     // Reset the encoder value to the right position when the according limit switch is pressed
     if (Robot.cargoArmSubsystem.getTopSwitch()) {
       Robot.cargoArmSubsystem.resetEncoder();
-      SmartDashboard.putString("Top Limit Switch Pressed:", "Yes");
-    } else {
-      SmartDashboard.putString("Top Limit Switch Pressed:", "No");
     }
     if (Robot.cargoArmSubsystem.getBottomSwitch()) {
       Robot.cargoArmSubsystem.setEncoder();
-      SmartDashboard.putString("Bottom Limit Switch Pressed:", "Yes");
-    } else {
-      SmartDashboard.putString("Bottom Limit Switch Pressed:", "No");
     }
   }
 

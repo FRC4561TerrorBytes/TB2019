@@ -53,6 +53,7 @@ public class OI {
   Button rButton3 = new JoystickButton(RobotMap.RIGHT_STICK, 3); // Hatch extend/retract.
   Button rButton5 = new JoystickButton(RobotMap.RIGHT_STICK, 5); // Disable Drivetrain PID
   Button rButton14 = new JoystickButton(RobotMap.RIGHT_STICK, 14); // Switch to Camera 1
+  Button rButton16 = new JoystickButton(RobotMap.RIGHT_STICK, 16); // Score cargo on rocket lvl 2
   Button rButton8 = new JoystickButton(RobotMap.RIGHT_STICK, 8); // Switch to camera 2
   POVButton lPovLeft = new POVButton(RobotMap.LEFT_STICK, 270); // Extend Hatch mechanism.
   POVButton lPovRight = new POVButton(RobotMap.LEFT_STICK, 90); // Retract Hatch mechanism.
@@ -117,6 +118,7 @@ public class OI {
     buttonXboxX.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_CARGO_LOC)); // when the X button is clicked, move the cargo arm to the cargo location.
     buttonXboxY.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_TOP_LOC)); // when the Y button is clicked, move the cargo arm to the top, or storage, location.
     buttonXboxStart.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_DEPOT_LOC)); // When the START button is pressed, move the cargo arm to the Depot loction.
+    rButton16.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_ROCKET_2_LOC)); // When the START button is pressed, move the cargo arm to the Depot loction.
     buttonXboxRS.whenPressed(new ToggleClimberCommand()); // When the right stick is pressed, toggle on/off Climber toggle.
     xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
     if (RobotMap.CLIMBER_TOGGLE) xboxStickRight.whileActive(new PassiveClimberPowerCommand()); // Have the climber keeping itself up when the climber is not being controlled

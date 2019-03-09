@@ -51,6 +51,6 @@ public class HatchIntakeSubsystem extends Subsystem {
     boolean hatchDetected = RobotMap.HATCH_DETECTOR.get();
 
     // Display on SmartDashboard on whether Super Suit (hatch) is there or not
-    SmartDashboard.putBoolean("Hatch Present:", !hatchDetected);
+    //SmartDashboard.putBoolean("Hatch Present:", !hatchDetected);
   }
 }

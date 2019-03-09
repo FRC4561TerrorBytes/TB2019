@@ -7,9 +7,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ClimberManualCommand;
 
@@ -26,7 +24,6 @@ public class ClimberSubsystem extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new ClimberManualCommand());
-    SmartDashboard.putNumber("Controller Right Y Axis", RobotMap.GAME_PAD.getY(Hand.kRight));
   }
 
   // This method makes the motors on both sides make the robot ascend
@@ -40,7 +37,6 @@ public class ClimberSubsystem extends Subsystem {
   }
 
   // Procides passive power to the climber to keep it from draging on the ground
-  // TODO: test this
   public void passivePower() {
     RobotMap.CLIMBER_MOTOR_GROUP.set(0.1);
   }

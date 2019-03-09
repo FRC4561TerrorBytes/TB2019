@@ -8,7 +8,6 @@
  * TODO:
  * Test drivetain PID toggle
  * Test cargo arm positional output restraints with velocity
- * Find proper values for the presets
  */
 
 package frc.robot;
@@ -73,7 +72,7 @@ public class Robot extends TimedRobot {
       camera1.setFPS(10);
       camera2.setFPS(10);
       camera1.setBrightness(25);
-      camera2.setBrightness(20);
+      camera2.setBrightness(25);
       camera1.setExposureManual(10);
       camera2.setExposureManual(10);
       camera1.setWhiteBalanceManual(10);
@@ -112,8 +111,9 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
     SmartDashboard.putBoolean("Arm Bottom Limit Switch", RobotMap.BACK_RIGHT_MOTOR.getSensorCollection().isRevLimitSwitchClosed());
     SmartDashboard.putBoolean("Arm Top Limit Switch", RobotMap.BACK_RIGHT_MOTOR.getSensorCollection().isFwdLimitSwitchClosed());
-    SmartDashboard.putNumber("Arm Velocity", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("Arm Velocity", RobotMap.CARGO_ARM_MOTOR.get());
     SmartDashboard.putBoolean("Climber Toggle", RobotMap.CLIMBER_TOGGLE);
+    SmartDashboard.putBoolean("DriveTrain PID Toggle", RobotMap.DRIVE_PID_TOGGLE);
     //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();
 
     // Reset the encoder value to the right position when the according limit switch is pressed

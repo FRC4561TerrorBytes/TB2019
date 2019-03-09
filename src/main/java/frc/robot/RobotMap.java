@@ -90,9 +90,10 @@ public class RobotMap {
   // Max/Min arm encoder positions/limit switch locations TODO: find real values
   public static final int ARM_BOT_LOC = -9000;
   public static final int ARM_TOP_LOC = 0;
-  public static final int ARM_CARGO_LOC = -1500;
-  public static final int ARM_ROCKET_LOC = -6800;
-  public static final int ARM_DEPOT_LOC = -8000;
+  public static final int ARM_CARGO_LOC = -455;
+  public static final int ARM_ROCKET_LOC = -6073;
+  public static final int ARM_DEPOT_LOC = -8394;
+  public static final int ARM_ROCKET_2_LOC = -1856;
 
   // Ski solenoid ports
   private static final int SKI_PORT = 4;
@@ -107,7 +108,6 @@ public class RobotMap {
   // Climber limit switch ports
   private static final int LIMIT_SWITCH_CLIMBER_PORT = 2;
   
-
   // Declraing all Drivetrian TalonSRX
   private static final WPI_TalonSRX FRONT_LEFT_MOTOR = new WPI_TalonSRX(FRONT_LEFT_MOTOR_PORT);
   private static final WPI_TalonSRX FRONT_RIGHT_MOTOR = new WPI_TalonSRX(FRONT_RIGHT_MOTOR_PORT);

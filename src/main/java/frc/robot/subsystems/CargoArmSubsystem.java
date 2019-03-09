@@ -86,11 +86,10 @@ public class CargoArmSubsystem extends PIDSubsystem {
     else RobotMap.CARGO_ARM_MOTOR.set(output);
 
     // limit the output of the cargo arm when moving where it would be most affected by gravity
-    /*
-    if (RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() > RobotMap.ARM_CARGO_LOC && RobotMap.CARGO_ARM_MOTOR.getSelectedSensorVelocity() > 0 || RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() < RobotMap.ARM_ROCKET_LOC && RobotMap.CARGO_ARM_MOTOR.getSelectedSensorVelocity() < 0) {
+    if (RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() > -500 && RobotMap.CARGO_ARM_MOTOR.get() > 0 || 
+    RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() < -8500 && RobotMap.CARGO_ARM_MOTOR.get() < 0) {
       RobotMap.CARGO_ARM_MOTOR.set(output * .5);
     }
-    */
 
     SmartDashboard.putNumber("PID Output", output);
   }
