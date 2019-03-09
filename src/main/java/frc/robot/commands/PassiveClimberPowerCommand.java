@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class PassiveClimberPowerCommand extends Command {
   public PassiveClimberPowerCommand() {
@@ -30,7 +31,7 @@ public class PassiveClimberPowerCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return !RobotMap.CLIMBER_TOGGLE;
   }
 
   // Called once after isFinished returns true

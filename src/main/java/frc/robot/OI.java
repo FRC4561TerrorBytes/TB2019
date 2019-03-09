@@ -94,7 +94,7 @@ public class OI {
     lButton4.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
     rButton1.whileHeld(new IntakeCargoCommand()); // While held cargo intakes.
     rButton1.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
-    rButton2.whenPressed(new InvertDriveCommand()); // invert the front of the robot
+    //rButton2.whenPressed(new InvertDriveCommand()); // invert the front of the robot
     rButton3.whenPressed(new HatchIntakeCommand()); // When pressed, change hatch intake position
     rButton5.whenPressed(new DrivetrainPIDToggleCommand());
     lPovLeft.whenPressed(new SwitchToCamera1Command()); // Switch to viewing camera1
@@ -121,7 +121,8 @@ public class OI {
     rButton16.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_ROCKET_2_LOC)); // When the START button is pressed, move the cargo arm to the Depot loction.
     buttonXboxRS.whenPressed(new ToggleClimberCommand()); // When the right stick is pressed, toggle on/off Climber toggle.
     xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
-    if (RobotMap.CLIMBER_TOGGLE) xboxStickRight.whileActive(new PassiveClimberPowerCommand()); // Have the climber keeping itself up when the climber is not being controlled
+    xboxStickRight.whileActive(new ClimberManualCommand()); // Have the climber keeping itself up when the climber is not being controlled
+    //if (RobotMap.CLIMBER_TOGGLE) xboxStickRight.whenInactive(new PassiveClimberPowerCommand());
     if (RobotMap.DRIVE_PID_TOGGLE) driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
   }
 }

@@ -44,6 +44,9 @@ public class RobotMap {
   // Climber toggle
   public static boolean CLIMBER_TOGGLE = true; // true is dissabled(passive is on) false is enabled(can control climber)
 
+  // Drive invert toggle
+  public static int DRIVE_INVERT_TOGGLE = 1;
+
   // Hatch Intake toggle
   public static boolean HATCH_TOGGLE = false; // false is retracted, true is extended
   
@@ -112,7 +115,7 @@ public class RobotMap {
   private static final WPI_TalonSRX FRONT_LEFT_MOTOR = new WPI_TalonSRX(FRONT_LEFT_MOTOR_PORT);
   private static final WPI_TalonSRX FRONT_RIGHT_MOTOR = new WPI_TalonSRX(FRONT_RIGHT_MOTOR_PORT);
   private static final WPI_TalonSRX MID_LEFT_MOTOR = new WPI_TalonSRX(MID_LEFT_MOTOR_PORT);
-  private static final WPI_TalonSRX MID_RIGHT_MOTOR = new WPI_TalonSRX(MID_RIGHT_MOTOR_PORT); 
+  public static final WPI_TalonSRX MID_RIGHT_MOTOR = new WPI_TalonSRX(MID_RIGHT_MOTOR_PORT); 
   private static final WPI_TalonSRX BACK_LEFT_MOTOR = new WPI_TalonSRX(BOT_LEFT_MOTOR_PORT);
   public static final WPI_TalonSRX BACK_RIGHT_MOTOR = new WPI_TalonSRX(BOT_RIGHT_MOTOR_PORT); // TODO: Fix this.
 

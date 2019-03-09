@@ -24,7 +24,7 @@ public class DriveSubsystem extends Subsystem {
 	
 	// PID Values set for Delta:
 	// double kP = 0.21, kI = 0.6, kD = 0.01375;
-	// Ku: Maximum kP value that gives ocillation
+	// Ku: Maximum kP value tbhat gives ocillation
 	// Tu: Time for full ocillation on the robot
 	// PID Values: kP = 0.6Ku  kI = 1.2Ku/Tu  kD = 3KuTu/40
 	double kP = 0.1, kI = 0.0, kD = 0.0003;
@@ -34,8 +34,9 @@ public class DriveSubsystem extends Subsystem {
 	
 	public DriveSubsystem() {
 		// Seting differentialDrive object to control the motor groups
-		RobotMap.BACK_RIGHT_MOTOR.setInverted(false); // TODO: Fix this.
+		//RobotMap.BACK_RIGHT_MOTOR.setInverted(false); // TODO: Fix this.
 		differentialDrive = new DifferentialDrive(RobotMap.LEFT_SIDE_MOTOR_GROUP, RobotMap.RIGHT_SIDE_MOTOR_GROUP);
+		System.out.println(differentialDrive.isRightSideInverted());
 	}
 	
 	@Override
@@ -55,14 +56,14 @@ public class DriveSubsystem extends Subsystem {
 	public void curvatureDrive() {
 		// Square inputs to curvatureDrive while maintaining sign
 		differentialDrive.curvatureDrive(
-		invertDrive * Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), RobotMap.LEFT_STICK.getY()),
+		RobotMap.DRIVE_INVERT_TOGGLE * Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), RobotMap.LEFT_STICK.getY()),
 		Math.copySign(Math.pow(RobotMap.RIGHT_STICK.getX(), 2), RobotMap.RIGHT_STICK.getX()), 
 		true);
 	}
 	
 	public void invertDrive() {
 		// invert the front of the robot
-		invertDrive *= -1;
+		RobotMap.DRIVE_INVERT_TOGGLE *= -1;
 	}
 	
 	// Test Drivetrain control with XBox Controller. Same as curvatureDrive but instead of joystick inputs, it uses game-pad inputs.

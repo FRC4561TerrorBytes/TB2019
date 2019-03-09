@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class InvertDriveCommand extends Command {
   public InvertDriveCommand() {
@@ -19,6 +20,7 @@ public class InvertDriveCommand extends Command {
   @Override
   protected void initialize() {
     Robot.drivetrain.invertDrive();
+    System.out.println("Inverted: " + RobotMap.DRIVE_INVERT_TOGGLE);
   }
 
   // Called repeatedly when this Command is scheduled to run
