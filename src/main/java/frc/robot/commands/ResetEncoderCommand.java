@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ResetEncoderCommand extends Command {
   public ResetEncoderCommand() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.cargoArmSubsystem);
+    //requires(Robot.cargoArmSubsystem);
   }
 
   // Called just before this Command runs the first time

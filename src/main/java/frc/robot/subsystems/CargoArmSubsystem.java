@@ -55,7 +55,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(absolutePosition);
 
     // Used to invert the encoder sensor phase WIP
-    RobotMap.CARGO_ARM_MOTOR.setSensorPhase(true); // TODO: Should be set as false on robot, true on test platform.
+    RobotMap.CARGO_ARM_MOTOR.setSensorPhase(false); // TODO: Should be set as false on robot, true on test platform.
   }
 
   @Override
@@ -111,14 +111,14 @@ public class CargoArmSubsystem extends PIDSubsystem {
   }
 
   public boolean getTopSwitch() {
-    return RobotMap.LEFT_CLIMBER_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
+    return RobotMap.BACK_RIGHT_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
     // gives the status of the top limit switch (true is pressed, false is not
     // pressed)
     // return !RobotMap.ARM_LIMIT_SWITCH_TOP.get();
   }
 
   public boolean getBottomSwitch() {
-    return RobotMap.LEFT_CLIMBER_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
+    return RobotMap.BACK_RIGHT_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
     // gives the status of the bottom limit switch (true is pressed, false is not
     // pressed)
     //return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();

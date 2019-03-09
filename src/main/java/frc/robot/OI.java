@@ -54,6 +54,8 @@ public class OI {
   Button rButton5 = new JoystickButton(RobotMap.RIGHT_STICK, 5); // Disable Drivetrain PID
   Button rButton14 = new JoystickButton(RobotMap.RIGHT_STICK, 14); // Switch to Camera 1
   Button rButton8 = new JoystickButton(RobotMap.RIGHT_STICK, 8); // Switch to camera 2
+  POVButton lPovLeft = new POVButton(RobotMap.LEFT_STICK, 270); // Extend Hatch mechanism.
+  POVButton lPovRight = new POVButton(RobotMap.LEFT_STICK, 90); // Retract Hatch mechanism.
   Button buttonXboxA = new JoystickButton(RobotMap.GAME_PAD, 1); // Arm at intake/bottom location
   Button buttonXboxB = new JoystickButton(RobotMap.GAME_PAD, 2); // Arm at Cargo Level 1 rocket position.
   Button buttonXboxX = new JoystickButton(RobotMap.GAME_PAD, 3); // Arm at Cargoship position.
@@ -94,8 +96,8 @@ public class OI {
     rButton2.whenPressed(new InvertDriveCommand()); // invert the front of the robot
     rButton3.whenPressed(new HatchIntakeCommand()); // When pressed, change hatch intake position
     rButton5.whenPressed(new DrivetrainPIDToggleCommand());
-    rButton8.whenPressed(new SwitchToCamera1Command()); // Switch to viewing camera1
-    rButton14.whenPressed(new SwitchToCamera2Command()); // Switch to viewing camera2
+    lPovLeft.whenPressed(new SwitchToCamera1Command()); // Switch to viewing camera1
+    lPovRight.whenPressed(new SwitchToCamera2Command()); // Switch to viewing camera2
     buttonXboxLB.whileHeld(new SkiOutCommand(true)); // When pressed Ski comes out.
     buttonXboxRB.whileHeld(new SkiOutCommand(false)); // When pressed Ski comes in.
     // buttonXboxLB.whenPressed(new SetEncoderCommand());
