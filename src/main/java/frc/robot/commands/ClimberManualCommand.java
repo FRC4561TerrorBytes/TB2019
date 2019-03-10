@@ -39,7 +39,7 @@ public class ClimberManualCommand extends Command {
   // It is set to false since the robot does not need to always ascend
   @Override
   protected boolean isFinished() {
-    return RobotMap.CLIMBER_TOGGLE;
+    return false;
   }
 
   // Called once after isFinished returns true

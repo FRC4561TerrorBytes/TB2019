@@ -105,8 +105,8 @@ public class OI {
     // buttonXboxRB.whenPressed(new ResetEncoderCommand());
     topLimSwitch.whileActive(new SetEncoderCommand());
     botLimSwitch.whileActive(new ResetEncoderCommand());
-    buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
-    buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
+    //buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
+    //buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
     buttonXboxLeft.whenPressed(new HatchIntakeXboxCommand(true)); // When pressed hatch intake goes out.
     buttonXboxRight.whenPressed(new HatchIntakeXboxCommand(false)); // When pressed hatch intake comes in.
     triggerXboxLeft.whenActive(new IntakeCargoCommand()); // When held cargo outtakes.
@@ -119,9 +119,9 @@ public class OI {
     buttonXboxY.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_TOP_LOC)); // when the Y button is clicked, move the cargo arm to the top, or storage, location.
     buttonXboxStart.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_DEPOT_LOC)); // When the START button is pressed, move the cargo arm to the Depot loction.
     rButton16.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_ROCKET_2_LOC)); // When the START button is pressed, move the cargo arm to the Depot loction.
-    buttonXboxRS.whenPressed(new ToggleClimberCommand()); // When the right stick is pressed, toggle on/off Climber toggle.
+    //buttonXboxRS.whenPressed(new ToggleClimberCommand()); // When the right stick is pressed, toggle on/off Climber toggle.
     xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
-    xboxStickRight.whileActive(new ClimberManualCommand()); // Have the climber keeping itself up when the climber is not being controlled
+    //xboxStickRight.whileActive(new ClimberManualCommand()); // Have the climber keeping itself up when the climber is not being controlled
     //if (RobotMap.CLIMBER_TOGGLE) xboxStickRight.whenInactive(new PassiveClimberPowerCommand());
     if (RobotMap.DRIVE_PID_TOGGLE) driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
   }
