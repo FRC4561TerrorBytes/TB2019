@@ -86,7 +86,7 @@ public class Robot extends TimedRobot {
       camera1.setBrightness(30);
       camera1.setExposureManual(10);
       camera1.setWhiteBalanceManual(10);
-      //server = CameraServer.getInstance().getServer();
+      server = CameraServer.getInstance().getServer();
     }
   }
 
