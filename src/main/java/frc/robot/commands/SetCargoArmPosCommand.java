@@ -34,8 +34,8 @@ public class SetCargoArmPosCommand extends Command {
   @Override
   protected void execute() {
     // Reset the encoder value to the right position when the according limit switch is pressed
-    if (Robot.cargoArmSubsystem.getTopSwitch()) Robot.cargoArmSubsystem.resetEncoder();
-    if (Robot.cargoArmSubsystem.getBottomSwitch()) Robot.cargoArmSubsystem.setEncoder();
+    if (Robot.cargoArmSubsystem.getTopSwitch()) Robot.cargoArmSubsystem.resetEncoderTop();
+    if (Robot.cargoArmSubsystem.getBottomSwitch()) Robot.cargoArmSubsystem.resetEncoderBot();
   }
 
   // Make this return true when this Command no longer needs to run execute()

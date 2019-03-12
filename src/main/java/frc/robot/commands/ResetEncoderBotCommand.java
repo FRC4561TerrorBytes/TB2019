@@ -10,8 +10,8 @@ import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ResetEncoderCommand extends Command {
-  public ResetEncoderCommand() {
+public class ResetEncoderBotCommand extends Command {
+  public ResetEncoderBotCommand() {
     // Use requires() here to declare subsystem dependencies
     //requires(Robot.cargoArmSubsystem);
   }
@@ -24,7 +24,7 @@ public class ResetEncoderCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoArmSubsystem.resetEncoder();
+    Robot.cargoArmSubsystem.resetEncoderBot();
   }
 
   // Make this return true when this Command no longer needs to run execute()

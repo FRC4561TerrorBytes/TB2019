@@ -34,7 +34,6 @@ public class CargoArmSubsystem extends PIDSubsystem {
     super("CargoArmSubsystem", 0.0005, 0.0, 0.003);
     //Setup sensors
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
     // Set PID values for Motion Magic.
     RobotMap.CARGO_ARM_MOTOR.config_kP(0, 1);
     RobotMap.CARGO_ARM_MOTOR.config_kI(0, 0);
@@ -42,16 +41,16 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
     RobotMap.CARGO_ARM_MOTOR.configOpenloopRamp(.5);
 
-    this.resetEncoder();
+    this.resetEncoderTop();
     // Make it so that the PID will recognize that it has upper and lower limits
     getPIDController().setContinuous(false);
     setInputRange(RobotMap.ARM_BOT_LOC, RobotMap.ARM_TOP_LOC);
     // Set PID max speed
-    setOutputRange(-0.4, 0.4);
+    setOutputRange(-0.4, 0.4); //TODO: Increase maximum output bc Namh said it was too slow
 
     // Synchronise encoder
     int absolutePosition = RobotMap.CARGO_ARM_MOTOR.getSensorCollection().getPulseWidthPosition();
-    absolutePosition &= 0xFFF;
+    absolutePosition &= 0xFFF; //TODO: Ask Vignesh what this does
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(absolutePosition);
 
     // Used to invert the encoder sensor phase WIP
@@ -80,7 +79,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     // Math.cos(angle);
     // getPIDController().setF(feedForward);
 
-    // limit the output of the cargo arm to keep it from slamming around the robot
+    // limit the output of the cargo arm to keep it from slamming around the robot TODO: probably redundant
     if (output > 0.4) RobotMap.CARGO_ARM_MOTOR.set(0.4);
     else if (output < -0.4) RobotMap.CARGO_ARM_MOTOR.set(-0.4);
     else RobotMap.CARGO_ARM_MOTOR.set(output);
@@ -123,12 +122,12 @@ public class CargoArmSubsystem extends PIDSubsystem {
     //return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();
   }
 
-  public void resetEncoder() {
+  public void resetEncoderTop() {
     // Reset the encoder values to 0
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
   }
 
-  public void setEncoder() {
+  public void resetEncoderBot() {
     // Set encoder value to the bottom position
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_BOT_LOC);
   }

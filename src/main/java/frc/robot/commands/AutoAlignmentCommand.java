@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class DriveStraightPixyInputCommand extends Command {
+public class AutoAlignmentCommand extends Command {
   double prevPixyAngle = 0;
   double prevVisionAngle = 0;
-  public DriveStraightPixyInputCommand() {
+  public AutoAlignmentCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.drivetrain);

@@ -36,7 +36,7 @@ public class RobotMap {
   // public static int rangefinderModule = 1;
 
   // Drive Mode
-  public static final int DRIVE_MODE = 1; // 1 is curve drive, 0 is tank drive
+  public static int DRIVE_MODE = 1; // 1 is curve drive, 0 is tank drive
 
   // Drivetrain toggle
   public static boolean DRIVE_PID_TOGGLE = true; // false is disabled, true is enabled

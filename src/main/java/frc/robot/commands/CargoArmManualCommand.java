@@ -34,10 +34,10 @@ public class CargoArmManualCommand extends Command {
     Robot.cargoArmSubsystem.armManual((-Math.copySign(Math.pow(RobotMap.GAME_PAD.getY(Hand.kLeft), 2), RobotMap.GAME_PAD.getY(Hand.kLeft))) * 0.4);
     // Reset the encoder value to the right position when the according limit switch is pressed
     if (Robot.cargoArmSubsystem.getTopSwitch()) {
-      Robot.cargoArmSubsystem.resetEncoder();
+      Robot.cargoArmSubsystem.resetEncoderTop();
     }
     if (Robot.cargoArmSubsystem.getBottomSwitch()) {
-      Robot.cargoArmSubsystem.setEncoder();
+      Robot.cargoArmSubsystem.resetEncoderBot();
     }
   }
 

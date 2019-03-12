@@ -21,11 +21,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.CargoArmSubsystem;
-import frc.robot.subsystems.CargoIntakeSubsystem;
-import frc.robot.subsystems.ClimberSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.HatchIntakeSubsystem;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -59,6 +55,10 @@ public class Robot extends TimedRobot {
     RobotMap.navx.reset();
     //cargoArmSubsystem.resetEncoder();
     networkTableInstance.startServer();
+    /*
+     * All values sent to the robot MUST be sent on
+     * this table (networkTable)
+     */
     networkTable = networkTableInstance.getTable("networkTable");
     // start cameras and configure settings
     if (RobotMap.TWO_CAMERAS) {
@@ -86,7 +86,6 @@ public class Robot extends TimedRobot {
       camera1.setBrightness(30);
       camera1.setExposureManual(10);
       camera1.setWhiteBalanceManual(10);
-      server = CameraServer.getInstance().getServer();
     }
   }
 
@@ -103,8 +102,8 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     // numbers retrieved from raspi
     SmartDashboard.putNumber("PixyAngle", networkTable.getEntry("pixyAngle").getDouble(4561));
-    SmartDashboard.putNumber("X-Center", networkTable.getEntry("xcenter").getDouble(0));
-    SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(0));
+    SmartDashboard.putNumber("X-Center", networkTable.getEntry("xcenter").getDouble(4561));
+    SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(4561));
     // numbers retrived from robot
     // SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
     SmartDashboard.putNumber("CargoArmEncoderPos", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
@@ -121,10 +120,10 @@ public class Robot extends TimedRobot {
 
     // Reset the encoder value to the right position when the according limit switch is pressed
     if (Robot.cargoArmSubsystem.getTopSwitch()) {
-      Robot.cargoArmSubsystem.resetEncoder();
+      Robot.cargoArmSubsystem.resetEncoderTop();
     }
     if (Robot.cargoArmSubsystem.getBottomSwitch()) {
-      Robot.cargoArmSubsystem.setEncoder();
+      Robot.cargoArmSubsystem.resetEncoderBot();
     }
   }
 

@@ -64,7 +64,7 @@ public class OI {
   Button buttonXboxLB = new JoystickButton(RobotMap.GAME_PAD, 5); // Deploy skis.
   Button buttonXboxRB = new JoystickButton(RobotMap.GAME_PAD, 6); // Retract skis.
   Button buttonXboxStart = new JoystickButton(RobotMap.GAME_PAD, 8); // Depot Arm Position.
-  Button buttonXboxRS = new JoystickButton(RobotMap.GAME_PAD, 10);
+  Button buttonXboxRS = new JoystickButton(RobotMap.GAME_PAD, 10); // Climber Toggle (NON-FUNCTIONAL)
   POVButton buttonXboxUp = new POVButton(RobotMap.GAME_PAD, 0); // Hatch mechanism up.
   POVButton buttonXboxDown = new POVButton(RobotMap.GAME_PAD, 180); // Hatch mechanism down.
   POVButton buttonXboxLeft = new POVButton(RobotMap.GAME_PAD, 270); // Extend Hatch mechanism.
@@ -74,22 +74,15 @@ public class OI {
   Trigger xboxStickLeft = new CargoArmTrigger(); // xbox left joystick is active when moved out of deadzone
   Trigger xboxStickRight = new ClimberTrigger(); // xbox right joystick is active when moved out of deadzone
   Trigger driveStraight = new DriveStraightTrigger(); // left joystick is active when moved out of deadzone
-  Trigger topLimSwitch = new TopLimitSwitchTrigger();
-  Trigger botLimSwitch = new BotLimitSwitchTrigger();
+  Trigger topLimSwitch = new TopLimitSwitchTrigger(); // when top limit switch is hit
+  Trigger botLimSwitch = new BotLimitSwitchTrigger(); // when bottom limit switch is hit
 
   public OI() {
-    // while the button is pressed and RobotMap.PIXY_DRIVE_TOGGLE is true, drive
-    // along line, otherwise drive straight based on gyro
-    if (RobotMap.PIXY_DRIVE_TOGGLE) {
-      lButton3.whileHeld(new DriveStraightPixyInputCommand());
-    } else {
-      lButton3.whileHeld(new DriveStraightCommand());
-    }
-
     lButton1.whileHeld(new HatchOuttakeCommand(true)); // While held HatchOuttake pushes out.
     lButton1.whenReleased(new HatchOuttakeCommand(false)); // When released HatchOuttake pulls in.
     lButton2.whileHeld(new ReleaseCargoSlowCommand()); // While held Cargo outtakes slowly.
     lButton2.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
+    lButton3.whileHeld(new AutoAlignmentCommand()); // aligns to target using vision and pixy line tracking TODO: link to rpi code
     lButton4.whileHeld(new ReleaseCargoCommand()); // While held cargo outtakes.
     lButton4.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
     rButton1.whileHeld(new IntakeCargoCommand()); // While held cargo intakes.
@@ -103,8 +96,8 @@ public class OI {
     buttonXboxRB.whileHeld(new SkiOutCommand(false)); // When pressed Ski comes in.
     // buttonXboxLB.whenPressed(new SetEncoderCommand());
     // buttonXboxRB.whenPressed(new ResetEncoderCommand());
-    topLimSwitch.whileActive(new SetEncoderCommand());
-    botLimSwitch.whileActive(new ResetEncoderCommand());
+    topLimSwitch.whileActive(new ResetEncoderBotCommand());
+    botLimSwitch.whileActive(new ResetEncoderTopCommand());
     //buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
     //buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
     buttonXboxLeft.whenPressed(new HatchIntakeXboxCommand(true)); // When pressed hatch intake goes out.
