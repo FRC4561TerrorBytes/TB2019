@@ -12,6 +12,8 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSink;
 import edu.wpi.cscore.VideoSource;
@@ -21,6 +23,13 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.videoio.VideoCapture;
+
 import frc.robot.subsystems.*;
 
 /**
@@ -41,7 +50,13 @@ public class Robot extends TimedRobot {
   public static edu.wpi.first.networktables.NetworkTable networkTable;
   public static UsbCamera camera1;
   public static UsbCamera camera2;
-  public static VideoSink server;
+  CvSink cvSink;
+  CvSource outputStream;
+  Mat source = new Mat();
+  Mat output = new Mat();
+  Point point1 = new Point(0, 0);
+  Point point2 = new Point(20, 20);
+  Scalar scalar = new Scalar(255, 0, 0);
   Command autonomousCommand;
 
   /**
@@ -64,10 +79,13 @@ public class Robot extends TimedRobot {
     if (RobotMap.TWO_CAMERAS) {
       // if we are using to cameras create 2 cameras running at 10 fps
       camera1 = CameraServer.getInstance().startAutomaticCapture();
-      camera2 = CameraServer.getInstance().startAutomaticCapture();
-      camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-      camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-      camera1.setResolution(176, 144);
+      //camera2 = CameraServer.getInstance().startAutomaticCapture();
+      //camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+      //camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+      cvSink = CameraServer.getInstance().getVideo(camera1);
+      outputStream = CameraServer.getInstance().putVideo("Cross-Hair cam", 176, 144);
+      cvSink.grabFrame(source);
+      /*camera1.setResolution(176, 144);
       camera2.setResolution(176, 144);
       camera1.setFPS(10);
       camera2.setFPS(10);
@@ -76,7 +94,9 @@ public class Robot extends TimedRobot {
       camera1.setExposureManual(10);
       camera2.setExposureManual(10);
       camera1.setWhiteBalanceManual(10);
-      camera2.setWhiteBalanceManual(10);
+      camera2.setWhiteBalanceManual(10);*/
+      Imgproc.line(source, point1, point2, scalar, 5); // these 2 lines don't work
+      outputStream.putFrame(source);
     } else {
       // if we are not using two cameras, create one camera running at 30 fps
       camera1 = CameraServer.getInstance().startAutomaticCapture();
