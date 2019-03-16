@@ -76,10 +76,11 @@ public class OI {
   Trigger driveStraight = new DriveStraightTrigger(); // left joystick is active when moved out of deadzone
   Trigger topLimSwitch = new TopLimitSwitchTrigger(); // when top limit switch is hit
   Trigger botLimSwitch = new BotLimitSwitchTrigger(); // when bottom limit switch is hit
+  Trigger cargoIntakePassive = new CargoIntakePassiveTrigger();
 
   public OI() {
-    lButton1.whileHeld(new HatchOuttakeCommand(true)); // While held HatchOuttake pushes out.
-    lButton1.whenReleased(new HatchOuttakeCommand(false)); // When released HatchOuttake pulls in.
+    lButton1.whileHeld(new HatchGrabberCommand(true)); // While held HatchGrabber opens.
+    lButton1.whenReleased(new HatchGrabberCommand(false)); // When released HatchGrabber closes.
     lButton2.whileHeld(new ReleaseCargoSlowCommand()); // While held Cargo outtakes slowly.
     lButton2.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
     lButton3.whileHeld(new AutoAlignmentCommand()); // aligns to target using vision and pixy line tracking TODO: link to rpi code
@@ -88,21 +89,23 @@ public class OI {
     rButton1.whileHeld(new IntakeCargoCommand()); // While held cargo intakes.
     rButton1.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
     //rButton2.whenPressed(new InvertDriveCommand()); // invert the front of the robot
-    rButton3.whenPressed(new HatchIntakeCommand()); // When pressed, change hatch intake position
+    rButton3.whenPressed(new HatchExtendCommand()); // When pressed, Hatch extends
     rButton5.whenPressed(new DrivetrainPIDToggleCommand());
     lPovLeft.whenPressed(new SwitchToCamera1Command()); // Switch to viewing camera1
     lPovRight.whenPressed(new SwitchToCamera2Command()); // Switch to viewing camera2
-    buttonXboxLB.whileHeld(new SkiOutCommand(true)); // When pressed Ski comes out.
-    buttonXboxRB.whileHeld(new SkiOutCommand(false)); // When pressed Ski comes in.
+    buttonXboxLB.whenPressed(new SkiOutCommand(true)); // When pressed Ski comes out.
+    buttonXboxRB.whenPressed(new SkiOutCommand(false)); // When pressed Ski comes in.
     // buttonXboxLB.whenPressed(new SetEncoderCommand());
     // buttonXboxRB.whenPressed(new ResetEncoderCommand());
     topLimSwitch.whileActive(new ResetEncoderBotCommand());
     botLimSwitch.whileActive(new ResetEncoderTopCommand());
     //buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
     //buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
-    buttonXboxLeft.whenPressed(new HatchIntakeXboxCommand(true)); // When pressed hatch intake goes out.
-    buttonXboxRight.whenPressed(new HatchIntakeXboxCommand(false)); // When pressed hatch intake comes in.
-    triggerXboxLeft.whenActive(new IntakeCargoCommand()); // When held cargo outtakes.
+    buttonXboxUp.whileHeld(new HatchGrabberCommand(true)); // 
+    buttonXboxUp.whenReleased(new HatchGrabberCommand(false)); // 
+    buttonXboxLeft.whenPressed(new HatchExtendXboxCommand(true)); // When pressed hatch extends.
+    buttonXboxRight.whenPressed(new HatchExtendXboxCommand(false)); // When pressed hatch retracts.
+    triggerXboxLeft.whenActive(new IntakeCargoCommand()); // When held cargo intakes.
     triggerXboxLeft.whenInactive(new StopCargoCommand()); // when the trigger is inactive, or not held, stop the cargo intake
     triggerXboxRight.whenActive(new ReleaseCargoCommand()); // When held cargo intakes.
     triggerXboxRight.whenInactive(new StopCargoCommand()); // when the trigger is inactive, or not held, stop the cargo intake
@@ -117,5 +120,6 @@ public class OI {
     //xboxStickRight.whileActive(new ClimberManualCommand()); // Have the climber keeping itself up when the climber is not being controlled
     //if (RobotMap.CLIMBER_TOGGLE) xboxStickRight.whenInactive(new PassiveClimberPowerCommand());
     if (RobotMap.DRIVE_PID_TOGGLE) driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
+    //cargoIntakePassive.whileActive(new PassiveIntakePowerCommand());
   }
 }

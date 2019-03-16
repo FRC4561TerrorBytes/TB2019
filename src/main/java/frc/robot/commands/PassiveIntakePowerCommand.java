@@ -9,18 +9,11 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
-/**
- * @author Max
- */
-public class HatchIntakeXboxCommand extends Command {
-  boolean set = false;
-
-  public HatchIntakeXboxCommand(boolean set) {
+public class PassiveIntakePowerCommand extends Command {
+  public PassiveIntakePowerCommand() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.hatchIntake);
-    this.set = set;
+    requires(Robot.cargoIntake);
   }
 
   // Called just before this Command runs the first time
@@ -31,8 +24,7 @@ public class HatchIntakeXboxCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    RobotMap.HATCH_TOGGLE = set;
-    Robot.hatchIntake.hatchIntakeXboxPistons();
+    Robot.cargoIntake.passivePower();
   }
 
   // Make this return true when this Command no longer needs to run execute()

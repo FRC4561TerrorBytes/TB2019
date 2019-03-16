@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -74,9 +75,9 @@ public class RobotMap {
   public static int BOT_LEFT_MOTOR_PORT = 2;
 
   // hatch intake solenoid ports
-  private static final int INTAKE_POS_PORT = 2;
-  private static final int INTAKE_IN_PORT = 3;
-  private static final int INTAKE_OUT_PORT = 5;
+  // private static final int INTAKE_POS_PORT = 2; // Not using right now.
+  private static final int INTAKE_EXTEND_PORT = 2;
+  private static final int INTAKE_GRAB_PORT = 3;
 
   // Xbox Controller Port
   public static final int XBOX_CONTROLLER_PORT = 2;
@@ -98,8 +99,9 @@ public class RobotMap {
   public static final int ARM_DEPOT_LOC = -8394;
   public static final int ARM_ROCKET_2_LOC = -1856;
 
-  // Ski solenoid ports
-  private static final int SKI_PORT = 4;
+  // Ski double solenoid ports
+  private static final int SKI_PORT_IN = 6; // TODO: change to 4
+  private static final int SKI_PORT_OUT = 7; // TODO: change to 5
 
   // Infrared Sensor port
   private static final int INFRARED_PORT = 3;
@@ -125,16 +127,16 @@ public class RobotMap {
   public static final WPI_VictorSPX CARGO_BOTTOM_ROLLER_MOTOR = new WPI_VictorSPX(CARGO_BOT_ROLLER_PORT);
 
   // Hatch intake variables
-  public static final Solenoid HATCH_POSITION_SOLENOID = new Solenoid(INTAKE_POS_PORT);
-  public static final Solenoid HATCH_INTAKE_SOLENOID = new Solenoid(INTAKE_IN_PORT);
-  public static final Solenoid HATCH_OUTTAKE_SOLENOID = new Solenoid(INTAKE_OUT_PORT);
+  // public static final Solenoid HATCH_POSITION_SOLENOID = new Solenoid(INTAKE_POS_PORT); // Not using right now
+  public static final Solenoid HATCH_EXTEND_SOLENOID = new Solenoid(INTAKE_EXTEND_PORT);
+  public static final Solenoid HATCH_GRABBER_SOLENOID = new Solenoid(INTAKE_GRAB_PORT);
 
   // Climber subsystem variables
   public static final WPI_TalonSRX LEFT_CLIMBER_MOTOR = new WPI_TalonSRX(CLIMBER_LEFT_PORT);
   private static final WPI_TalonSRX RIGHT_CLIMBER_MOTOR = new WPI_TalonSRX(CLIMBER_RIGHT_PORT);
 
   // Ski solenoids objects
-  public static final Solenoid SKI_SOLENOID = new Solenoid(SKI_PORT);
+  public static final DoubleSolenoid SKI_SOLENOID = new DoubleSolenoid(SKI_PORT_OUT, SKI_PORT_IN);
 
   // Creates SpeedController object to combine left and right side motors
   public static final SpeedControllerGroup LEFT_SIDE_MOTOR_GROUP = new SpeedControllerGroup(FRONT_LEFT_MOTOR, MID_LEFT_MOTOR, BACK_LEFT_MOTOR);

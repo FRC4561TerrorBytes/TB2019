@@ -7,19 +7,20 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
- * @author Karthik, Max, Snehil
+ * @author Max
  */
+public class HatchExtendXboxCommand extends Command {
+  boolean set = false;
 
-public class ClimberManualCommand extends Command {
-
-  public ClimberManualCommand() {
-    requires(Robot.climber);
+  public HatchExtendXboxCommand(boolean set) {
+    // Use requires() here to declare subsystem dependencies
+    requires(Robot.hatchIntake);
+    this.set = set;
   }
 
   // Called just before this Command runs the first time
@@ -28,32 +29,26 @@ public class ClimberManualCommand extends Command {
   }
 
   // Called repeatedly when this Command is scheduled to run
-  // Called when the robot needs to ascend into space like it's the Enterprise
   @Override
   protected void execute() {
-    // Cobe the input from the xbox joystick to make the speed of the climber slower
-      Robot.climber.set(RobotMap.GAME_PAD.getY(Hand.kRight));
+    RobotMap.HATCH_TOGGLE = set;
+    Robot.hatchIntake.hatchExtendXboxPistons();
   }
 
   // Make this return true when this Command no longer needs to run execute()
-  // It is set to false since the robot does not need to always ascend
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
-  // This command calls the stop method in the Climber subsytem, which stops the motors
   @Override
   protected void end() {
-    Robot.climber.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
-  // This calls the end() method above
   @Override
   protected void interrupted() {
-    end();
   }
 }

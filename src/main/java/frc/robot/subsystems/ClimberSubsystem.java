@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ClimberManualCommand;
@@ -32,8 +33,13 @@ public class ClimberSubsystem extends Subsystem {
   }
 
   // Moving the skis onto the hab or back
-  public void skiOutPosition(boolean activate) {
-    RobotMap.SKI_SOLENOID.set(activate);
+  public void skiOutPosition(Boolean activate) {
+    if (activate) {
+      RobotMap.SKI_SOLENOID.set(Value.kForward);
+    } else {
+      RobotMap.SKI_SOLENOID.set(Value.kReverse);
+    }
+
   }
 
   // Procides passive power to the climber to keep it from draging on the ground
