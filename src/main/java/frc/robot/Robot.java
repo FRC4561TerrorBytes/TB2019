@@ -101,8 +101,12 @@ public class Robot extends TimedRobot {
         Mat source = new Mat(); //Blank Matrix where we put the image we want to modify
         while(!Thread.interrupted()) { // Whilst this thread is running we add crosshairs to the source image
           cvSink.grabFrame(source); // Grab source image
+          double xCenter = networkTable.getEntry("xcenter").getDouble(4561); // x-coordinate of the center of the vision target
+          Point visionCenterPoint = new Point(xCenter, 72); // point which is the center of the vision target
           Imgproc.line(source, horizCrosshairPoint1, horizCrosshairPoint2, color, 1); // Add horizontal crosshair
           Imgproc.line(source, vertCrosshairPoint1, vertCrosshairPoint2, color, 1); // Add vertical crosshair
+          // Put a circle around the center of a vision target if we have acquired one
+          if(xCenter != 4561) Imgproc.circle(source, visionCenterPoint, 10, color, 1);
           outputStream.putFrame(source); // Add this image to the output stream
         }
       }).start();
@@ -123,8 +127,12 @@ public class Robot extends TimedRobot {
         Mat source = new Mat(); //Blank Matrix where we put the image we want to modify
         while(!Thread.interrupted()) { // Whilst this thread is running we add crosshairs to the source image
           cvSink.grabFrame(source); // Grab source image
+          double xCenter = networkTable.getEntry("xcenter").getDouble(4561); // x-coordinate of the center of the vision target
+          Point visionCenterPoint = new Point(xCenter, 72); // point which is the center of the vision target
           Imgproc.line(source, horizCrosshairPoint1, horizCrosshairPoint2, color, 1); // Add horizontal crosshair
           Imgproc.line(source, vertCrosshairPoint1, vertCrosshairPoint2, color, 1); // Add vertical crosshair
+          // Put a circle around the center of a vision target if we have acquired one
+          if(xCenter != 4561) Imgproc.circle(source, visionCenterPoint, 10, color, 1);
           outputStream.putFrame(source); // Add this image to the output stream
         }
       }).start();
