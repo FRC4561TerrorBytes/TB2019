@@ -12,8 +12,9 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoSink;
 import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -21,6 +22,15 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.videoio.VideoCapture;
+
 import frc.robot.subsystems.*;
 
 /**
@@ -41,7 +51,13 @@ public class Robot extends TimedRobot {
   public static edu.wpi.first.networktables.NetworkTable networkTable;
   public static UsbCamera camera1;
   public static UsbCamera camera2;
-  public static VideoSink server;
+  CvSink cvSink; // Input source for the unmodified stream
+  CvSource outputStream; // Output stream for the modified stream (ie it has crosshairs)
+  Point horizCrosshairPoint1 = new Point(83, 72); // Left point of the crosshair
+  Point horizCrosshairPoint2 = new Point(93, 72); // Right point of the crosshair
+  Point vertCrosshairPoint1 = new Point(88, 67); // Bottom point of the crosshair
+  Point vertCrosshairPoint2 = new Point(88, 77); // Top point of the crosshair
+  Scalar color = new Scalar(0, 255, 0); // Color Variable, in BGR (Blue, Green, Red) Format
   Command autonomousCommand;
 
   /**
@@ -62,30 +78,56 @@ public class Robot extends TimedRobot {
     networkTable = networkTableInstance.getTable("networkTable");
     // start cameras and configure settings
     if (RobotMap.TWO_CAMERAS) {
-      // if we are using to cameras create 2 cameras running at 10 fps
-      camera1 = CameraServer.getInstance().startAutomaticCapture();
-      camera2 = CameraServer.getInstance().startAutomaticCapture();
-      camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-      camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-      camera1.setResolution(176, 144);
-      camera2.setResolution(176, 144);
-      camera1.setFPS(10);
-      camera2.setFPS(10);
-      camera1.setBrightness(25);
-      camera2.setBrightness(25);
-      camera1.setExposureManual(10);
-      camera2.setExposureManual(10);
-      camera1.setWhiteBalanceManual(10);
-      camera2.setWhiteBalanceManual(10);
+      // To make the crosshair camera work we need to create a new thread. Why? Who knows.
+      new Thread(() -> {
+        // if we are using to cameras create 2 cameras running at 10 fps
+        camera1 = CameraServer.getInstance().startAutomaticCapture();
+        camera2 = CameraServer.getInstance().startAutomaticCapture();
+        camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+        camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+        camera1.setResolution(176, 144);
+        camera2.setResolution(176, 144);
+        camera1.setFPS(10);
+        camera2.setFPS(10);
+        camera1.setBrightness(25);
+        camera2.setBrightness(25);
+        camera1.setExposureManual(10);
+        camera2.setExposureManual(10);
+        camera1.setWhiteBalanceManual(10);
+        camera2.setWhiteBalanceManual(10);
+        cvSink = CameraServer.getInstance().getVideo(camera1);
+        cvSink.setEnabled(true);
+        outputStream = CameraServer.getInstance().putVideo("Crosshair Cam", 176, 144);
+        Mat source = new Mat(); //Blank Matrix where we put the image we want to modify
+        while(!Thread.interrupted()) { // Whilst this thread is running we add crosshairs to the source image
+          cvSink.grabFrame(source); // Grab source image
+          Imgproc.line(source, horizCrosshairPoint1, horizCrosshairPoint2, color, 1); // Add horizontal crosshair
+          Imgproc.line(source, vertCrosshairPoint1, vertCrosshairPoint2, color, 1); // Add vertical crosshair
+          outputStream.putFrame(source); // Add this image to the output stream
+        }
+      }).start();
     } else {
-      // if we are not using two cameras, create one camera running at 30 fps
-      camera1 = CameraServer.getInstance().startAutomaticCapture();
-      camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-      camera1.setResolution(176, 144);
-      camera1.setFPS(30);
-      camera1.setBrightness(30);
-      camera1.setExposureManual(10);
-      camera1.setWhiteBalanceManual(10);
+      // To make the crosshair camera work we need to create a new thread. Why? Who knows.
+      new Thread(() -> {
+        // if we are not using two cameras, create one camera running at 30 fps
+        camera1 = CameraServer.getInstance().startAutomaticCapture();
+        camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+        camera1.setResolution(176, 144);
+        camera1.setFPS(30);
+        camera1.setBrightness(25);
+        camera1.setExposureManual(10);
+        camera1.setWhiteBalanceManual(10);
+        cvSink = CameraServer.getInstance().getVideo(camera1);
+        cvSink.setEnabled(true);
+        outputStream = CameraServer.getInstance().putVideo("Cross-Hair cam", 176, 144);
+        Mat source = new Mat(); //Blank Matrix where we put the image we want to modify
+        while(!Thread.interrupted()) { // Whilst this thread is running we add crosshairs to the source image
+          cvSink.grabFrame(source); // Grab source image
+          Imgproc.line(source, horizCrosshairPoint1, horizCrosshairPoint2, color, 1); // Add horizontal crosshair
+          Imgproc.line(source, vertCrosshairPoint1, vertCrosshairPoint2, color, 1); // Add vertical crosshair
+          outputStream.putFrame(source); // Add this image to the output stream
+        }
+      }).start();
     }
   }
 
