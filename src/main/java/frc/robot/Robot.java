@@ -101,7 +101,7 @@ public class Robot extends TimedRobot {
         Mat source = new Mat(); //Blank Matrix where we put the image we want to modify
         while(!Thread.interrupted()) { // Whilst this thread is running we add crosshairs to the source image
           cvSink.grabFrame(source); // Grab source image
-          double xCenter = networkTable.getEntry("xcenter").getDouble(4561); // x-coordinate of the center of the vision target
+          double xCenter = networkTable.getEntry("xcenter").getDouble(4561)-222; // x-coordinate of the center of the vision target
           Point visionCenterPoint = new Point(xCenter, 72); // point which is the center of the vision target
           Imgproc.line(source, horizCrosshairPoint1, horizCrosshairPoint2, color, 1); // Add horizontal crosshair
           Imgproc.line(source, vertCrosshairPoint1, vertCrosshairPoint2, color, 1); // Add vertical crosshair
@@ -152,7 +152,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     // numbers retrieved from raspi
     SmartDashboard.putNumber("PixyAngle", networkTable.getEntry("pixyAngle").getDouble(4561));
-    SmartDashboard.putNumber("X-Center", networkTable.getEntry("xcenter").getDouble(4561));
+    SmartDashboard.putNumber("X-Center", networkTable.getEntry("xcenter").getDouble(4561)-222);
     SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(4561));
     // numbers retrived from robot
     // SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
