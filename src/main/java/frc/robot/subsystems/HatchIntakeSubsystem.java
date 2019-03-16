@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 /**
@@ -25,31 +26,31 @@ public class HatchIntakeSubsystem extends Subsystem {
   }
 
   // Moving velcro pistons forward
-  public void hatchIntakePistons() {
+  public void hatchExtendPistons() {
     RobotMap.HATCH_TOGGLE = !RobotMap.HATCH_TOGGLE;
-    RobotMap.HATCH_INTAKE_SOLENOID.set(RobotMap.HATCH_TOGGLE);
+    RobotMap.HATCH_EXTEND_SOLENOID.set(RobotMap.HATCH_TOGGLE);
   }
 
   // Moving velcro pistons forward for controller
-  public void hatchIntakeXboxPistons() {
-    RobotMap.HATCH_INTAKE_SOLENOID.set(RobotMap.HATCH_TOGGLE);
+  public void hatchExtendXboxPistons() {
+    RobotMap.HATCH_EXTEND_SOLENOID.set(RobotMap.HATCH_TOGGLE);
   }
 
   // Moving non-velcro pistons forward
-  public void hatchOuttakePistons(boolean value) {
-    RobotMap.HATCH_OUTTAKE_SOLENOID.set(value);
+  public void hatchGrabberPistons(boolean value) {
+    RobotMap.HATCH_GRABBER_SOLENOID.set(value);
   }
 
   // Moving the hatch intake in and out from the robot
   public void hatchPosition(boolean value) {
-    RobotMap.HATCH_POSITION_SOLENOID.set(value);
+    // RobotMap.HATCH_POSITION_SOLENOID.set(value); // Not using right now
   }
 
-  // Check if there is Super Suit (hatch) in front of the robot
+  // Check if there is Super Suit (hatch) in front of the robot with limit switch
   public void getHatch() {
-    boolean hatchDetected = RobotMap.HATCH_DETECTOR.get();
+    boolean hatchDetected = RobotMap.LEFT_CLIMBER_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
 
     // Display on SmartDashboard on whether Super Suit (hatch) is there or not
-    //SmartDashboard.putBoolean("Hatch Present:", !hatchDetected);
+    SmartDashboard.putBoolean("Hatch Present:", !hatchDetected);
   }
 }

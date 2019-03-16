@@ -13,13 +13,11 @@ import frc.robot.Robot;
 /**
  * @author Max
  */
-public class HatchOuttakeCommand extends Command {
-  boolean set = false;
+public class HatchExtendCommand extends Command {
 
-  public HatchOuttakeCommand(boolean set) {
+  public HatchExtendCommand() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.hatchIntake);
-    this.set = set;
   }
 
   // Called just before this Command runs the first time
@@ -30,7 +28,7 @@ public class HatchOuttakeCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchIntake.hatchOuttakePistons(this.set);
+    Robot.hatchIntake.hatchExtendPistons();
   }
 
   // Make this return true when this Command no longer needs to run execute()

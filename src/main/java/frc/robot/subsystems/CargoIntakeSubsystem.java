@@ -41,6 +41,10 @@ public class CargoIntakeSubsystem extends Subsystem {
     RobotMap.CARGO_INTAKE_MOTOR_GROUP.set(-0.6);
   }
 
+  public void passivePower() {
+    RobotMap.CARGO_INTAKE_MOTOR_GROUP.set(0.2);
+  }
+
   public void stop(){
     // stop all cargo motors
     RobotMap.CARGO_INTAKE_MOTOR_GROUP.set(0);
