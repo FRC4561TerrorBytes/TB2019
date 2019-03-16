@@ -100,8 +100,8 @@ public class RobotMap {
   public static final int ARM_ROCKET_2_LOC = -1856;
 
   // Ski double solenoid ports
-  private static final int SKI_PORT_IN = 6; // TODO: change to 4
-  private static final int SKI_PORT_OUT = 7; // TODO: change to 5
+  private static final int SKI_PORT_IN = 4;
+  private static final int SKI_PORT_OUT = 5;
 
   // Infrared Sensor port
   private static final int INFRARED_PORT = 3;
