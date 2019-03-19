@@ -79,29 +79,31 @@ public class Robot extends TimedRobot {
     // start cameras and configure settings
     if (RobotMap.TWO_CAMERAS) {
       // To make the crosshair camera work we need to create a new thread. Why? Who knows.
+      // if we are using to cameras create 2 cameras running at 10 fps
+      camera1 = CameraServer.getInstance().startAutomaticCapture();
+      camera2 = CameraServer.getInstance().startAutomaticCapture();
+      camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+      camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+      camera1.setResolution(176, 144);
+      camera2.setResolution(176, 144);
+      camera1.setFPS(10);
+      camera2.setFPS(10);
+      camera1.setBrightness(25);
+      camera2.setBrightness(25);
+      camera1.setExposureManual(10);
+      camera2.setExposureManual(10);
+      camera1.setWhiteBalanceManual(10);
+      camera2.setWhiteBalanceManual(10);
       new Thread(() -> {
-        // if we are using to cameras create 2 cameras running at 10 fps
-        camera1 = CameraServer.getInstance().startAutomaticCapture();
-        camera2 = CameraServer.getInstance().startAutomaticCapture();
-        camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-        camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-        camera1.setResolution(176, 144);
-        camera2.setResolution(176, 144);
-        camera1.setFPS(10);
-        camera2.setFPS(10);
-        camera1.setBrightness(25);
-        camera2.setBrightness(25);
-        camera1.setExposureManual(10);
-        camera2.setExposureManual(10);
-        camera1.setWhiteBalanceManual(10);
-        camera2.setWhiteBalanceManual(10);
         cvSink = CameraServer.getInstance().getVideo(camera1);
         cvSink.setEnabled(true);
         outputStream = CameraServer.getInstance().putVideo("Crosshair Cam", 176, 144);
         Mat source = new Mat(); //Blank Matrix where we put the image we want to modify
+        double xCenter;
         while(!Thread.interrupted()) { // Whilst this thread is running we add crosshairs to the source image
           cvSink.grabFrame(source); // Grab source image
-          double xCenter = networkTable.getEntry("xcenter").getDouble(4561)-222; // x-coordinate of the center of the vision target
+          xCenter = networkTable.getEntry("xcenter").getDouble(4561); // x-coordinate of the center of the vision target
+          xCenter = (xCenter - 0) * (176 - 0) / (640 - 0) + 0;
           Point visionCenterPoint = new Point(xCenter, 72); // point which is the center of the vision target
           Imgproc.line(source, horizCrosshairPoint1, horizCrosshairPoint2, color, 1); // Add horizontal crosshair
           Imgproc.line(source, vertCrosshairPoint1, vertCrosshairPoint2, color, 1); // Add vertical crosshair
@@ -112,22 +114,25 @@ public class Robot extends TimedRobot {
       }).start();
     } else {
       // To make the crosshair camera work we need to create a new thread. Why? Who knows.
+      // if we are not using two cameras, create one camera running at 30 fps
+      camera1 = CameraServer.getInstance().startAutomaticCapture();
+      camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
+      camera1.setResolution(176, 144);
+      camera1.setFPS(30);
+      camera1.setBrightness(25);
+      camera1.setExposureManual(10);
+      camera1.setWhiteBalanceManual(10);
       new Thread(() -> {
-        // if we are not using two cameras, create one camera running at 30 fps
-        camera1 = CameraServer.getInstance().startAutomaticCapture();
-        camera1.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-        camera1.setResolution(176, 144);
-        camera1.setFPS(30);
-        camera1.setBrightness(25);
-        camera1.setExposureManual(10);
-        camera1.setWhiteBalanceManual(10);
         cvSink = CameraServer.getInstance().getVideo(camera1);
         cvSink.setEnabled(true);
         outputStream = CameraServer.getInstance().putVideo("Cross-Hair cam", 176, 144);
         Mat source = new Mat(); //Blank Matrix where we put the image we want to modify
+        double xCenter;
         while(!Thread.interrupted()) { // Whilst this thread is running we add crosshairs to the source image
           cvSink.grabFrame(source); // Grab source image
-          double xCenter = networkTable.getEntry("xcenter").getDouble(4561); // x-coordinate of the center of the vision target
+          xCenter = networkTable.getEntry("xcenter").getDouble(4561); // x-coordinate of the center of the vision target
+          // rescale (vision and computer vision cams have different resolutions)
+          xCenter = (xCenter - 0) * (176 - 0) / (640 - 0) + 0;
           Point visionCenterPoint = new Point(xCenter, 72); // point which is the center of the vision target
           Imgproc.line(source, horizCrosshairPoint1, horizCrosshairPoint2, color, 1); // Add horizontal crosshair
           Imgproc.line(source, vertCrosshairPoint1, vertCrosshairPoint2, color, 1); // Add vertical crosshair
@@ -152,7 +157,8 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     // numbers retrieved from raspi
     SmartDashboard.putNumber("PixyAngle", networkTable.getEntry("pixyAngle").getDouble(4561));
-    SmartDashboard.putNumber("X-Center", networkTable.getEntry("xcenter").getDouble(4561)-222);
+    double xCenter = (networkTable.getEntry("xcenter").getDouble(4561) - 0) * (176 - 0) / (640 - 0) + 0;
+    SmartDashboard.putNumber("X-Center", xCenter);
     SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(4561));
     // numbers retrived from robot
     // SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
