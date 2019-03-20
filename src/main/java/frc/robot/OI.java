@@ -92,8 +92,10 @@ public class OI {
     rButton3.whenReleased(new HatchIntakeCommand(false)); // When released Hatchintake pulls in.
     rButton4.whenPressed(new SwitchToCamera1Command()); // Switch to viewing camera1
     rButton5.whenPressed(new SwitchToCamera2Command()); // Switch to viewing camera2
-    buttonXboxLB.whileHeld(new SkiOutCommand(true)); // When pressed Ski comes out.
-    buttonXboxRB.whileHeld(new SkiOutCommand(false)); // When pressed Ski comes in.
+    //buttonXboxLB.whileHeld(new SkiOutCommand(true)); // When pressed Ski comes out.
+    //buttonXboxRB.whileHeld(new SkiOutCommand(false)); // When pressed Ski comes in.
+    buttonXboxLB.whenPressed(new SetEncoderCommand());
+    buttonXboxRB.whenPressed(new ResetEncoderCommand());
     buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
     buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
     buttonXboxLeft.whenPressed(new HatchIntakeCommand(true)); // When pressed hatch intake goes out.

@@ -105,17 +105,21 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
     SmartDashboard.putNumber("CargoArmEncoderPos", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
     SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
+    SmartDashboard.putNumber("Cargo Arm Motor Value:", RobotMap.CARGO_ARM_MOTOR.get());
     SmartDashboard.putBoolean("Arm Bottom Limit Switch", Robot.cargoArmSubsystem.getBottomSwitch());
     SmartDashboard.putBoolean("Arm Top Limit Switch", Robot.cargoArmSubsystem.getTopSwitch());
+    SmartDashboard.putString("Arm PID Enabled:", " " + RobotMap.CARGO_ARM_MOTOR.getControlMode());
     //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();
 
     // Reset the encoder value to the right position when the according limit switch is pressed
+    /*
     if (Robot.cargoArmSubsystem.getTopSwitch()) {
       Robot.cargoArmSubsystem.resetEncoder();
     }
     if (Robot.cargoArmSubsystem.getBottomSwitch()) {
       Robot.cargoArmSubsystem.setEncoder();
     }
+    */
   }
 
   /**

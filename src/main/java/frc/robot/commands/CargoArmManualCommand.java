@@ -7,6 +7,8 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,8 +34,13 @@ public class CargoArmManualCommand extends Command {
   @Override
   protected void execute() {
     // squares the input from the xbox left joystick to make the cargo arm ovement slower and more precise, but keeps the sign the same as the original input
-    Robot.cargoArmSubsystem.armManual((-Math.copySign(Math.pow(RobotMap.GAME_PAD.getY(Hand.kLeft), 2), RobotMap.GAME_PAD.getY(Hand.kLeft))) * 0.4);
+    //Robot.cargoArmSubsystem.armManual((-Math.copySign(Math.pow(RobotMap.GAME_PAD.getY(Hand.kLeft), 2), RobotMap.GAME_PAD.getY(Hand.kLeft))) * 0.4);
+    double targetPos = RobotMap.GAME_PAD.getY(Hand.kLeft)	* -1000.0;
+    RobotMap.CARGO_ARM_MOTOR.set(ControlMode.MotionMagic, targetPos);
+    SmartDashboard.putNumber("Motion Magic target position", targetPos);
+    
     // Reset the encoder value to the right position when the according limit switch is pressed
+    /*
     if (Robot.cargoArmSubsystem.getTopSwitch()) {
       Robot.cargoArmSubsystem.resetEncoder();
       SmartDashboard.putString("Top Limit Switch Pressed:", "Yes");
@@ -46,6 +53,7 @@ public class CargoArmManualCommand extends Command {
     } else {
       SmartDashboard.putString("Bottom Limit Switch Pressed:", "No");
     }
+    */
   }
 
   // Make this return true when this Command no longer needs to run execute()
