@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -26,6 +27,7 @@ public class SetCargoArmPosCommand extends Command {
     Robot.cargoArmSubsystem.setAbsoluteTolerance(10);
     // set setpoint
     Robot.cargoArmSubsystem.setSetpoint(this.setpoint);
+    SmartDashboard.putNumber("Setpoint", this.setpoint);
     // Start PID loop
     Robot.cargoArmSubsystem.enable();
   }
@@ -34,8 +36,8 @@ public class SetCargoArmPosCommand extends Command {
   @Override
   protected void execute() {
     // Reset the encoder value to the right position when the according limit switch is pressed
-    if (Robot.cargoArmSubsystem.getTopSwitch()) Robot.cargoArmSubsystem.resetEncoderTop();
-    if (Robot.cargoArmSubsystem.getBottomSwitch()) Robot.cargoArmSubsystem.resetEncoderBot();
+    //if (Robot.cargoArmSubsystem.getTopSwitch()) Robot.cargoArmSubsystem.resetEncoderTop();
+    //if (Robot.cargoArmSubsystem.getBottomSwitch()) Robot.cargoArmSubsystem.resetEncoderBot();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -48,6 +50,7 @@ public class SetCargoArmPosCommand extends Command {
   @Override
   protected void end() {
     Robot.cargoArmSubsystem.setSetpoint(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("Setpoint", this.setpoint);
   }
 
   // Called when another command which requires one or more of the same

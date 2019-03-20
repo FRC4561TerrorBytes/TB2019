@@ -39,6 +39,9 @@ public class RobotMap {
   // Drive Mode
   public static int DRIVE_MODE = 1; // 1 is curve drive, 0 is tank drive
 
+  //Manual Setpoint for Motion Magic
+  public static int MAGIC_POS = 0;
+
   // Drivetrain toggle
   public static boolean DRIVE_PID_TOGGLE = true; // false is disabled, true is enabled
 
@@ -92,12 +95,12 @@ public class RobotMap {
   private static final int CLIMBER_RIGHT_PORT = 8;
 
   // Max/Min arm encoder positions/limit switch locations TODO: find real values
-  public static final int ARM_BOT_LOC = -9000;
-  public static final int ARM_TOP_LOC = 0;
-  public static final int ARM_CARGO_LOC = -455;
-  public static final int ARM_ROCKET_LOC = -6073;
-  public static final int ARM_DEPOT_LOC = -8394;
-  public static final int ARM_ROCKET_2_LOC = -1856;
+  public static final int ARM_BOT_LOC = 0;
+  public static final int ARM_TOP_LOC = -9000;
+  public static final int ARM_CARGO_LOC = -8500;
+  public static final int ARM_ROCKET_LOC = -3000;
+  public static final int ARM_DEPOT_LOC = -600;
+  public static final int ARM_ROCKET_2_LOC = -7200;
 
   // Ski double solenoid ports
   private static final int SKI_PORT_IN = 4;
