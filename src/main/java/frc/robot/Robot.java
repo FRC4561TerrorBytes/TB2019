@@ -108,7 +108,7 @@ public class Robot extends TimedRobot {
           Imgproc.line(source, horizCrosshairPoint1, horizCrosshairPoint2, color, 1); // Add horizontal crosshair
           Imgproc.line(source, vertCrosshairPoint1, vertCrosshairPoint2, color, 1); // Add vertical crosshair
           // Put a circle around the center of a vision target if we have acquired one
-          if(xCenter != 4561) Imgproc.circle(source, visionCenterPoint, 10, color, 1);
+          if(xCenter != 4561) Imgproc.circle(source, visionCenterPoint, 20, color, 1);
           outputStream.putFrame(source); // Add this image to the output stream
         }
       }).start();
