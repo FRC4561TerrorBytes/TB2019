@@ -113,7 +113,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
   public void stop() {
     RobotMap.CARGO_ARM_MOTOR.stopMotor();
   }
-  /*
+  
   public boolean getTopSwitch() {
     return RobotMap.BACK_RIGHT_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
     // gives the status of the top limit switch (true is pressed, false is not
@@ -127,7 +127,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     // pressed)
     //return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();
   }
-  */
+  
 
   public void resetEncoderTop() {
     // Reset the encoder values to 0
