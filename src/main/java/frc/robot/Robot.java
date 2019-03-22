@@ -171,16 +171,20 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("DriveTrain PID Toggle", RobotMap.DRIVE_PID_TOGGLE);
     SmartDashboard.putNumber("Back Right Motor Value", RobotMap.BACK_RIGHT_MOTOR.get());
     SmartDashboard.putNumber("Middle Right Motor Value", RobotMap.MID_RIGHT_MOTOR.get());
+    SmartDashboard.putNumber("Cargo Arm value", RobotMap.CARGO_ARM_MOTOR.get());
+
 
     //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();
 
     // Reset the encoder value to the right position when the according limit switch is pressed
+    /*
     if (Robot.cargoArmSubsystem.getTopSwitch()) {
       Robot.cargoArmSubsystem.resetEncoderTop();
     }
     if (Robot.cargoArmSubsystem.getBottomSwitch()) {
       Robot.cargoArmSubsystem.resetEncoderBot();
     }
+    */
   }
 
   /**

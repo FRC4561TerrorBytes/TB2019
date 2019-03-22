@@ -91,14 +91,14 @@ public class OI {
     //rButton2.whenPressed(new InvertDriveCommand()); // invert the front of the robot
     rButton3.whenPressed(new HatchExtendCommand()); // When pressed, Hatch extends
     rButton5.whenPressed(new DrivetrainPIDToggleCommand());
-    buttonXboxLB.whenPressed(new SkiOutCommand(true)); // When pressed Ski comes out.
-    buttonXboxRB.whenPressed(new SkiOutCommand(false)); // When pressed Ski comes in.
-    // buttonXboxLB.whenPressed(new SetEncoderCommand());
-    // buttonXboxRB.whenPressed(new ResetEncoderCommand());
+    //buttonXboxLB.whenPressed(new SkiOutCommand(true)); // When pressed Ski comes out.
+    //buttonXboxRB.whenPressed(new SkiOutCommand(false)); // When pressed Ski comes in.
+    buttonXboxLB.whenPressed(new ResetEncoderTopCommand());
+    buttonXboxRB.whenPressed(new ResetEncoderBotCommand());
     topLimSwitch.whileActive(new ResetEncoderBotCommand());
     botLimSwitch.whileActive(new ResetEncoderTopCommand());
-    //buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
-    //buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
+    buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
+    buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
     buttonXboxUp.whileHeld(new HatchGrabberCommand(true)); // 
     buttonXboxUp.whenReleased(new HatchGrabberCommand(false)); // 
     buttonXboxLeft.whenPressed(new HatchExtendXboxCommand(true)); // When pressed hatch extends.
