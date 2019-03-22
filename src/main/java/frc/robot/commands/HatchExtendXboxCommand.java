@@ -19,7 +19,7 @@ public class HatchExtendXboxCommand extends Command {
 
   public HatchExtendXboxCommand(boolean set) {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.hatchIntake);
+    //requires(Robot.hatchIntake);
     this.set = set;
   }
 
@@ -38,7 +38,7 @@ public class HatchExtendXboxCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
