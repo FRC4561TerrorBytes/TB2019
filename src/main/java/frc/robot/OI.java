@@ -79,11 +79,11 @@ public class OI {
   Trigger cargoIntakePassive = new CargoIntakePassiveTrigger();
 
   public OI() {
-    lButton1.whileHeld(new HatchGrabberCommand(false)); // While held HatchGrabber opens.
-    lButton1.whenReleased(new HatchGrabberCommand(true)); // When released HatchGrabber closes.
+    lButton1.whileHeld(new HatchGrabberCommand(true)); // While held HatchGrabber opens.
+    lButton1.whenReleased(new HatchGrabberCommand(false)); // When released HatchGrabber closes.
     lButton2.whileHeld(new ReleaseCargoSlowCommand()); // While held Cargo outtakes slowly.
     lButton2.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
-    lButton3.whileHeld(new AutoAlignmentCommand()); // aligns to target using vision and pixy line tracking TODO: link to rpi code
+    //lButton3.whileHeld(new AutoAlignmentCommand()); // aligns to target using vision and pixy line tracking TODO: link to rpi code
     lButton4.whileHeld(new ReleaseCargoCommand()); // While held cargo outtakes.
     lButton4.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
     rButton1.whileHeld(new IntakeCargoCommand()); // While held cargo intakes.
@@ -116,9 +116,9 @@ public class OI {
     //buttonXboxRS.whenPressed(new ToggleClimberCommand()); // When the right stick is pressed, toggle on/off Climber toggle.
     xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
     //xboxStickRight.whileActive(new ClimberManualCommand()); // Have the climber keeping itself up when the climber is not being controlled
-    xboxStickRight.whileActive(new HatchExtendXboxCommand(true));
+    //xboxStickRight.whileActive(new HatchExtendXboxCommand(true));
     //if (RobotMap.CLIMBER_TOGGLE) xboxStickRight.whenInactive(new PassiveClimberPowerCommand());
-    if (RobotMap.DRIVE_PID_TOGGLE) driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
+    //if (RobotMap.DRIVE_PID_TOGGLE) driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
     //cargoIntakePassive.whileActive(new PassiveIntakePowerCommand());
   }
 }

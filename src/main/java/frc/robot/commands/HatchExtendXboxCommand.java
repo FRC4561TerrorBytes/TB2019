@@ -19,7 +19,7 @@ public class HatchExtendXboxCommand extends Command {
 
   public HatchExtendXboxCommand(boolean set) {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.hatchIntake);
+    //requires(Robot.hatchIntake);
     this.set = set;
   }
 
