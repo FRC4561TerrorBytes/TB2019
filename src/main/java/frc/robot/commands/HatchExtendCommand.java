@@ -17,7 +17,6 @@ public class HatchExtendCommand extends Command {
 
   public HatchExtendCommand() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.hatchIntake);
   }
 
   // Called just before this Command runs the first time
