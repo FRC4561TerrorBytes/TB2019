@@ -60,11 +60,11 @@ public class OI {
   Button buttonXboxA = new JoystickButton(RobotMap.GAME_PAD, 1); // Arm at intake/bottom location
   Button buttonXboxB = new JoystickButton(RobotMap.GAME_PAD, 2); // Arm at Cargo Level 1 rocket position.
   Button buttonXboxX = new JoystickButton(RobotMap.GAME_PAD, 3); // Arm at Cargoship position.
-  Button buttonXboxY = new JoystickButton(RobotMap.GAME_PAD, 4); // Arm at Storage position.
+  Button buttonXboxY = new JoystickButton(RobotMap.GAME_PAD, 4); // Arm at Depot Position.
   Button buttonXboxLB = new JoystickButton(RobotMap.GAME_PAD, 5); // Deploy skis.
   Button buttonXboxRB = new JoystickButton(RobotMap.GAME_PAD, 6); // Retract skis.
-  Button buttonXboxStart = new JoystickButton(RobotMap.GAME_PAD, 8); // Depot Arm Position.
-  Button buttonXboxRS = new JoystickButton(RobotMap.GAME_PAD, 10); // Climber Toggle (NON-FUNCTIONAL)
+  Button buttonXboxBack = new JoystickButton(RobotMap.GAME_PAD, 7); // Climber Toggle
+  Button buttonXboxStart = new JoystickButton(RobotMap.GAME_PAD, 8); // Level 2 rocket
   POVButton buttonXboxUp = new POVButton(RobotMap.GAME_PAD, 0); // Hatch mechanism up.
   POVButton buttonXboxDown = new POVButton(RobotMap.GAME_PAD, 180); // Hatch mechanism down.
   POVButton buttonXboxLeft = new POVButton(RobotMap.GAME_PAD, 270); // Extend Hatch mechanism.
@@ -72,7 +72,7 @@ public class OI {
   Trigger triggerXboxLeft = new CargoIntakeTrigger(); // Cargo outtake.
   Trigger triggerXboxRight = new CargoOuttakeTrigger(); // Cargo intake.
   Trigger xboxStickLeft = new CargoArmTrigger(); // xbox left joystick is active when moved out of deadzone
-  Trigger xboxStickRight = new ClimberTrigger(); // xbox right joystick is active when moved out of deadzone
+  Trigger climberPassive = new ClimberTrigger(); // xbox right joystick is active when moved out of deadzone
   Trigger driveStraight = new DriveStraightTrigger(); // left joystick is active when moved out of deadzone
   Trigger topLimSwitch = new TopLimitSwitchTrigger(); // when top limit switch is hit
   Trigger botLimSwitch = new BotLimitSwitchTrigger(); // when bottom limit switch is hit
@@ -110,14 +110,13 @@ public class OI {
     buttonXboxA.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_BOT_LOC)); // when the A button is clicked, move the cargo arm to the bottom location.
     buttonXboxB.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_ROCKET_LOC)); // when the B button is clicked, move the cargo arm to the rocket level one location.
     buttonXboxX.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_CARGO_LOC)); // when the X button is clicked, move the cargo arm to the cargo location.
-    buttonXboxY.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_TOP_LOC)); // when the Y button is clicked, move the cargo arm to the top, or storage, location.
-    buttonXboxStart.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_DEPOT_LOC)); // When the START button is pressed, move the cargo arm to the Depot loction.
-    rButton16.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_ROCKET_2_LOC)); // When the START button is pressed, move the cargo arm to the Depot loction.
-    //buttonXboxRS.whenPressed(new ToggleClimberCommand()); // When the right stick is pressed, toggle on/off Climber toggle.
+    buttonXboxY.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_DEPOT_LOC)); // When the START button is pressed, move the cargo arm to the Depot loction.
+    buttonXboxStart.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_ROCKET_2_LOC)); // When the START button is pressed, move the cargo arm to the Depot loction.
+    buttonXboxBack.whenPressed(new ToggleClimberCommand()); // When the right stick is pressed, toggle on/off Climber toggle.
     xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
     //xboxStickRight.whileActive(new ClimberManualCommand()); // Have the climber keeping itself up when the climber is not being controlled
     //xboxStickRight.whileActive(new HatchExtendXboxCommand(true));
-    //if (RobotMap.CLIMBER_TOGGLE) xboxStickRight.whenInactive(new PassiveClimberPowerCommand());
+    //climberPassive.whileActive(new PassiveClimberPowerCommand());
     //if (RobotMap.DRIVE_PID_TOGGLE) driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
     //cargoIntakePassive.whileActive(new PassiveIntakePowerCommand());
   }

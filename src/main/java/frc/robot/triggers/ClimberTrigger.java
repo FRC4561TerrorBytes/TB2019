@@ -17,6 +17,6 @@ import frc.robot.RobotMap;
 public class ClimberTrigger extends Trigger {
   @Override
   public boolean get() {
-    return (Math.abs(RobotMap.GAME_PAD.getY(Hand.kRight)) > 0.04) && !RobotMap.CLIMBER_TOGGLE; // right xbox joystick is active when moved out of deadzone
+    return !(Math.abs(RobotMap.GAME_PAD.getY(Hand.kRight)) > 0.04) && RobotMap.CLIMBER_PASSIVE_TOGGLE; // right xbox joystick is inactive when not moved out of deadzone
   }
 }

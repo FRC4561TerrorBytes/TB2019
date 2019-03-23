@@ -39,14 +39,13 @@ public class RobotMap {
   // Drive Mode
   public static int DRIVE_MODE = 1; // 1 is curve drive, 0 is tank drive
 
+  public static boolean CLIMBER_PASSIVE_TOGGLE = true; // false is disabled(passive is off) true is enabled(passive is on)
+
   //Manual Setpoint for Motion Magic
   public static int MAGIC_POS = 0;
 
   // Drivetrain toggle
   public static boolean DRIVE_PID_TOGGLE = true; // false is disabled, true is enabled
-
-  // Climber toggle
-  public static boolean CLIMBER_TOGGLE = true; // true is dissabled(passive is on) false is enabled(can control climber)
 
   // Drive invert toggle
   public static int DRIVE_INVERT_TOGGLE = 1;

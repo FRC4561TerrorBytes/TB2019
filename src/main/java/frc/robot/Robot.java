@@ -8,6 +8,12 @@
  * TODO:
  * Test drivetain PID toggle
  * Test cargo intake passive
+ * Test climber passive
+ * 
+ * For the new arm:
+ * set talon settings to the test settings
+ * make sure encoder is going the right way
+ * start tuning PID
  */
 
 package frc.robot;
@@ -127,11 +133,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Arm Bottom Limit Switch", RobotMap.BACK_RIGHT_MOTOR.getSensorCollection().isRevLimitSwitchClosed());
     SmartDashboard.putBoolean("Arm Top Limit Switch", RobotMap.BACK_RIGHT_MOTOR.getSensorCollection().isFwdLimitSwitchClosed());
     SmartDashboard.putNumber("Arm Velocity", RobotMap.CARGO_ARM_MOTOR.get());
-    SmartDashboard.putBoolean("Climber Toggle", RobotMap.CLIMBER_TOGGLE);
     SmartDashboard.putBoolean("DriveTrain PID Toggle", RobotMap.DRIVE_PID_TOGGLE);
     SmartDashboard.putNumber("Back Right Motor Value", RobotMap.BACK_RIGHT_MOTOR.get());
     SmartDashboard.putNumber("Middle Right Motor Value", RobotMap.MID_RIGHT_MOTOR.get());
     SmartDashboard.putNumber("Cargo Arm value", RobotMap.CARGO_ARM_MOTOR.get());
+    SmartDashboard.putBoolean("Climber Passive Toggle", RobotMap.CLIMBER_PASSIVE_TOGGLE);
 
 
     //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();

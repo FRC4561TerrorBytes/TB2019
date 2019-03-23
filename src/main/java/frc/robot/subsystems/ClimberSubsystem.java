@@ -49,7 +49,7 @@ public class ClimberSubsystem extends Subsystem {
 
   // Toggle Climber
   public void toggleClimber() {
-		RobotMap.CLIMBER_TOGGLE = !RobotMap.CLIMBER_TOGGLE;
+		RobotMap.CLIMBER_PASSIVE_TOGGLE = !RobotMap.CLIMBER_PASSIVE_TOGGLE;
 	}
 
   // This method makes the motors on both sides stop.

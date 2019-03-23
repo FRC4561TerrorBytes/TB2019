@@ -31,7 +31,7 @@ public class ClimberManualCommand extends Command {
   // Called when the robot needs to ascend into space like it's the Enterprise
   @Override
   protected void execute() {
-    // Cobe the input from the xbox joystick to make the speed of the climber slower
+    // Keep the climber motion linear so we can get movement even if we move oit a little and we don't just immediately start moving after a certian point
       Robot.climber.set(RobotMap.GAME_PAD.getY(Hand.kRight));
   }
 
