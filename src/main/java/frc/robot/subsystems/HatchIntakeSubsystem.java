@@ -27,13 +27,8 @@ public class HatchIntakeSubsystem extends Subsystem {
 
   // Moving velcro pistons forward
   public void hatchExtendPistons() {
-    RobotMap.HATCH_TOGGLE = !RobotMap.HATCH_TOGGLE;
     RobotMap.HATCH_EXTEND_SOLENOID.set(RobotMap.HATCH_TOGGLE);
-  }
-
-  // Moving velcro pistons forward for controller
-  public void hatchExtendXboxPistons() {
-    RobotMap.HATCH_EXTEND_SOLENOID.set(RobotMap.HATCH_TOGGLE);
+    SmartDashboard.putBoolean("Hatch Position", RobotMap.HATCH_TOGGLE);
   }
 
   // Moving non-velcro pistons forward

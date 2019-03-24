@@ -11,34 +11,27 @@
  * Test climber passive
  * 
  * For the new arm:
- * set talon settings to the test settings
  * make sure encoder is going the right way
  * start tuning PID
  */
 
 package frc.robot;
 
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.videoio.VideoCapture;
-
 import frc.robot.commands.CrosshairCommand;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.CargoArmSubsystem;
+import frc.robot.subsystems.CargoIntakeSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.HatchIntakeSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -107,7 +100,7 @@ public class Robot extends TimedRobot {
       camera1.setWhiteBalanceManual(10);
     }
     // Run command to create a modified stream of camera1 (Hatch side cam) with crosshairs and vision target aid
-    crosshairCommand.start();
+    //crosshairCommand.start();
   }
 
   /**
@@ -127,7 +120,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("X-Center", xCenter);
     SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(4561));
     // numbers retrived from robot
-    // SmartDashboard.putNumber("Right Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
+    SmartDashboard.putNumber("Left Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
     SmartDashboard.putNumber("CargoArmEncoderPos", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
     // SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
     SmartDashboard.putBoolean("Arm Bottom Limit Switch", RobotMap.BACK_RIGHT_MOTOR.getSensorCollection().isRevLimitSwitchClosed());
@@ -138,19 +131,19 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Middle Right Motor Value", RobotMap.MID_RIGHT_MOTOR.get());
     SmartDashboard.putNumber("Cargo Arm value", RobotMap.CARGO_ARM_MOTOR.get());
     SmartDashboard.putBoolean("Climber Passive Toggle", RobotMap.CLIMBER_PASSIVE_TOGGLE);
+    SmartDashboard.putNumber("intake top:", RobotMap.CARGO_TOP_ROLLER_MOTOR.get());
+    SmartDashboard.putNumber("intake bottom:", RobotMap.CARGO_BOTTOM_ROLLER_MOTOR.get());
 
 
     //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();
 
     // Reset the encoder value to the right position when the according limit switch is pressed
-    /*
     if (Robot.cargoArmSubsystem.getTopSwitch()) {
       Robot.cargoArmSubsystem.resetEncoderTop();
     }
     if (Robot.cargoArmSubsystem.getBottomSwitch()) {
       Robot.cargoArmSubsystem.resetEncoderBot();
     }
-    */
   }
 
   /**

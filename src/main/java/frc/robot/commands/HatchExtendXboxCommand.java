@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -32,7 +33,7 @@ public class HatchExtendXboxCommand extends Command {
   @Override
   protected void execute() {
     RobotMap.HATCH_TOGGLE = set;
-    Robot.hatchIntake.hatchExtendXboxPistons();
+    Robot.hatchIntake.hatchExtendPistons();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -50,5 +51,6 @@ public class HatchExtendXboxCommand extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    cancel();
   }
 }

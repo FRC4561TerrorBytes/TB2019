@@ -90,19 +90,19 @@ public class OI {
     rButton1.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
     //rButton2.whenPressed(new InvertDriveCommand()); // invert the front of the robot
     rButton3.whenPressed(new HatchExtendCommand()); // When pressed, Hatch extends
+
     rButton5.whenPressed(new DrivetrainPIDToggleCommand());
     buttonXboxLB.whenPressed(new SkiOutCommand(true)); // When pressed Ski comes out.
     buttonXboxRB.whenPressed(new SkiOutCommand(false)); // When pressed Ski comes in.
     //buttonXboxLB.whenPressed(new ResetEncoderTopCommand());
     //buttonXboxRB.whenPressed(new ResetEncoderBotCommand());
     topLimSwitch.whileActive(new ResetEncoderBotCommand());
-    botLimSwitch.whileActive(new ResetEncoderTopCommand());
+    //botLimSwitch.whileActive(new ResetEncoderTopCommand());
     buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
     buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
     buttonXboxUp.whileHeld(new HatchGrabberCommand(true)); // 
     buttonXboxUp.whenReleased(new HatchGrabberCommand(false)); // 
-    buttonXboxLeft.whenPressed(new HatchExtendXboxCommand(true)); // When pressed hatch extends.
-    buttonXboxRight.whenPressed(new HatchExtendXboxCommand(false)); // When pressed hatch retracts.
+    buttonXboxLeft.whenPressed(new HatchExtendCommand()); // When pressed hatch retracts.
     triggerXboxLeft.whenActive(new IntakeCargoCommand()); // When held cargo intakes.
     triggerXboxLeft.whenInactive(new StopCargoCommand()); // when the trigger is inactive, or not held, stop the cargo intake
     triggerXboxRight.whenActive(new ReleaseCargoCommand()); // When held cargo intakes.

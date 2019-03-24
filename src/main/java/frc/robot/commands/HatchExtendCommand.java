@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
  * @author Max
@@ -27,6 +28,7 @@ public class HatchExtendCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    RobotMap.HATCH_TOGGLE = !RobotMap.HATCH_TOGGLE;
     Robot.hatchIntake.hatchExtendPistons();
   }
 
