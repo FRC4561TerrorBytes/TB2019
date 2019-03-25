@@ -123,12 +123,13 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Left Trigger Y axis", RobotMap.GAME_PAD.getY(Hand.kRight));
     SmartDashboard.putNumber("CargoArmEncoderPos", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
     // SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
-    SmartDashboard.putBoolean("Arm Bottom Limit Switch", RobotMap.BACK_RIGHT_MOTOR.getSensorCollection().isRevLimitSwitchClosed());
-    SmartDashboard.putBoolean("Arm Top Limit Switch", RobotMap.BACK_RIGHT_MOTOR.getSensorCollection().isFwdLimitSwitchClosed());
+    SmartDashboard.putBoolean("Arm Bottom Limit Switch", RobotMap.MID_RIGHT_MOTOR.getSensorCollection().isRevLimitSwitchClosed());
+    SmartDashboard.putBoolean("Arm Top Limit Switch", RobotMap.MID_RIGHT_MOTOR.getSensorCollection().isFwdLimitSwitchClosed());
     SmartDashboard.putNumber("Arm Velocity", RobotMap.CARGO_ARM_MOTOR.get());
     SmartDashboard.putBoolean("DriveTrain PID Toggle", RobotMap.DRIVE_PID_TOGGLE);
     SmartDashboard.putNumber("Back Right Motor Value", RobotMap.BACK_RIGHT_MOTOR.get());
     SmartDashboard.putNumber("Middle Right Motor Value", RobotMap.MID_RIGHT_MOTOR.get());
+    SmartDashboard.putNumber("Front Right Motor Value", RobotMap.MID_RIGHT_MOTOR.get());
     SmartDashboard.putNumber("Cargo Arm value", RobotMap.CARGO_ARM_MOTOR.get());
     SmartDashboard.putBoolean("Climber Passive Toggle", RobotMap.CLIMBER_PASSIVE_TOGGLE);
     SmartDashboard.putNumber("intake top:", RobotMap.CARGO_TOP_ROLLER_MOTOR.get());

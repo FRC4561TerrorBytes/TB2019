@@ -117,14 +117,14 @@ public class CargoArmSubsystem extends PIDSubsystem {
   }
   
   public boolean getTopSwitch() {
-    return RobotMap.BACK_RIGHT_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
+    return RobotMap.MID_RIGHT_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
     // gives the status of the top limit switch (true is pressed, false is not
     // pressed)
     // return !RobotMap.ARM_LIMIT_SWITCH_TOP.get();
   }
 
   public boolean getBottomSwitch() {
-    return RobotMap.BACK_RIGHT_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
+    return RobotMap.MID_RIGHT_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
     // gives the status of the bottom limit switch (true is pressed, false is not
     // pressed)
     //return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();

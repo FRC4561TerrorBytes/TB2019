@@ -91,7 +91,7 @@ public class OI {
     //rButton2.whenPressed(new InvertDriveCommand()); // invert the front of the robot
     rButton3.whenPressed(new HatchExtendCommand()); // When pressed, Hatch extends
 
-    rButton5.whenPressed(new DrivetrainPIDToggleCommand());
+    //rButton5.whenPressed(new DrivetrainPIDToggleCommand());
     buttonXboxLB.whenPressed(new SkiOutCommand(true)); // When pressed Ski comes out.
     buttonXboxRB.whenPressed(new SkiOutCommand(false)); // When pressed Ski comes in.
     //buttonXboxLB.whenPressed(new ResetEncoderTopCommand());
