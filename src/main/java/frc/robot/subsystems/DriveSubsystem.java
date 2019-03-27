@@ -82,7 +82,7 @@ public class DriveSubsystem extends Subsystem {
 	}
 	
 	// Gyro Driving Straight
-	/*
+	
 	public void angleDriveStraight(double angle) {
 		// drive toward 0 degrees
 		double error = angle;
@@ -101,7 +101,7 @@ public class DriveSubsystem extends Subsystem {
 			differentialDrive.arcadeDrive(invertDrive * RobotMap.LEFT_STICK.getY(), turn_power, false);
 		}
 	}
-	*/
+	
 	
 	// Creates stop method to stop all motors on drivetrain
 	public void stop() {

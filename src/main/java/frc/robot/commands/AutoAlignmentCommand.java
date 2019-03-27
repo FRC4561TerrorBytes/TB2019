@@ -40,7 +40,7 @@ public class AutoAlignmentCommand extends Command {
         if(Math.abs(visionAngle)>1){
           visionAngle=Math.copySign(1, visionAngle);
         }
-        //Robot.drivetrain.angleDriveStraight(-visionAngle);
+        Robot.drivetrain.angleDriveStraight(-visionAngle);
       }
       //The robot is going the right way, keep going
       else{
@@ -48,7 +48,7 @@ public class AutoAlignmentCommand extends Command {
         if(Math.abs(visionAngle)>1){
           pixyAngle=Math.copySign(1, visionAngle);
         }
-        //Robot.drivetrain.angleDriveStraight(visionAngle);
+        Robot.drivetrain.angleDriveStraight(visionAngle);
       }
     }
     else{
@@ -58,7 +58,7 @@ public class AutoAlignmentCommand extends Command {
         if(Math.abs(pixyAngle)>1){
           pixyAngle=Math.copySign(1, pixyAngle);
         }
-        //Robot.drivetrain.angleDriveStraight(-pixyAngle);
+        Robot.drivetrain.angleDriveStraight(-pixyAngle);
       }
       //The robot is going the right way, keep going
       else{
@@ -66,7 +66,7 @@ public class AutoAlignmentCommand extends Command {
         if(Math.abs(pixyAngle)>1){
           pixyAngle=Math.copySign(1, pixyAngle);
         }
-        //Robot.drivetrain.angleDriveStraight(pixyAngle);
+        Robot.drivetrain.angleDriveStraight(pixyAngle);
       }
     }
   }

@@ -83,7 +83,7 @@ public class OI {
     lButton1.whenReleased(new HatchGrabberCommand(false)); // When released HatchGrabber closes.
     lButton2.whileHeld(new ReleaseCargoSlowCommand()); // While held Cargo outtakes slowly.
     lButton2.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
-    //lButton3.whileHeld(new AutoAlignmentCommand()); // aligns to target using vision and pixy line tracking TODO: link to rpi code
+    lButton3.whileHeld(new AutoAlignmentCommand()); // aligns to target using vision and pixy line tracking.
     lButton4.whileHeld(new ReleaseCargoCommand()); // While held cargo outtakes.
     lButton4.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
     rButton1.whileHeld(new IntakeCargoCommand()); // While held cargo intakes.
@@ -91,13 +91,13 @@ public class OI {
     //rButton2.whenPressed(new InvertDriveCommand()); // invert the front of the robot
     rButton3.whenPressed(new HatchExtendCommand()); // When pressed, Hatch extends
 
-    //rButton5.whenPressed(new DrivetrainPIDToggleCommand());
+    rButton5.whenPressed(new DrivetrainPIDToggleCommand());
     buttonXboxLB.whenPressed(new SkiOutCommand(true)); // When pressed Ski comes out.
     buttonXboxRB.whenPressed(new SkiOutCommand(false)); // When pressed Ski comes in.
     //buttonXboxLB.whenPressed(new ResetEncoderTopCommand());
     //buttonXboxRB.whenPressed(new ResetEncoderBotCommand());
     topLimSwitch.whileActive(new ResetEncoderBotCommand());
-    //botLimSwitch.whileActive(new ResetEncoderTopCommand());
+    botLimSwitch.whileActive(new ResetEncoderTopCommand());
     buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
     buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
     buttonXboxUp.whileHeld(new HatchGrabberCommand(true)); // 
@@ -117,7 +117,7 @@ public class OI {
     //xboxStickRight.whileActive(new ClimberManualCommand()); // Have the climber keeping itself up when the climber is not being controlled
     //xboxStickRight.whileActive(new HatchExtendXboxCommand(true));
     //climberPassive.whileActive(new PassiveClimberPowerCommand());
-    //if (RobotMap.DRIVE_PID_TOGGLE) driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
+    if (RobotMap.DRIVE_PID_TOGGLE) driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
     //cargoIntakePassive.whileActive(new PassiveIntakePowerCommand());
   }
 }
