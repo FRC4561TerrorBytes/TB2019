@@ -138,7 +138,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
   
 
   public void resetEncoderTop() {
-    // Reset the encoder values to 0
+    // Reset the encoder values to the top position
     //System.out.println("Top set");
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
   }
