@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,9 +34,13 @@ public class CargoArmSubsystem extends PIDSubsystem {
     /* Delta Values: 4, 0.0055, 1023, 3.41*/
     //0.000
     // test arm values: 0.0004, 0.0, 0.003
+    // Orion v1 arm values: 0.0008, 0.0, 0.008
     super("CargoArmSubsystem", 0.0008, 0.0, 0.008);
     //Setup sensors
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    RobotMap.CARGO_ARM_MOTOR.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+    RobotMap.CARGO_ARM_MOTOR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+
     // Set PID values for Motion Magic.
     /*
     RobotMap.CARGO_ARM_MOTOR.config_kF(0, 2.273);
@@ -117,14 +123,14 @@ public class CargoArmSubsystem extends PIDSubsystem {
   }
   
   public boolean getTopSwitch() {
-    return RobotMap.MID_RIGHT_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
+    return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
     // gives the status of the top limit switch (true is pressed, false is not
     // pressed)
     // return !RobotMap.ARM_LIMIT_SWITCH_TOP.get();
   }
 
   public boolean getBottomSwitch() {
-    return RobotMap.MID_RIGHT_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
+    return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed();
     // gives the status of the bottom limit switch (true is pressed, false is not
     // pressed)
     //return !RobotMap.ARM_LIMIT_SWITCH_BOT.get();
@@ -133,11 +139,13 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
   public void resetEncoderTop() {
     // Reset the encoder values to 0
+    //System.out.println("Top set");
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
   }
 
   public void resetEncoderBot() {
     // Set encoder value to the bottom position
+    //System.out.println("Bot set");
     RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_BOT_LOC);
   }
 }
