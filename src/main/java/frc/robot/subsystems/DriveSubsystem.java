@@ -27,7 +27,7 @@ public class DriveSubsystem extends Subsystem {
 	// Ku: Maximum kP value tbhat gives ocillation
 	// Tu: Time for full ocillation on the robot
 	// PID Values: kP = 0.6Ku  kI = 1.2Ku/Tu  kD = 3KuTu/40
-	double kP = 0.1, kI = 0.0, kD = 0.0003;
+	double kP = 0.01, kI = 0.0, kD = 0.0003;
 	double integral = 0, previous_error = 0;
 	DifferentialDrive differentialDrive;
 	int invertDrive = 1;
@@ -95,11 +95,7 @@ public class DriveSubsystem extends Subsystem {
 		// update previous_error
 		this.previous_error = error;
 		// drive with 'LEFT_STICK' throttle, and 'turn_power' rotation; no squared inputs
-		if(RobotMap.PIXY_DRIVE_TOGGLE){
-			differentialDrive.arcadeDrive(invertDrive * RobotMap.LEFT_STICK.getY(), -turn_power, false);
-		} else {
-			differentialDrive.arcadeDrive(invertDrive * RobotMap.LEFT_STICK.getY(), turn_power, false);
-		}
+		differentialDrive.arcadeDrive(invertDrive * RobotMap.LEFT_STICK.getY(), turn_power, false);
 	}
 	
 	

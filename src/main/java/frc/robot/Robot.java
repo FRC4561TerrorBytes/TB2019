@@ -134,6 +134,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Climber Passive Toggle", RobotMap.CLIMBER_PASSIVE_TOGGLE);
     SmartDashboard.putNumber("intake top:", RobotMap.CARGO_TOP_ROLLER_MOTOR.get());
     SmartDashboard.putNumber("intake bottom:", RobotMap.CARGO_BOTTOM_ROLLER_MOTOR.get());
+    SmartDashboard.putNumber("VisionAngle", Robot.networkTable.getEntry("centerangle").getDouble(0));
 
 
     //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();

@@ -30,44 +30,13 @@ public class AutoAlignmentCommand extends Command {
   @Override
   protected void execute() {
     RobotMap.navx.reset();
-    double pixyAngle = Robot.networkTable.getEntry("pixyAngle").getDouble(0);
     double visionAngle = Robot.networkTable.getEntry("centerangle").getDouble(0);
+    // If we see a valid vision target aim at it
     if(Robot.networkTable.getEntry("validleft").getBoolean(false)&&Robot.networkTable.getEntry("validright").getBoolean(false)){
-      //If the robot is not going the right way, go the other direction
       //System.out.println("target acquired");
-      if(visionAngle>prevVisionAngle && visionAngle>0 || visionAngle<prevVisionAngle && visionAngle<0){
-        prevVisionAngle = visionAngle;
-        if(Math.abs(visionAngle)>1){
-          visionAngle=Math.copySign(1, visionAngle);
-        }
-        Robot.drivetrain.angleDriveStraight(-visionAngle);
-      }
-      //The robot is going the right way, keep going
-      else{
-        prevVisionAngle = visionAngle;
-        if(Math.abs(visionAngle)>1){
-          pixyAngle=Math.copySign(1, visionAngle);
-        }
-        Robot.drivetrain.angleDriveStraight(visionAngle);
-      }
-    }
-    else{
-      //If the robot is not going the right way, go the other direction
-      if(pixyAngle>prevPixyAngle && pixyAngle>0 || pixyAngle<prevPixyAngle && pixyAngle<0){
-        prevPixyAngle = pixyAngle;
-        if(Math.abs(pixyAngle)>1){
-          pixyAngle=Math.copySign(1, pixyAngle);
-        }
-        Robot.drivetrain.angleDriveStraight(-pixyAngle);
-      }
-      //The robot is going the right way, keep going
-      else{
-        prevPixyAngle = pixyAngle;
-        if(Math.abs(pixyAngle)>1){
-          pixyAngle=Math.copySign(1, pixyAngle);
-        }
-        Robot.drivetrain.angleDriveStraight(pixyAngle);
-      }
+      Robot.drivetrain.angleDriveStraight(visionAngle);
+    } else { //Else keep driving as usual
+      Robot.drivetrain.curvatureDrive();
     }
   }
 
