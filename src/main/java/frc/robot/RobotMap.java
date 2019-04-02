@@ -45,7 +45,7 @@ public class RobotMap {
   public static int MAGIC_POS = 0;
 
   // Drivetrain toggle
-  public static boolean DRIVE_PID_TOGGLE = true; // false is disabled, true is enabled
+  public static boolean DRIVE_PID_TOGGLE = false; // false is disabled, true is enabled
 
   // Drive invert toggle
   public static int DRIVE_INVERT_TOGGLE = 1;
