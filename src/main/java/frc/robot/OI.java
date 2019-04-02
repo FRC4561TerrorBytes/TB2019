@@ -92,10 +92,10 @@ public class OI {
     rButton3.whenPressed(new HatchExtendCommand()); // When pressed, Hatch extends
 
     rButton5.whenPressed(new DrivetrainPIDToggleCommand());
-    buttonXboxLB.whenPressed(new SkiOutCommand(true)); // When pressed Ski comes out.
-    buttonXboxRB.whenPressed(new SkiOutCommand(false)); // When pressed Ski comes in.
-    //buttonXboxLB.whenPressed(new ResetEncoderTopCommand());
-    //buttonXboxRB.whenPressed(new ResetEncoderBotCommand());
+    //buttonXboxLB.whenPressed(new SkiOutCommand(true)); // When pressed Ski comes out.
+    //buttonXboxRB.whenPressed(new SkiOutCommand(false)); // When pressed Ski comes in.
+    buttonXboxLB.whenPressed(new ResetEncoderTopCommand());
+    buttonXboxRB.whenPressed(new ResetEncoderBotCommand());
     topLimSwitch.whenActive(new ResetEncoderBotCommand());
     botLimSwitch.whenActive(new ResetEncoderTopCommand());
     buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.

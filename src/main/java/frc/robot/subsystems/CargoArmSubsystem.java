@@ -35,7 +35,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     //0.000
     // test arm values: 0.0004, 0.0, 0.003
     // Orion v1 arm values: 0.0008, 0.0, 0.008
-    super("CargoArmSubsystem", 0.0008, 0.0, 0.008);
+    super("CargoArmSubsystem", 0.0005, 0.0, 0.003);
     //Setup sensors
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     RobotMap.CARGO_ARM_MOTOR.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
@@ -59,7 +59,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     setInputRange(RobotMap.ARM_TOP_LOC, RobotMap.ARM_BOT_LOC);
     // Set PID max speed
     // -0.7, 0.7
-    setOutputRange(-0.7, 0.7); //TODO: Increase maximum output bc Namh said it was too slow
+    setOutputRange(-0.6, 0.6); //TODO: Increase maximum output bc Namh said it was too slow
 
     // Synchronise encoder
     int absolutePosition = RobotMap.CARGO_ARM_MOTOR.getSensorCollection().getPulseWidthPosition();
@@ -94,7 +94,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
     // limit the output of the cargo arm to keep it from slamming around the robot TODO: probably redundant
     
-    RobotMap.CARGO_ARM_MOTOR.set(-output);
+    RobotMap.CARGO_ARM_MOTOR.set(output);
 
     /*
     // limit the output of the cargo arm when moving where it would be most affected by gravity
