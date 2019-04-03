@@ -27,13 +27,21 @@ public class AutoAlignmentCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    RobotMap.navx.reset();
-    double visionAngle = Robot.networkTable.getEntry("centerangle").getDouble(0);
     // If we see a valid vision target aim at it
     if(Robot.networkTable.getEntry("validleft").getBoolean(false)&&Robot.networkTable.getEntry("validright").getBoolean(false)){
       //System.out.println("target acquired");
-      Robot.drivetrain.angleDriveStraight(visionAngle);
-    } else { //Else keep driving as usual
+      double visionAngle = Robot.networkTable.getEntry("centerangle").getDouble(0);
+      RobotMap.navx.setAngleAdjustment(visionAngle); // adjust our current gyro heading by our current vision angle
+      /**
+      * Note: this works because the adjustment angle is not reset by the reset() method
+      * Essentially we are just fudging the real heading (in this case 0)
+      * by what our current vision angle is
+      */
+      RobotMap.navx.reset(); // set gyro value to visionAngle
+      double desiredHeading = RobotMap.navx.getAngle();
+      Robot.drivetrain.angleDriveStraight(desiredHeading);
+    } else { // Else keep driving as usual
+      RobotMap.navx.setAngleAdjustment(0);
       Robot.drivetrain.curvatureDrive();
     }
   }
