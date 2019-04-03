@@ -27,6 +27,7 @@ public class DriveSubsystem extends Subsystem {
 	// Ku: Maximum kP value tbhat gives ocillation
 	// Tu: Time for full ocillation on the robot
 	// PID Values: kP = 0.6Ku  kI = 1.2Ku/Tu  kD = 3KuTu/40
+	// TODO: decrease P to .01 on Kongo
 	double kP = 0.1, kI = 0.0, kD = 0.0003;
 	double integral = 0, previous_error = 0;
 	DifferentialDrive differentialDrive;
