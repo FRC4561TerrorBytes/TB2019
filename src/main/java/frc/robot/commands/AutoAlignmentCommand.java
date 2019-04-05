@@ -12,6 +12,11 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class AutoAlignmentCommand extends Command {
+  /* TODO: Kongo seems to always veer to right when he gets close, 
+	   and the x-center value remains real although it certianly can't 
+	   see the target. Probably caused due to the pi not getting enough
+	   power because the battery was very low in my garage test
+	*/ 
   public AutoAlignmentCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);

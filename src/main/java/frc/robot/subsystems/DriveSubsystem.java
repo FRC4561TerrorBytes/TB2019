@@ -27,8 +27,8 @@ public class DriveSubsystem extends Subsystem {
 	// Ku: Maximum kP value tbhat gives ocillation
 	// Tu: Time for full ocillation on the robot
 	// PID Values: kP = 0.6Ku  kI = 1.2Ku/Tu  kD = 3KuTu/40
-	// TODO: decrease P to .01 on Kongo
-	double kP = 0.1, kI = 0.0, kD = 0.0003;
+	// TODO: Needs some amount of I
+	double kP = 0.0003, kI = 0.0001, kD = 0.0015;
 	double integral = 0, previous_error = 0;
 	DifferentialDrive differentialDrive;
 	int invertDrive = 1;
@@ -57,8 +57,8 @@ public class DriveSubsystem extends Subsystem {
 	public void curvatureDrive() {
 		// Square inputs to curvatureDrive while maintaining sign
 		differentialDrive.curvatureDrive(
-		RobotMap.DRIVE_INVERT_TOGGLE * Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), RobotMap.LEFT_STICK.getY()),
-		Math.copySign(Math.pow(RobotMap.RIGHT_STICK.getX(), 2), RobotMap.RIGHT_STICK.getX()), 
+		Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), RobotMap.LEFT_STICK.getY()),
+		Math.copySign(Math.pow(RobotMap.RIGHT_STICK.getX(), 2), RobotMap.RIGHT_STICK.getX()),
 		true);
 	}
 	
@@ -96,7 +96,7 @@ public class DriveSubsystem extends Subsystem {
 		// update previous_error
 		this.previous_error = error;
 		// drive with 'LEFT_STICK' throttle, and 'turn_power' rotation; no squared inputs
-		differentialDrive.arcadeDrive(invertDrive * RobotMap.LEFT_STICK.getY(), turn_power, false);
+		differentialDrive.arcadeDrive(RobotMap.LEFT_STICK.getY(), turn_power, false);
 	}
 	
 	

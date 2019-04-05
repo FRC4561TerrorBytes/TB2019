@@ -66,15 +66,15 @@ public class RobotMap {
   public static final int RIGHT_JOYSTICK_PORT = 1;
   public static final int LEFT_JOYSTICK_PORT = 0;
 
-  // Right motor ports. Delta Ports: 8,9,10
-  public static int FRONT_RIGHT_MOTOR_PORT = 3;
+  // Right motor ports. Delta Ports: 8,9,10 Kongo Ports: 1
+  public static int FRONT_RIGHT_MOTOR_PORT = 1;
   public static int MID_RIGHT_MOTOR_PORT = 4;
   public static int BOT_RIGHT_MOTOR_PORT = 5;
 
-  // Left motor ports	Delta Ports: 7,11,12
-  public static int FRONT_LEFT_MOTOR_PORT = 6;
-  public static int MID_LEFT_MOTOR_PORT = 1;
-  public static int BOT_LEFT_MOTOR_PORT = 2;
+  // Left motor ports	Delta Ports: 7,11,12 Kongo Ports: 2
+  public static int FRONT_LEFT_MOTOR_PORT = 2;
+  public static int MID_LEFT_MOTOR_PORT = 3;
+  public static int BOT_LEFT_MOTOR_PORT = 6;
 
   // hatch intake solenoid ports
   // private static final int INTAKE_POS_PORT = 2; // Not using right now.
