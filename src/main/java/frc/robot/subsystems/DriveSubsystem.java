@@ -57,8 +57,8 @@ public class DriveSubsystem extends Subsystem {
 	public void curvatureDrive() {
 		// Square inputs to curvatureDrive while maintaining sign
 		differentialDrive.curvatureDrive(
-		Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), RobotMap.LEFT_STICK.getY()),
-		Math.copySign(Math.pow(RobotMap.RIGHT_STICK.getX(), 2), RobotMap.RIGHT_STICK.getX()),
+		Math.copySign(Math.pow(RobotMap.LEFT_STICK.getY(), 2), -RobotMap.LEFT_STICK.getY()),
+		Math.copySign(Math.pow(RobotMap.RIGHT_STICK.getX(), 2), RobotMap.RIGHT_STICK.getX()), 
 		true);
 	}
 	
