@@ -67,14 +67,14 @@ public class RobotMap {
   public static final int LEFT_JOYSTICK_PORT = 0;
 
   // Right motor ports. Delta Ports: 8,9,10
-  public static int FRONT_RIGHT_MOTOR_PORT = 3;
-  public static int MID_RIGHT_MOTOR_PORT = 4;
-  public static int BOT_RIGHT_MOTOR_PORT = 5;
+  public static int FRONT_RIGHT_MOTOR_PORT = 0;
+  public static int MID_RIGHT_MOTOR_PORT = 7;
+  public static int BOT_RIGHT_MOTOR_PORT = 8;
 
   // Left motor ports	Delta Ports: 7,11,12
-  public static int FRONT_LEFT_MOTOR_PORT = 6;
-  public static int MID_LEFT_MOTOR_PORT = 1;
-  public static int BOT_LEFT_MOTOR_PORT = 2;
+  public static int FRONT_LEFT_MOTOR_PORT = 3;
+  public static int MID_LEFT_MOTOR_PORT = 4;
+  public static int BOT_LEFT_MOTOR_PORT = 5;
 
   // hatch intake solenoid ports
   // private static final int INTAKE_POS_PORT = 2; // Not using right now.
@@ -85,13 +85,13 @@ public class RobotMap {
   public static final int XBOX_CONTROLLER_PORT = 2;
 
   // Cargo Intake motor ports
-  private static final int CARGO_ARM_MOTOR_PORT = 7;
+  private static final int CARGO_ARM_MOTOR_PORT = 2;
   private static final int CARGO_TOP_ROLLER_PORT = 9;
   private static final int CARGO_BOT_ROLLER_PORT = 10;
 
   // Climber motor ports
-  private static final int CLIMBER_LEFT_PORT = 0;
-  private static final int CLIMBER_RIGHT_PORT = 8;
+  private static final int CLIMBER_LEFT_PORT = 1;
+  private static final int CLIMBER_RIGHT_PORT = 6;
 
   // Max/Min arm encoder positions/limit switch locations TODO: find real values
   public static final int ARM_BOT_LOC = 0;
