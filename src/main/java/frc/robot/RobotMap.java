@@ -96,7 +96,7 @@ public class RobotMap {
   // Max/Min arm encoder positions/limit switch locations TODO: find real values
   public static final int ARM_BOT_LOC = 0;
   public static final int ARM_TOP_LOC = -9000;
-  public static final int ARM_CARGO_LOC = -8500;
+  public static final int ARM_CARGO_LOC = -9000;
   public static final int ARM_ROCKET_LOC = -3400;
   public static final int ARM_DEPOT_LOC = -1200;
   public static final int ARM_ROCKET_2_LOC = -7000;

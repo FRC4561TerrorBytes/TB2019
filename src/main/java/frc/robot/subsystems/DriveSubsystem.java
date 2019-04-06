@@ -28,7 +28,7 @@ public class DriveSubsystem extends Subsystem {
 	// Tu: Time for full ocillation on the robot
 	// PID Values: kP = 0.6Ku  kI = 1.2Ku/Tu  kD = 3KuTu/40
 	// TODO: Needs some amount of I
-	double kP = 0.0003, kI = 0.0001, kD = 0.0015;
+	double kP = 0.1, kI = 0.000, kD = 0.0003;
 	double integral = 0, previous_error = 0;
 	DifferentialDrive differentialDrive;
 	int invertDrive = 1;

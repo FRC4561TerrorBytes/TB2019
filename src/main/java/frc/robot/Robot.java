@@ -80,14 +80,14 @@ public class Robot extends TimedRobot {
       camera2.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
       camera1.setResolution(176, 144);
       camera2.setResolution(176, 144);
-      camera1.setFPS(10);
-      camera2.setFPS(10);
-      camera1.setBrightness(25);
-      camera2.setBrightness(25);
-      camera1.setExposureManual(10);
-      camera2.setExposureManual(10);
-      camera1.setWhiteBalanceManual(10);
-      camera2.setWhiteBalanceManual(10);
+      camera1.setFPS(25);
+      camera2.setFPS(25);
+      camera1.setBrightness(30);
+      camera2.setBrightness(30);
+      camera1.setExposureManual(15);
+      camera2.setExposureManual(15);
+      camera1.setWhiteBalanceManual(15);
+      camera2.setWhiteBalanceManual(15);
     } else {
       // To make the crosshair camera work we need to create a new thread. Why? Who knows.
       // if we are not using two cameras, create one camera running at 30 fps
