@@ -96,8 +96,8 @@ public class OI {
     buttonXboxRB.whenPressed(new SkiOutCommand(false)); // When pressed Ski comes in.
     //buttonXboxLB.whenPressed(new ResetEncoderTopCommand());
     //buttonXboxRB.whenPressed(new ResetEncoderBotCommand());
-    topLimSwitch.whenActive(new ResetEncoderBotCommand());
-    botLimSwitch.whenActive(new ResetEncoderTopCommand());
+    topLimSwitch.whileActive(new ResetEncoderTopCommand());
+    botLimSwitch.whileActive(new ResetEncoderBotCommand());
     buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
     buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
     buttonXboxUp.whileHeld(new HatchGrabberCommand(true)); // 
