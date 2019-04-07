@@ -51,7 +51,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     RobotMap.CARGO_ARM_MOTOR.configMotionCruiseVelocity(23);
     */
 
-    RobotMap.CARGO_ARM_MOTOR.configOpenloopRamp(.6);
+    RobotMap.CARGO_ARM_MOTOR.configOpenloopRamp(.5);
 
     // Make it so that the PID will recognize that it has upper and lower limits
     getPIDController().setContinuous(false);
