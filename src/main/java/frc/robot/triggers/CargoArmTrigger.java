@@ -17,6 +17,6 @@ import frc.robot.RobotMap;
 public class CargoArmTrigger extends Trigger {
   @Override
   public boolean get() {
-    return Math.abs(RobotMap.GAME_PAD.getY(Hand.kLeft)) > 0.01; // If the xbox left joystick is moved noticably, this returns true
+    return Math.abs(RobotMap.GAME_PAD.getY(Hand.kLeft)) > 0.08; // If the xbox left joystick is moved noticably, this returns true
   }
 }

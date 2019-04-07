@@ -38,7 +38,7 @@ public class CargoIntakeSubsystem extends Subsystem {
 
   public void outtakeCargoSlow(){
     // move both motors to release cargo slow
-    RobotMap.CARGO_INTAKE_MOTOR_GROUP.set(-0.75);
+    RobotMap.CARGO_INTAKE_MOTOR_GROUP.set(-0.6);
   }
 
   public void passivePower() {

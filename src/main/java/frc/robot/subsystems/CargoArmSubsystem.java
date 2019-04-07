@@ -35,7 +35,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     //0.000
     // test arm values: 0.0004, 0.0, 0.003
     // Orion v1 arm values: 0.0008, 0.0, 0.008
-    super("CargoArmSubsystem", 0.0004, 0.0, 0.003);
+    super("CargoArmSubsystem", 0.0004, 0.000, .003);
     //Setup sensors0
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     RobotMap.CARGO_ARM_MOTOR.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
@@ -51,7 +51,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     RobotMap.CARGO_ARM_MOTOR.configMotionCruiseVelocity(23);
     */
 
-    RobotMap.CARGO_ARM_MOTOR.configOpenloopRamp(.5);
+    RobotMap.CARGO_ARM_MOTOR.configOpenloopRamp(.6);
 
     // Make it so that the PID will recognize that it has upper and lower limits
     getPIDController().setContinuous(false);
