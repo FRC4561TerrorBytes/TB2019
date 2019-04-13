@@ -94,7 +94,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     getPIDController().setF(feedForward);
 
     if(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() > -5500 && RobotMap.CARGO_ARM_MOTOR.get() > 0
-    || RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() < -6000 && RobotMap.CARGO_ARM_MOTOR.get() < 0) {
+    || RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() < -7500 && RobotMap.CARGO_ARM_MOTOR.get() < 0) {
         RobotMap.CARGO_ARM_MOTOR.set(output * 0.001);
       System.out.println("super gravity");
     } else {
