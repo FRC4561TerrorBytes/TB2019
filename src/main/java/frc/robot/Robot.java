@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
     oi = new OI();
     RobotMap.navx.reset();
     //cargoArmSubsystem.resetEncoder();
+    //RobotMap.MAGIC_POS = Robot.cargoArmSubsystem.getPosition();
     networkTableInstance.startServer();
     /*
      * All values sent to the robot MUST be sent on
@@ -123,6 +124,12 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Left Stick Y axis", RobotMap.GAME_PAD.getY(Hand.kLeft));
     SmartDashboard.putNumber("CargoArmEncoderPos", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
     SmartDashboard.putNumber("GyroYawAngle", drivetrain.getYawAngle());
+    RobotMap.ARM_ANGLE = Math.toRadians((Robot.cargoArmSubsystem.getPosition() * 3)/-200 - 45);
+    SmartDashboard.putNumber("Arm Angle:", Math.toDegrees(RobotMap.ARM_ANGLE));
+    RobotMap.ARM_ANGLE_COS = Math.cos(RobotMap.ARM_ANGLE);
+    SmartDashboard.putNumber("Cosine of Arm Angle:", RobotMap.ARM_ANGLE_COS);
+    RobotMap.ARM_LAG = Math.abs(Robot.cargoArmSubsystem.getPosition() - Robot.cargoArmSubsystem.getSetpoint());
+		SmartDashboard.putNumber("Arm Lag", RobotMap.ARM_LAG);
     SmartDashboard.putBoolean("Arm Bottom Limit Switch", RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isRevLimitSwitchClosed());
     SmartDashboard.putBoolean("Arm Top Limit Switch", RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed());
     SmartDashboard.putNumber("Arm Velocity", RobotMap.CARGO_ARM_MOTOR.get());

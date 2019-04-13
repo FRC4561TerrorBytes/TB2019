@@ -42,7 +42,19 @@ public class RobotMap {
   public static boolean CLIMBER_PASSIVE_TOGGLE = true; // false is disabled(passive is off) true is enabled(passive is on)
 
   //Manual Setpoint for Motion Magic
-  public static int MAGIC_POS = 0;
+  public static double MAGIC_POS = 0;
+
+  //Create a variable for the arm
+  public static double ARM_ANGLE = 0;
+
+  //Cosine of ARM_ANGLE
+  public static double ARM_ANGLE_COS = 0;
+
+  //Distance from target and current arm position
+  public static double ARM_LAG = 0;
+
+  // Straight position for cargo arm
+  public static double ARM_STRAIGHT_LOC = -3000;
 
   // Drivetrain toggle
   public static boolean DRIVE_PID_TOGGLE = false; // false is disabled, true is enabled
