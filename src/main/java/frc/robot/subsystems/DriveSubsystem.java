@@ -15,7 +15,7 @@ import frc.robot.commands.CurvatureDriveCommand;
 import frc.robot.commands.TankDriveCommand;
 
 /**
-* @author Snehil
+* @author Snehil, Lucas
 */
 
 public class DriveSubsystem extends Subsystem {
@@ -96,7 +96,7 @@ public class DriveSubsystem extends Subsystem {
 		// update previous_error
 		this.previous_error = error;
 		// drive with 'LEFT_STICK' throttle, and 'turn_power' rotation; no squared inputs
-		differentialDrive.arcadeDrive(RobotMap.LEFT_STICK.getY(), turn_power, false);
+		differentialDrive.curvatureDrive(RobotMap.LEFT_STICK.getY(), turn_power, true);
 	}
 	
 	

@@ -116,9 +116,15 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     // numbers retrieved from raspi
     SmartDashboard.putNumber("PixyAngle", networkTable.getEntry("pixyAngle").getDouble(4561));
-    double xCenter = (networkTable.getEntry("xcenter").getDouble(4561) - 0) * (176 - 0) / (640 - 0) + 0;
+    double xCenter = networkTable.getEntry("xcenter").getDouble(4561);
     SmartDashboard.putNumber("X-Center", xCenter);
     SmartDashboard.putNumber("Y-Center", networkTable.getEntry("ycenter").getDouble(4561));
+    SmartDashboard.putNumber("VisionAngle", Robot.networkTable.getEntry("centerangle").getDouble(0));
+    // Boolean which is true when we have a target to aim at
+    boolean validTarget = Robot.networkTable.getEntry("validleft").getBoolean(false)&&
+    Robot.networkTable.getEntry("validright").getBoolean(false);
+    // Display whether or not we have a target
+    SmartDashboard.putBoolean("Target Aquired", validTarget);
     // numbers retrived from robot
     SmartDashboard.putNumber("Left Stick Y axis", RobotMap.GAME_PAD.getY(Hand.kLeft));
     SmartDashboard.putNumber("CargoArmEncoderPos", RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition());
@@ -134,7 +140,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Climber Passive Toggle", RobotMap.CLIMBER_PASSIVE_TOGGLE);
     SmartDashboard.putNumber("intake top:", RobotMap.CARGO_TOP_ROLLER_MOTOR.get());
     SmartDashboard.putNumber("intake bottom:", RobotMap.CARGO_BOTTOM_ROLLER_MOTOR.get());
-    SmartDashboard.putNumber("VisionAngle", Robot.networkTable.getEntry("centerangle").getDouble(0));
     //SmartDashboard.putBoolean("PID Enabled?", cargoArmSubsystem.g);
 
 
