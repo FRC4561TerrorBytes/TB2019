@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
@@ -24,18 +25,19 @@ public class CargoArmSubsystem extends PIDSubsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  final double ARM_WEIGHT = 14; // lbs
+  final double ARM_WEIGHT = 12; // lbs
   final double ARM_LENGTH = 16; // in
   final double TORQUE_CONSTANT = 6.284029 / 12; // in*lbs / volts
-  final double TICKS_TO_DEGREES = 360 / 4096; // degrees / pulses per revolution
+  final double TICKS_TO_DEGREES = 180 / 9000; // degrees / pulses per revolution
 
   public CargoArmSubsystem() {
     /* values: P,I,D*/ 
     /* Delta Values: 4, 0.0055, 1023, 3.41*/
     //0.000
     // test arm values: 0.0004, 0.0, 0.003
+    // test arm value with terror magic with good feedforward
     // Orion v1 arm values: 0.0008, 0.0, 0.008
-    super("CargoArmSubsystem", 0.0004, 0.000, .003);
+    super("CargoArmSubsystem", 0.0009, 0.000, .01);
     //Setup sensors0
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     RobotMap.CARGO_ARM_MOTOR.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
@@ -58,7 +60,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
     setInputRange(RobotMap.ARM_TOP_LOC, RobotMap.ARM_BOT_LOC);
     // Set PID max speed
     // -0.7, 0.7
-    setOutputRange(-0.6, 0.6); //TODO: Increase maximum output bc Namh said it was too slow
+    //setOutputRange(-0.6, 0.6); //TODO: Increase maximum output bc Namh said it was too slow
 
     // Synchronise encoder
     int absolutePosition = RobotMap.CARGO_ARM_MOTOR.getSensorCollection().getPulseWidthPosition();
@@ -83,18 +85,33 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    // int setpointPosition = (int) this.getSetpoint();
-    // setpointPosition &= 0xFFF;
-    // double angle = (RobotMap.ARM_STRAIGHT_LOC - setpointPosition) *
-    // TICKS_TO_DEGREES;
-    // double feedForward = (ARM_WEIGHT * ARM_LENGTH / TORQUE_CONSTANT) *
-    // Math.cos(angle);
-    // getPIDController().setF(feedForward);
+    int setpointPosition = (int) this.getSetpoint();
+    setpointPosition &= 0xFFF;
+    double angle = (RobotMap.ARM_STRAIGHT_LOC - setpointPosition) *
+    TICKS_TO_DEGREES;
+    double feedForward = (ARM_WEIGHT * ARM_LENGTH / TORQUE_CONSTANT) *
+    Math.cos(angle);
+    getPIDController().setF(feedForward);
+
+    if(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() > -5500 && RobotMap.CARGO_ARM_MOTOR.get() > 0
+    || RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() < -7500 && RobotMap.CARGO_ARM_MOTOR.get() < 0) {
+        RobotMap.CARGO_ARM_MOTOR.set(output * 0.001);
+      System.out.println("super gravity");
+    } else {
+        RobotMap.CARGO_ARM_MOTOR.set(output * 0.5);
+    }
 
     // limit the output of the cargo arm to keep it from slamming around the robot TODO: probably redundant
-    
-    RobotMap.CARGO_ARM_MOTOR.set(-output);
-
+    /*
+    // * Math.cos(RobotMap.ARM_ANGLE)
+    if(RobotMap.ARM_ANGLE_COS < 0.5) {
+      RobotMap.ARM_ANGLE_COS = 0.5;
+    }
+    if(RobotMap.ARM_LAG < 250) {
+      output = output * 2;
+    }
+    RobotMap.CARGO_ARM_MOTOR.set(output * RobotMap.ARM_ANGLE_COS / 1.5); // negative for Orion, positive on test board
+    */
     /*
     // limit the output of the cargo arm when moving where it would be most affected by gravity
     if (RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() > -1000 && RobotMap.CARGO_ARM_MOTOR.get() < 0 || 
