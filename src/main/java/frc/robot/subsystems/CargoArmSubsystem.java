@@ -95,10 +95,10 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
     if(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() > -5500 && RobotMap.CARGO_ARM_MOTOR.get() > 0
     || RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() < -7500 && RobotMap.CARGO_ARM_MOTOR.get() < 0) {
-        RobotMap.CARGO_ARM_MOTOR.set(output * 0.001);
+        RobotMap.CARGO_ARM_MOTOR.set(-output * 0.001);
       System.out.println("super gravity");
     } else {
-        RobotMap.CARGO_ARM_MOTOR.set(output * 0.5);
+        RobotMap.CARGO_ARM_MOTOR.set(-output * 0.5);
     }
 
     // limit the output of the cargo arm to keep it from slamming around the robot TODO: probably redundant
