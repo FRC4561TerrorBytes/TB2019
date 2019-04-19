@@ -153,14 +153,17 @@ public class Robot extends TimedRobot {
     //RobotMap.CARGO_ARM_MOTOR.setNeutralMode();
 
     // Reset the encoder value to the right position when the according limit switch is pressed
-    /*if (Robot.cargoArmSubsystem.getTopSwitch()) {
+    
+    if (Robot.cargoArmSubsystem.getTopSwitch()) {
       //System.out.println("top switch tripped");
       Robot.cargoArmSubsystem.resetEncoderTop();
+      //System.out.println("Top limit switch pressed");
     }
+    
     if (Robot.cargoArmSubsystem.getBottomSwitch()) {
       //System.out.println("bottom switch tripped");
       Robot.cargoArmSubsystem.resetEncoderBot();
-    }*/
+    }
   }
 
   /**
