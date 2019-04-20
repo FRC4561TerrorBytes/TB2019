@@ -95,7 +95,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
 
     if(RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() > -5500 && RobotMap.CARGO_ARM_MOTOR.get() < 0
     || RobotMap.CARGO_ARM_MOTOR.getSelectedSensorPosition() < -7500 && RobotMap.CARGO_ARM_MOTOR.get() > 0) {
-        RobotMap.CARGO_ARM_MOTOR.set(-output * 0.002);
+        RobotMap.CARGO_ARM_MOTOR.set(-output * 0.001);
       System.out.println("super gravity");
     } else {
         RobotMap.CARGO_ARM_MOTOR.set(-output * 0.5);
@@ -142,7 +142,6 @@ public class CargoArmSubsystem extends PIDSubsystem {
     return RobotMap.CARGO_ARM_MOTOR.getSensorCollection().isFwdLimitSwitchClosed();
     // gives the status of the top limit switch (true is pressed, false is not
     // pressed)
-    // return !RobotMap.ARM_LIMIT_SWITCH_TOP.get();
   }
 
   public boolean getBottomSwitch() {
@@ -156,7 +155,7 @@ public class CargoArmSubsystem extends PIDSubsystem {
   public void resetEncoderTop() {
     // Reset the encoder values to the top position
     //System.out.println("Top set");
-    RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_TOP_LOC);
+    RobotMap.CARGO_ARM_MOTOR.setSelectedSensorPosition(RobotMap.ARM_CARGO_LOC);
   }
 
   public void resetEncoderBot() {
