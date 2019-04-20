@@ -35,9 +35,9 @@ public class CargoArmSubsystem extends PIDSubsystem {
     /* Delta Values: 4, 0.0055, 1023, 3.41*/
     //0.000
     // test arm values: 0.0004, 0.0, 0.003
-    // test arm value with terror magic with good feedforward
+    // test arm value with terror magic with good feedforward: 0.0009, 0.000, .01
     // Orion v1 arm values: 0.0008, 0.0, 0.008
-    super("CargoArmSubsystem", 0.0009, 0.000, .01);
+    super("CargoArmSubsystem", 0.0009, 0.000, .008);
     //Setup sensors0
     RobotMap.CARGO_ARM_MOTOR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     RobotMap.CARGO_ARM_MOTOR.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);

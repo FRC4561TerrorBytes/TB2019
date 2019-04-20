@@ -43,7 +43,7 @@ public class CargoArmManualCommand extends Command {
     */
     
     //RobotMap.MAGIC_POS += Math.copySign(Math.pow(RobotMap.GAME_PAD.getY(Hand.kLeft), 1), RobotMap.GAME_PAD.getY(Hand.kLeft)) * 100;
-    RobotMap.MAGIC_POS += RobotMap.GAME_PAD.getY(Hand.kLeft) * 100;
+    RobotMap.MAGIC_POS += RobotMap.GAME_PAD.getY(Hand.kLeft) * 80;
     // set setpoint
     Robot.cargoArmSubsystem.setSetpoint(RobotMap.MAGIC_POS);
     SmartDashboard.putNumber("Magic Position: ", RobotMap.MAGIC_POS);
