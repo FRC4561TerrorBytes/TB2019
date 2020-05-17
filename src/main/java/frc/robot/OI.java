@@ -7,6 +7,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.buttons.*;
+import frc.robot.commands.*;
+import frc.robot.triggers.*;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -39,4 +43,81 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+
+  Button lButton1 = new JoystickButton(RobotMap.LEFT_STICK, 1); // Hatch outtake
+  Button lButton2 = new JoystickButton(RobotMap.LEFT_STICK, 2); // Cargo outtake (slow)
+  Button lButton3 = new JoystickButton(RobotMap.LEFT_STICK, 3); // Auto Align
+  Button lButton4 = new JoystickButton(RobotMap.LEFT_STICK, 4); // Cargo outtake (fast)
+  Button rButton1 = new JoystickButton(RobotMap.RIGHT_STICK, 1); // Cargo intake in.
+  Button rButton2 = new JoystickButton(RobotMap.RIGHT_STICK, 2); // Invert drive
+  Button rButton3 = new JoystickButton(RobotMap.RIGHT_STICK, 3); // Hatch extend/retract.
+  Button rButton5 = new JoystickButton(RobotMap.RIGHT_STICK, 5); // Disable Drivetrain PID
+  Button rButton14 = new JoystickButton(RobotMap.RIGHT_STICK, 14); // Switch to Camera 1
+  Button rButton16 = new JoystickButton(RobotMap.RIGHT_STICK, 16); // Score cargo on rocket lvl 2
+  Button rButton8 = new JoystickButton(RobotMap.RIGHT_STICK, 8); // Switch to camera 2
+  POVButton lPovLeft = new POVButton(RobotMap.LEFT_STICK, 270); // Extend Hatch mechanism.
+  POVButton lPovRight = new POVButton(RobotMap.LEFT_STICK, 90); // Retract Hatch mechanism.
+  Button buttonXboxA = new JoystickButton(RobotMap.GAME_PAD, 1); // Arm at intake/bottom location
+  Button buttonXboxB = new JoystickButton(RobotMap.GAME_PAD, 2); // Arm at Cargo Level 1 rocket position.
+  Button buttonXboxX = new JoystickButton(RobotMap.GAME_PAD, 3); // Arm at Cargoship position.
+  Button buttonXboxY = new JoystickButton(RobotMap.GAME_PAD, 4); // Arm at Depot Position.
+  Button buttonXboxLB = new JoystickButton(RobotMap.GAME_PAD, 5); // Deploy skis.
+  Button buttonXboxRB = new JoystickButton(RobotMap.GAME_PAD, 6); // Retract skis.
+  Button buttonXboxBack = new JoystickButton(RobotMap.GAME_PAD, 7); // Climber Toggle
+  Button buttonXboxStart = new JoystickButton(RobotMap.GAME_PAD, 8); // Level 2 rocket
+  POVButton buttonXboxUp = new POVButton(RobotMap.GAME_PAD, 0); // Hatch mechanism up.
+  POVButton buttonXboxDown = new POVButton(RobotMap.GAME_PAD, 180); // Hatch mechanism down.
+  POVButton buttonXboxLeft = new POVButton(RobotMap.GAME_PAD, 270); // Extend Hatch mechanism.
+  POVButton buttonXboxRight = new POVButton(RobotMap.GAME_PAD, 90); // Retract Hatch mechanism.
+  Trigger triggerXboxLeft = new CargoIntakeTrigger(); // Cargo outtake.
+  Trigger triggerXboxRight = new CargoOuttakeTrigger(); // Cargo intake.
+  Trigger xboxStickLeft = new CargoArmTrigger(); // xbox left joystick is active when moved out of deadzone
+  Trigger climberPassive = new ClimberTrigger(); // xbox right joystick is active when moved out of deadzone
+  Trigger driveStraight = new DriveStraightTrigger(); // left joystick is active when moved out of deadzone
+  Trigger topLimSwitch = new TopLimitSwitchTrigger(); // when top limit switch is hit
+  Trigger botLimSwitch = new BotLimitSwitchTrigger(); // when bottom limit switch is hit
+  Trigger cargoIntakePassive = new CargoIntakePassiveTrigger();
+
+  public OI() {
+    lButton1.whileHeld(new HatchGrabberCommand(true)); // While held HatchGrabber opens.
+    lButton1.whenReleased(new HatchGrabberCommand(false)); // When released HatchGrabber closes.
+    lButton2.whileHeld(new ReleaseCargoSlowCommand()); // While held Cargo outtakes slowly.
+    lButton2.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
+    lButton3.whileHeld(new AutoAlignmentCommand()); // aligns to target using vision and pixy line tracking.
+    lButton4.whileHeld(new ReleaseCargoCommand()); // While held cargo outtakes.
+    lButton4.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
+    rButton1.whileHeld(new IntakeCargoCommand()); // While held cargo intakes.
+    rButton1.whenReleased(new StopCargoCommand()); // when released, stop the cargo intake
+    //rButton2.whenPressed(new InvertDriveCommand()); // invert the front of the robot
+    rButton3.whenPressed(new HatchExtendCommand()); // When pressed, Hatch extends
+
+    rButton5.whenPressed(new DrivetrainPIDToggleCommand());
+    buttonXboxLB.whenPressed(new SkiOutCommand(true)); // When pressed Ski comes out.
+    buttonXboxRB.whenPressed(new SkiOutCommand(false)); // When pressed Ski comes in.
+    //buttonXboxLB.whenPressed(new ResetEncoderTopCommand());
+    //buttonXboxRB.whenPressed(new ResetEncoderBotCommand());
+    topLimSwitch.whenActive(new ResetEncoderTopCommand());
+    botLimSwitch.whenActive(new ResetEncoderBotCommand());
+    buttonXboxUp.whenPressed(new HatchPositionCommand(false)); // When pressed Hatch comes up.
+    buttonXboxDown.whenPressed(new HatchPositionCommand(true)); // When pressed hatch goes down.
+    buttonXboxUp.whileHeld(new HatchGrabberCommand(true)); // 
+    buttonXboxUp.whenReleased(new HatchGrabberCommand(false)); // 
+    buttonXboxLeft.whenPressed(new HatchExtendCommand()); // When pressed hatch retracts.
+    triggerXboxLeft.whenActive(new IntakeCargoCommand()); // When held cargo intakes.
+    triggerXboxLeft.whenInactive(new StopCargoCommand()); // when the trigger is inactive, or not held, stop the cargo intake
+    triggerXboxRight.whenActive(new ReleaseCargoCommand()); // When held cargo intakes.
+    triggerXboxRight.whenInactive(new StopCargoCommand()); // when the trigger is inactive, or not held, stop the cargo intake
+    buttonXboxA.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_BOT_LOC)); // when the A button is clicked, move the cargo arm to the bottom location.
+    buttonXboxB.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_ROCKET_LOC)); // when the B button is clicked, move the cargo arm to the rocket level one location.
+    buttonXboxX.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_CARGO_LOC)); // when the X button is clicked, move the cargo arm to the cargo location.
+    buttonXboxY.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_DEPOT_LOC)); // When the START button is pressed, move the cargo arm to the Depot loction.
+    buttonXboxStart.whenPressed(new SetCargoArmPosCommand(RobotMap.ARM_ROCKET_2_LOC)); // When the START button is pressed, move the cargo arm to the Depot loction.
+    buttonXboxBack.whenPressed(new ToggleClimberCommand()); // When the right stick is pressed, toggle on/off Climber toggle.
+    xboxStickLeft.whileActive(new CargoArmManualCommand()); // move the cargo arm with the xbox left stick
+    //xboxStickRight.whileActive(new ClimberManualCommand()); // Have the climber keeping itself up when the climber is not being controlled
+    //xboxStickRight.whileActive(new HatchExtendXboxCommand(true));
+    //climberPassive.whileActive(new PassiveClimberPowerCommand());
+    if (RobotMap.DRIVE_PID_TOGGLE) driveStraight.whileActive(new DriveStraightCommand()); // Drive straight using gyro when only the left stick is active
+    //cargoIntakePassive.whileActive(new PassiveIntakePowerCommand());
+  }
 }
